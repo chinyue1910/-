@@ -9,8 +9,8 @@
 
 <body>
     <script>
-        let num = parseInt(prompt("請輸入起始值(正整數)"))
-        while (isNaN(num) || num < 0 || num.match(/[^0-9]/g)) {
+        let num = prompt("請輸入起始值(正整數)")
+        while (isNaN(num) || num <= 0) {
             alert("就跟你說輸入正整數齁，87喔");
             num = prompt("再給你一次機會，請輸入起始值(正整數)")
         }
