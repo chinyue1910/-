@@ -25,11 +25,22 @@
         <li>2</li>
         <li><a href="http://google.com">連結</a></li>
     </ul>
+
+    <ul id="ul2">
+        <li>1</li>
+        <li id="myli">2</li>
+        <li>3</li>
+    </ul>
+
+    <p id="myp" class="myclass1 myclass2">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ratione provident
+        corrupti accusantium, cum cupiditate explicabo quos deserunt minima commodi architecto!</p>
+
+    <div id="myli2">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nam, minus.</div>
     <script>
         // 用 ID 抓 HTML 元素
         const title = document.getElementById("title");
         // .innerText 為裡面的文字
-        console.log(title.innerText);
+        console.log(title.innerHTML);
 
         // 用標籤名稱抓 HTML 元素，結果是陣列
         const h2 = document.getElementsByTagName("h2");
@@ -65,6 +76,34 @@
         const ul1 = document.getElementById("ul1")
         // innerHTML 會將 HTML 內容以文字輸出
         console.log(ul1.innerHTML)
+
+        // parentElement 上一層
+        const a_in_ul1 = ul1.getElementsByTagName("a")[0]
+        a_in_ul1.parentElement.style.background = "green";
+
+        // children 下一層
+        const li_in_ul1 = ul1.children;
+        for (let element of li_in_ul1) {
+            element.style.border = "1px solid blue"
+        }
+
+        const myli = document.getElementById("myli");
+        myli.previousElementSibling.style.color = "blue";
+        myli.nextElementSibling.style.color = "pink";
+
+        const myp = document.getElementById("myp");
+        console.log(myp.className);
+        myp.classList.add("myclass3");
+        myp.classList.remove("myclass2");
+        myp.classList.replace("myclass1", "myclass4")
+        myp.classList.toggle("myclass5");
+        console.log(myp.className)
+
+        const myli2 = document.getElementById("myli2");
+        myli2.insertAdjacentHTML("afterbegin", "<i>afterbegin</i>")
+        myli2.insertAdjacentHTML("afterend", "<i>afterend</i>")
+        myli2.insertAdjacentHTML("beforebegin", "<i>beforebegin</i>")
+        myli2.insertAdjacentHTML("beforeend", "<i>beforeend</i>")
     </script>
 </body>
 
