@@ -13,6 +13,8 @@
     <h2>第1個h2</h2>
     <h2>第2個h2</h2>
 
+    <h3 class="myclass1">第1個h3</h3>
+    <h3 class="myclass1">第2個h3</h3>
     <script>
         // 用 ID 抓 HTML 元素
         const title = document.getElementById("title");
@@ -27,6 +29,16 @@
         for (let element of h2) {
             element.innerText += "   哈囉"
         }
+
+        // 用 CLASS 名稱抓 HTML 元素，結果是陣列
+        // 如果你要一次符合多個 CLASS 的元素以空白分隔 ("myclass1 myclass2")
+        const myclass1 = document.getElementsByClassName("myclass1")
+        for (let element of myclass1) {
+            // .style.CSS 名稱
+            // CSS名稱改駝峰式命名，例如 background-color 改成 backgroundColor
+            element.style.color = "red";
+        }
+
     </script>
 </body>
 
