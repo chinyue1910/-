@@ -9,11 +9,24 @@
 
 <body>
     <h1 id="title">標題</h1>
+
+    <h2>第1個h2</h2>
+    <h2>第2個h2</h2>
+
     <script>
         // 用 ID 抓 HTML 元素
-        const title = document.getElementById("title")
+        const title = document.getElementById("title");
         // .innerText 為裡面的文字
-        console.log(title.innerText)
+        console.log(title.innerText);
+
+        // 用標籤名稱抓 HTML 元素，結果是陣列
+        const h2 = document.getElementsByTagName("h2");
+        // 也可以用 [] 指定第幾個
+        console.log(h2[0].innerText);
+        // 也可以用 for of 一次修改
+        for (let element of h2) {
+            element.innerText += "   哈囉"
+        }
     </script>
 </body>
 
