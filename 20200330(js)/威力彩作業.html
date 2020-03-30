@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const rand = (min, max) => {
+            return Math.round(Math.random() * (max - min)) + min
+        }
+
+        let a = [];
+        let b = rand(1, 8);
+
+        document.write(`A 區:<br>`)
+
+        for (let i = 0; i < 6; i++) {
+            let temp = rand(1, 38);
+            if (a.includes(temp)) {
+                i--;
+                continue;
+            }
+            a.push(temp);
+            document.write(temp + ",");
+        }
+        document.write("<br>")
+        document.write(`B 區: ${rand(1, 8)}<br>`);
+
+        //------------------------------------------------------------------------
+
+        let number = [];
+        for (let i = 0; i <= 38; i++) {
+            number.push(i);
+        }
+        for (let i = 0; i < 6; i++) {
+            let temp = rand(0, 37 - i);
+            document.write(number[temp] + ",")
+            number.splice(temp, 1);
+        }
+
+        document.write("<br>");
+
+        document.write(`B 區: ${rand(1, 8)}<br>`);
+    </script>
+</body>
+
+</html>

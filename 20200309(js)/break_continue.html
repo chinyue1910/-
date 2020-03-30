@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // let input = "";
+        // while (input !== "end") {
+        //     input = prompt("輸入 end 結束，不然煩死你");
+        // }
+
+        // for (let i = 0; i <= 10; i++) {
+        //     if (i === 5) {
+        //         continue;
+        //     }
+        //     document.write(i);
+        // }
+
+        // for (let i = 0; i <= 10; i++) {
+        //     if (i !== 5) {
+        //         document.write(i);
+        //     }
+        // }
+
+        // let count = 1;
+        // let num = 123;
+        // while (true) {
+        //     let answer = prompt(`第 ${count} 次猜測，猜猜看秘密數字是多少`);
+        //     if (answer == num) {
+        //         break;
+        //     }
+        //     count++;
+        // }
+
+        while (true) {
+            let answer = prompt(`猜猜看秘密數字是多少`)
+            if (answer == 100) {
+                break;
+            } else if (answer < 100) {
+                alert("太小")
+            } else {
+                alert("太大")
+            }
+        }
+    </script>
+</body>
+
+</html>

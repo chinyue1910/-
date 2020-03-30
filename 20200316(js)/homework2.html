@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let data = [
+            ["時段一", 18.2, 17.3, 15.0, 13.4],
+            ["時段二", 23.8, 25.1, 20.6, 17.8],
+            ["時段三", 20.6, 21.5, 18.4, 15.7]
+        ]
+        document.write(`
+        <table border="1">
+            <tr>
+                <td></td>
+                <td align="center">星期一</td>
+                <td align="center">星期二</td>
+                <td align="center">星期三</td>
+                <td align="center">星期四</td>
+                <td align="center" style="background:pink">平均溫度</td>
+            </tr>
+        `)
+        for (let d of data) {
+            document.write("<tr>")
+            let amount = 0;
+            for (let i in d) {
+                document.write(`<td align="center">${d[i]}</td>`)
+                if (i != 0) {
+                    amount += d[i]
+                }
+            }
+            document.write(`<td align="center" style="background:pink"> ${(amount / (d.length - 1)).toFixed(1)} </td>
+            </tr>`)
+        }
+
+        document.write(`<tr style="background:pink">
+        <td >平均溫度</td>`)
+        for (let k = 1; k < data[0].length; k++) {
+            let amount = 0;
+            document.write(`<td align="center">`)
+            for (let j in data) {
+                amount += data[j][k]
+            }
+            document.write(`${(amount / data.length).toFixed(1)} </td>`)
+        }
+        document.write(`</tr> </table> <hr>`)
+
+        let max = 0;
+        for (let d of data) {
+            for (let i in d) {
+                if (d[i] > max && i != 0) {
+                    max = d[i];
+                    time = d[0];
+                    if (i == 1) {
+                        day = "星期一"
+                    }
+                    else if (i == 2) {
+                        day = "星期二"
+                    }
+                    else if (i == 3) {
+                        day = "星期三"
+                    }
+                    else { day = "星期四" }
+                }
+            }
+        }
+
+        document.write(`溫度最高出現在: <span style="color:red">${day}</span> 的 <span style="color:red">${time}</span> ， 溫度為 <span style="color:red">${max}</span>`)
+
+        document.write("<hr>")
+
+        let min = Infinity;
+        for (let d of data) {
+            for (let i in d) {
+                if (d[i] < min && i != 0) {
+                    min = d[i];
+                    time = d[0];
+                    if (i == 1) {
+                        day = "星期一"
+                    }
+                    else if (i == 2) {
+                        day = "星期二"
+                    }
+                    else if (i == 3) {
+                        day = "星期三"
+                    }
+                    else { day = "星期四" }
+                }
+            }
+        }
+
+        document.write(`溫度最高出現在: <span style="color:red">${day}</span> 的 <span style="color:red">${time}</span> ， 溫度為 <span style="color:red">${min}</span>`)
+    </script>
+</body>
+
+</html>

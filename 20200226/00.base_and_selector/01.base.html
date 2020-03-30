@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS的學習</title>
+    <!-- 
+        第二種方式使用 <link> 連結外部樣式表
+        1.優點可以減少 CSS原始碼，不需要每個 html 重複寫 CSS，檔案較小
+        2.設計專題或工作時，使用外部樣式表。
+        3.外部樣式表不只有一份，可能會有樣式被覆蓋的問題，因為瀏覽器在閱讀網頁時，由上至下去閱讀每份外部樣式表。
+    -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- 
+        第一種方式 style 標籤樣式：寫在<style></style>
+        該網頁文件專屬樣式，無法被其他網頁使用
+     -->
+    <style>
+        /* 
+            1.要有一個選擇器
+            2.接著一個大括弧{}
+            3.屬性：值;
+         */
+        
+        h1 {
+            color: red;
+            background-color: yellow;
+            font-size: 40px;
+        }
+        /* 群組選擇，以逗點分開 */
+        
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            color: green;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 
+        第三種方式：style 屬性樣式，被稱為行內樣式
+        行內樣式優先權最高，因為 style 是標籤的屬性，不會被內嵌 (style)標籤、外部樣式表影響
+     -->
+    <h1 style="color: brown; font-size: 60px;">Lorem ipsum dolor sit amet.</h1>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam, dolores.</p>
+
+    <h1>Lorem ipsum dolor sit amet.</h1>
+    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nisi, magnam.</p>
+
+    <h1>Lorem ipsum dolor sit amet.</h1>
+    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Excepturi, ea?</p>
+
+    <hr>
+
+    <h1>Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis, consequatur.</h1>
+    <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis, consequatur.</h2>
+    <h3>Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis, consequatur.</h3>
+    <h4>Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis, consequatur.</h4>
+    <h5>Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis, consequatur.</h5>
+    <h6>Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis, consequatur.</h6>
+</body>
+
+</html>

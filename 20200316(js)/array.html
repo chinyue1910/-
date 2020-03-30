@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // let bendons = ["雞排飯", "排骨飯", "魚排飯"];
+        // document.write("便當總數:" + bendons.length + "<br>");
+        // document.write("第 0 個便當是" + bendons[0]);
+
+        let bendons = ["雞排飯", "排骨飯", "魚排飯"];
+        document.write("便當總數:" + bendons.length + "<br>");
+        for (let i = 0; i < bendons.length; i++) {
+            document.write(`第${i + 1}個便當是${bendons[i]}<br>`);
+        }
+        document.write("<hr>")
+        let person = {
+            name: "王小明",
+            age: 25,
+            number: 24
+        }
+        document.write(`名字叫 ${person["name"]} ， ${person.age} 歲`)
+        document.write("<br>")
+        document.write(Object.keys(person).length + "個");
+        document.write("<hr>");
+
+        // for(變數 of 陣列)
+        // 變數代表陣列裡面的每個東西，每次迴圈的值會改變
+        for (let bendon of bendons) {
+            document.write(bendon + "<br>")
+        }
+
+        let string = "Hello";
+        for (let s of string) {
+            document.write(s + "<br>");
+        }
+
+        // for(變數 in 陣列)
+        // 變數代表陣列裡面的每個索引，每次迴圈的值會改變
+        // jSON 只能用這個迴圈
+        for (let p in person) {
+            document.write(p + "的值是" + person[p] + "<br>");
+        }
+    </script>
+</body>
+
+</html>

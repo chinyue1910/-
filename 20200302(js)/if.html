@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let num1 = 10;
+        // 如果數字小於等於 10
+        if (num1 <= 10) {
+            document.write("數字小於等於 10")
+        } else {
+            document.write("數字大於 10")
+        }
+
+        // 兩個等於會忽略資料型態
+        document.write("<hr>" + "忽略資料型態" + "<br>")
+        let num2 = "10";
+        if (num1 == num2) {
+            document.write("==")
+        }
+
+        // 三個等於會判斷資料型態是否一樣
+        document.write("<hr>" + "判斷資料型態" + "<br>")
+        if (num1 === num2) {
+            document.write("===")
+        }
+
+        // // confirm 是確認訊息，點確定就是 true，取消是 false
+        // let answer = confirm('今天天氣好嗎');
+        // if (answer === true) {
+        //     alert("天氣好")
+        // }
+        // else {
+        //     alert("出門記得帶雨傘")
+        // }
+
+        // // 三元運算式簡寫
+        // answer === true ? alert("天氣好") : alert("出門記得帶雨傘");
+
+        // let isRich = true;
+        // let isFat = true;
+        // let isGoodAtCoding = true;
+        // // 布林值 !isFat => isFat === false
+        // if ((!isFat && isGoodAtCoding) || isRich) {
+        //     alert("交到女朋友")
+        // }
+
+        // // \n 在訊息視窗中換行
+        // let answer = prompt("引清兵入關的是誰? \n 1.吳三桂 \n 2.吳四桂 \n 3.吳五桂");
+        // if (answer === "1") {
+        //     alert("答對了");
+        // }
+        // else if (answer === "2" || answer === "3") {
+        //     alert("答錯了");
+        // }
+        // else {
+        //     alert("沒有這個選項");
+        // }
+
+        // let drink = "可樂";
+        // switch (drink) {
+        //     case "可樂":
+        //         alert("你喜歡喝可樂");
+        //         // break 後面的程式碼不會繼續跑
+        //         break;
+        //     case "果汁":
+        //         alert("你很健康");
+        //         break;
+        //     case "水":
+        //         alert("沒事多喝水");
+        //         break;
+        //     // 錯誤時會跑的程式碼
+        //     default:
+        //         alert("飲料");
+        //         break;
+        // }
+
+        let weather = "rain";
+        let hasUmbrella = false;
+        if (weather === "rain") {
+            if (hasUmbrella) {
+                alert("我有帶傘，不怕下雨")
+            } else {
+                alert("我沒有帶傘，要去買")
+            }
+        } else {
+            alert("出太陽")
+        }
+    </script>
+</body>
+
+</html>

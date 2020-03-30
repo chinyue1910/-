@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 定義 function
+        function sayHello() {
+            alert("Hello");
+        }
+
+        // 呼叫
+        sayHello();
+
+        function sayHelloname(name) {
+            alert("Hello," + name);
+        }
+
+        sayHelloname("小王")
+
+        function sayHelloString(name) {
+            let r = "Hello," + name;
+            return r;
+        }
+        let Hi1 = sayHelloString("小明");
+        document.write(Hi1);
+
+        // object 只有一樣不用加括號
+        const sayHelloarrow = () => {
+            alert("Hello");
+        };
+
+        sayHelloarrow();
+    </script>
+</body>
+
+</html>

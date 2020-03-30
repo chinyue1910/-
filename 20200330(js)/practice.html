@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let num = parseInt(prompt("請輸入起始值(正整數)"))
+        while (isNaN(num) || num < 0 || num.match(/[^0-9]/g)) {
+            alert("就跟你說輸入正整數齁，87喔");
+            num = prompt("再給你一次機會，請輸入起始值(正整數)")
+        }
+
+        let timer = setInterval(() => {
+            document.write(`${num} <br>`)
+            num--;
+            if (num < 0) {
+                clearInterval(timer)
+            }
+        }, 1000);
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let data = [
+            {
+                "時段": "時段一",
+                "星期一": 18.2,
+                "星期二": 17.3,
+                "星期三": 15.0,
+                "星期四": 13.4,
+            },
+            {
+                "時段": "時段二",
+                "星期一": 23.8,
+                "星期二": 25.1,
+                "星期三": 20.6,
+                "星期四": 17.8,
+            },
+            {
+                "時段": "時段三",
+                "星期一": 20.6,
+                "星期二": 21.5,
+                "星期三": 18.4,
+                "星期四": 15.7,
+            }
+        ]
+        document.write(`
+        <table border="1">
+            <tr style="background:pink">
+                <td></td>
+                <td align="center">星期一</td>
+                <td align="center">星期二</td>
+                <td align="center">星期三</td>
+                <td align="center">星期四</td>
+                <td align="center">平均溫度</td>
+            </tr>
+        `)
+
+
+        for (let d of data) {
+            let time = 0;
+            for (let i in d) {
+                if (i !== "時段") {
+                    time += d[i]
+                }
+            }
+            document.write(`
+            <tr>
+                <td align="center" style="background:pink">${d.時段}</td>
+                <td align="center">${d.星期一}</td>
+                <td align="center">${d.星期二}</td>
+                <td align="center">${d.星期三}</td>
+                <td align="center">${d.星期四}</td>
+                <td align="center" style="color:red">${(time / (Object.keys(d).length - 1)).toFixed(1)}</td>
+            </tr>
+            `)
+
+        }
+        let monday = 0;
+        for (let d of data) {
+            monday += d.星期一
+        }
+        let tuesday = 0;
+        for (let d of data) {
+            tuesday += d.星期二
+        }
+        let wednesday = 0;
+        for (let d of data) {
+            wednesday += d.星期三
+        }
+        let thursday = 0;
+        for (let d of data) {
+            thursday += d.星期四
+        }
+        document.write(`
+            <tr>
+                <td align="center" style="background:pink">平均溫度</td>
+                <td align="center" style="color:red">${(monday / data.length).toFixed(1)}</td>
+                <td align="center" style="color:red">${(tuesday / data.length).toFixed(1)}</td>
+                <td align="center" style="color:red">${(wednesday / data.length).toFixed(1)}</td>
+                <td align="center" style="color:red">${(thursday / data.length).toFixed(1)}</td>
+            </tr>
+        `)
+
+        document.write("</table>")
+
+        document.write("<hr>")
+
+        let max = 0;
+
+        for (let d of data) {
+            for (let i in d) {
+                if (d[i] > max) {
+                    max = d[i];
+                    day = i;
+                    time = d.時段;
+                }
+            }
+        }
+        document.write(`溫度最高出現在: <span style="color:red">${day}</span> 的 <span style="color:red">${time}</span> ， 溫度為 <span style="color:red">${max}</span>`)
+
+        document.write("<hr>")
+
+        let min = Infinity;
+        for (let d of data) {
+            for (let i in d) {
+                if (d[i] < min) {
+                    min = d[i];
+                    day = i;
+                    time = d.時段;
+                }
+            }
+        }
+        document.write(`溫度最低出現在: <span style="color:red">${day}</span> 的 <span style="color:red">${time}</span> ， 溫度為 <span style="color:red">${min}</span>`)
+
+
+    </script>
+</body>
+
+</html>

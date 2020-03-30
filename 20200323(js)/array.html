@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // .join("")將陣列接成文字
+        // 如果 () 沒東西就是用 , 連接
+        let elements = ['Fire', 'Wind', 'Rain'];
+        let join = elements.join("-");
+        console.log(join)
+
+        // .push() 在陣列後新增值
+        let days = ["星期一", "星期二"];
+        let push = days.push("星期三");
+        console.log(days);
+        console.log(push)
+
+        // .splice(開始位置, 刪除數量, 插入新值1, 插入新值2...)
+        let fruits = ["Apple", "Banana", "Cherry"];
+        fruits.splice(1, 0, "Tomato");
+        console.log(fruits)
+
+        // .contact() 陣列連接
+        let array1 = ['a', 'b', 'c'];
+        let array2 = ['d', 'e', 'f'];
+        let array3 = array1.concat(array2);
+        console.log(array3)
+
+        // .reverse()
+        let numbers = ["1", "2", "3"];
+        numbers.reverse();
+        console.log(numbers);
+
+        // .includes(文字) 陣列中找文字
+        // .indexof(文字) 陣列中找文字，回傳索引值
+        // 都要完全符合才會找到
+        let includes = fruits.includes("Apple");
+        console.log(includes);
+        let indexOf = fruits.indexOf("Banana");
+        console.log(indexOf)
+
+        // .map() 迴圈陣列後產生新的陣列
+        // 一定要有return
+        let numbers1 = [1, 2, 3, 4];
+        // num =>{} 為 function (num){}
+        numbers1 = numbers1.map(num => {
+            return num * 2
+        })
+        console.log(numbers1)
+
+        // .fliter() 過濾
+        let numbers2 = [100, 200, 300, 400];
+        numbers2 = numbers2.filter(num => {
+            // let stay= false;
+            // if(num>200){
+            // stay =true;
+            // }
+            // return stay
+            return num > 200
+        })
+        console.log(numbers2)
+
+        // .sort() 排序，預設是 1~9，大寫 A-Z，小寫a-z
+        let arr = [100, 500, 300, 400, 200, 3, 1, 4, 5, 2];
+        arr = arr.sort();
+        console.log(arr)
+
+        // 英文預設為 A-Z
+        let arr1 = ["Banana", "Apple", "Cherry", "apple", "banana", "cherry"];
+        arr1 = arr1.sort();
+        console.log(arr1)
+
+        // 預設排序不支援中文
+        let arr2 = ["三", "一", "二"];
+        arr2 = arr2.sort();
+        console.log(arr2)
+
+        // 數字大到小
+        let arr3 = [100, 500, 300, 400, 200, 3, 1, 4, 5, 2];
+        let ascnum = arr3.sort(
+            (a, b) => {
+                return b - a;
+            }
+        )
+        console.log(ascnum)
+
+        // 數字小到大
+        let arr4 = [100, 500, 300, 400, 200, 3, 1, 4, 5, 2];
+        let descnum = arr4.sort(
+            (a, b) => {
+                return a - b
+            }
+        )
+        console.log(descnum)
+
+        // localCompare()
+        let ch1 = "二";
+        let ch2 = "五";
+        // 如果 ch1 在 ch2 前為 -1
+        // 如果 ch1 在 ch2 前為 1
+        // 如果 ch1 在 ch2 前為 0
+        let compare = ch1.localeCompare(ch2, "zh-Hant-TW");
+        console.log(compare)
+
+        let arr5 = ["九", "四", "五", "三"];
+        arr5 = arr5.sort(
+            (a, b) => {
+                return b.localeCompare(a, "zh-TW")
+            }
+        )
+        console.log(arr5)
+    </script>
+</body>
+
+</html>

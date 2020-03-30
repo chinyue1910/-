@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let width = parseInt(prompt("你想要多寬(方框)"));
+        let height = parseInt(prompt("你想要多高(方框)"));
+        for (i = 1; i <= width; i++) {
+            document.write("★")
+        }
+        document.write("<br>")
+        for (i = 1; i <= height - 2; i++) {
+            document.write("★")
+            for (let j = 1; j <= width - 2; j++) {
+                document.write("&nbsp;&thinsp;&thinsp;&thinsp;")
+            }
+            document.write("★")
+            document.write("<br>")
+        }
+        for (i = 1; i <= width; i++) {
+            document.write("★")
+        }
+
+        document.write("<hr>")
+
+        let layer = parseInt(prompt("你想要幾層"));
+        for (let i = 1; i <= layer; i++) {
+            for (let j = 1; j <= i; j++) {
+                document.write("★")
+            }
+            document.write("<br>")
+        }
+
+        document.write("<hr>")
+
+        for (let i = 1; i <= layer; i++) {
+            for (let j = layer; j >= i; j--) {
+                document.write("★")
+            }
+            document.write("<br>")
+        }
+
+        document.write("<hr>")
+
+        for (let i = 1; i <= layer; i++) {
+            for (let k = layer - 1; k >= i; k--) {
+                document.write("&nbsp;&nbsp;&nbsp;")
+            }
+            for (let j = 1; j <= i; j++) {
+                document.write("★")
+            }
+            document.write("<br>")
+        }
+
+        document.write("<hr>")
+
+        for (let i = 1; i <= layer; i++) {
+            for (let k = 2; k <= i; k++) {
+                document.write("&nbsp;&nbsp;&nbsp;")
+            }
+            for (let j = layer; j >= i; j--) {
+                document.write("★")
+            }
+            document.write("<br>")
+        }
+
+        document.write("<hr>")
+
+        for (let i = 1; i <= layer; i++) {
+            for (let k = layer - 1; k >= i; k--) {
+                document.write("&nbsp;&nbsp;&nbsp;")
+            };
+            for (let j = 2; j <= i * 2; j++) {
+                document.write("★")
+            }
+            document.write("<br>")
+        }
+
+        document.write("<hr>")
+
+        for (let i = 1; i <= layer; i++) {
+            for (let k = 2; k <= i; k++) {
+                document.write("&nbsp;&nbsp;&nbsp;")
+            };
+            for (let j = layer * 2; j >= i * 2; j--) {
+                document.write("★")
+            }
+            document.write("<br>")
+        }
+
+        document.write("<hr>")
+
+        for (let i = 1; i <= layer; i++) {
+            for (let j = 1; j <= i; j++) {
+                document.write("★")
+            }
+            document.write("&nbsp;&nbsp;&nbsp;")
+            for (let j = 1; j <= i; j++) {
+                document.write("★")
+            }
+            document.write("<br>")
+        }
+
+        document.write("<hr>")
+
+        for (let i = 1; i <= layer; i++) {
+            for (let j = 1; j <= i; j++) {
+                document.write("★")
+            }
+            for (let j = layer - 1; j >= i; j--) {
+                document.write("&nbsp;&nbsp;&nbsp;")
+            }
+            for (let j = layer + 1; j >= i; j--) {
+                document.write("★")
+            }
+            for (let j = 3; j <= i * 2; j++) {
+                document.write("&nbsp;&nbsp;&nbsp;")
+            }
+            for (let j = layer; j >= i; j--) {
+                document.write("★")
+            }
+            for (let j = layer - 1; j >= i; j--) {
+                document.write("&nbsp;&nbsp;&nbsp;")
+            }
+            for (let j = 1; j <= i; j++) {
+                document.write("★")
+            }
+            document.write("<br>")
+
+        }
+
+        document.write("<hr>")
+
+        let Layer = parseInt(prompt("你想要幾層(菱形)"));
+        if (Layer % 2 == 1) {
+            for (let i = 1; i <= (Layer + 1) / 2; i++) {
+                for (let k = (Layer - 1) / 2; k >= i; k--) {
+                    document.write("&nbsp;&nbsp;&nbsp;")
+                };
+                for (let j = 2; j <= i * 2; j++) {
+                    document.write("★")
+                }
+                document.write("<br>")
+            }
+            for (let i = 1; i <= (Layer - 1) / 2; i++) {
+                for (let k = 1; k <= i; k++) {
+                    document.write("&nbsp;&nbsp;&nbsp;")
+                };
+                for (let j = Layer - 1; j >= i * 2; j--) {
+                    document.write("★")
+                }
+                document.write("<br>")
+            }
+        }
+        else {
+            for (let i = 1; i <= Layer / 2; i++) {
+                for (let k = Layer / 2 - 1; k >= i; k--) {
+                    document.write("&nbsp;&nbsp;&nbsp;")
+                };
+                for (let j = 2; j <= i * 2; j++) {
+                    document.write("★")
+                }
+                document.write("<br>")
+            }
+            for (let i = 1; i <= Layer; i++) {
+                for (let k = 2; k <= i; k++) {
+                    document.write("&nbsp;&nbsp;&nbsp;")
+                };
+                for (let j = Layer - 1; j >= i * 2 - 1; j--) {
+                    document.write("★")
+                }
+                document.write("<br>")
+            }
+        }
+    </script>
+</body>
+
+</html>

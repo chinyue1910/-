@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // for (let a = 0; a <= 255; a += 5) {
+        //     document.write(`<span style="color: rgb(${a},0,${255 - a})">★</span>`)
+        // }
+
+        document.write('<table border="1"')
+        for (let i = 1; i <= 9; i++) {
+            document.write('<tr>')
+            for (let j = 1; j <= 9; j++) {
+                document.write(
+                    `<td style="background-color: rgb(${j * 28}, 0, ${255 - j * 28})">${i} x ${j} = ${i * j}</td>`
+                )
+            }
+            document.write('</tr>')
+        }
+        document.write('</table>')
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* 
+            transition 轉場
+            1. 兩個樣式之間漸進式的轉變過程
+            2. 一個起始樣式，另一個結束的樣式，瀏覽器會將兩個樣式間的變化形成補間動畫(Tween)
+            3. 必須要有觸發動作，最常見的是 :hover
+        */
+        
+        .box {
+            width: 200px;
+            height: 200px;
+            background: #000;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(0deg);
+            /* 轉場屬性 預設all */
+            /* transition-property: background; */
+            /* 持續時間 */
+            /* transition-duration: 1s; */
+            /* 轉場速率 ease、linear、ease-in、ease-out、ease-in-out */
+            /* transition-timing-function: ease; */
+            /* 延遲時間 */
+            /* transition-delay: 1s; */
+            /*縮寫 */
+            transition: 1s
+        }
+        
+        .box:hover {
+            background-color: red;
+            width: 500px;
+            height: 500px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(720deg);
+        }
+        /* 
+            transition 可控制屬性
+            [Transform 變形]
+            translate
+            rotate
+            scale
+            skew
+
+            [顏色]
+            color
+            background-color
+            border-color
+
+            [文字]
+            font-size
+            opacity
+            line-height
+            letter-spacing
+            word-spacing
+
+            [盒模型]
+            width
+            height
+            margin
+            padding
+            border
+
+            [定位]
+            top
+            right
+            bottom
+            left
+        */
+    </style>
+</head>
+
+<body>
+    <div class="box"></div>
+</body>
+
+</html>

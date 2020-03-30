@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let a = parseInt(prompt("請輸入數值"));
+        let b = parseInt(prompt("請輸入數值"));
+        let c = parseInt(prompt("請輸入數值"));
+        let d = parseInt(prompt("請輸入數值"));
+        let e = parseInt(prompt("請輸入數值"));
+        let numbers = [a, b, c, d, e];
+        let max = numbers[0];
+        let min = numbers[0];
+        let amount = 0;
+        for (let i of numbers) {
+            if (i > max) {
+                max = i;
+            }
+            if (i < min) {
+                min = i;
+            }
+            amount += i;
+        }
+        document.write("你輸入的值為:" + numbers)
+        document.write("<br> 最大值是:" + max);
+        document.write("<br> 最小值是:" + min);
+        document.write("<br> 總和為:" + amount);
+
+    </script>
+</body>
+
+</html>

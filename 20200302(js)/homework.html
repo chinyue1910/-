@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let score = 0;
+        let sex = prompt("請問你的性別是？ \n\n 1.男生 \n\n 2.女生 \n");
+        alert("這些話你有對你的伴侶說過嗎？");
+
+        if (sex == 1) {
+            let q1 = confirm("1.你幹嘛生氣");
+            let q2 = confirm("2.對對對都我的錯");
+            let q3 = confirm("3.隨便妳決定就好");
+            let q4 = confirm("4.你這樣開心了嗎");
+            let q5 = confirm("5.是還要多久");
+
+            if (q1) {
+                score++
+            }
+            if (q2) {
+                score++
+            }
+            if (q3) {
+                score++
+            }
+            if (q4) {
+                score++
+            }
+            if (q5) {
+                score++
+            }
+        }
+        else {
+            let q1 = confirm("1.沒有你我活得更好");
+            let q2 = confirm("2.你也太快了吧、你好快喔");
+            let q3 = confirm("3.怪我囉、都我錯可以嗎");
+            let q4 = confirm("4.你開心就好、你爽就好");
+            let q5 = confirm("5.男生本來就該付錢");
+
+            if (q1) {
+                score++
+            }
+            if (q2) {
+                score++
+            }
+            if (q3) {
+                score++
+            }
+            if (q4) {
+                score++
+            }
+            if (q5) {
+                score++
+            }
+
+        }
+        if (score >= 4) {
+            alert("你知道死這個字怎麼寫嗎？")
+        }
+        else if (score >= 2) {
+            alert("心臟放大顆，福氣才會來")
+        }
+        else {
+            alert("You are perfect！")
+        }
+
+    </script>
+</body>
+
+</html>

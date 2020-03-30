@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>字體設定</title>
+    <style>
+        /* html 及 :root 是相同的寫法 */
+        html {
+            font-size: 16px;
+        }
+
+        :root {
+            font-size: 16px;
+        }
+
+        .font-style {
+            /* px、em、rem */
+            font-size: 28px;
+            /* 設定斜體 */
+            font-style: italic;
+            /* 設定粗體 */
+            font-weight: bolder;
+            /* 設定字體都變大寫，句子第一個字比較大，原本是大寫也會變大 */
+            font-variant: small-caps;
+        }
+
+        .text-style {
+            font-size: 30px;
+            text-align: left;
+            text-decoration: underline;
+            /* 縮排 */
+            text-indent: 100px;
+            /* capitalize(單字第一個字大寫)、uppercase(全部大寫)、lowercase(全部小寫) */
+            text-transform: capitalize;
+            /* 
+                第一個數字：水平位移量
+                第二個數字：垂直位移量
+                第三個數字：陰影模糊半徑
+                rgba()=> a 為 alpha (透明度)，1 完全不透明，0完全透明
+             */
+            text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.8);
+            /* 英文字母之間的間隔 */
+            letter-spacing: 3px;
+            /* 單字間的間隔 */
+            word-spacing: 5px;
+            /* 行高 */
+            line-height: 60px;
+        }
+
+        /* 設定連結狀態 */
+        a {
+            font-size: 30px;
+            text-decoration: none;
+            font-weight: bolder;
+        }
+
+        /* 滑鼠一般狀態 */
+        /* love-hate */
+        a:link {
+            color: rgb(202, 43, 104);
+        }
+
+        /* 連結拜訪過後的顏色 */
+        a:visited {
+            color: darkgrey;
+        }
+
+        /* 滑鼠滑過的顏色狀態 */
+        a:hover {
+            color: darkgreen;
+            text-decoration: underline;
+        }
+
+        /* 點擊時的顏色 */
+        a:active {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>設定 Font</h1>
+    <p class="font-style">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius praesentium cupiditate nisi illo
+        voluptate ex debitis suscipit deserunt eveniet, expedita voluptas dicta nobis sed velit eum atque provident
+        illum quidem?</p>
+
+    <hr>
+
+    <h1>設定 Text</h1>
+    <p class="text-style">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Culpa labore sed ipsam quam
+        doloribus, repudiandae
+        inventore laudantium libero corrupti molestias tempora eaque nostrum, enim ipsum ab, sunt voluptatum ducimus
+        reprehenderit.</p>
+
+    <hr>
+
+    <h1>連結顏色控制</h1>
+    <a href="#">Google</a>
+    <hr>
+    <h1>rem 與 em 差異</h1>
+    <h2>REM 為 root 預設(呈線性成長)</h2>
+    <div style="font-size: 1rem;">
+        font
+        <div style="font-size: 2rem;">
+            font
+            <div style="font-size: 3rem">font</div>
+        </div>
+    </div>
+    <h2>EM為父層 font-size 的倍數，父層若沒有設定文字尺寸會往外尋找，都沒有會以 root(html)設定 font-size 為依據，也就是16px</h2>
+    <div style="font-size: 1em;">
+        font
+        <div style="font-size: 2em;">
+            font
+            <div style="font-size: 3em">font</div>
+        </div>
+    </div>
+</body>
+
+</html>

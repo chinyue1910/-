@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let temp = [
+            [18.2, 17.3, 15.0, 13.4],
+            [23.8, 25.1, 20.6, 17.8],
+            [20.6, 21.5, 18.4, 15.7]
+        ];
+
+        let chinese = ["零", "一", "二", "三", "四"];
+
+        // 第一題
+        document.write("<table border='1'>");
+        document.write(`<tr>
+      <td></td>  
+      <td>星期一</td> 
+      <td>星期二</td> 
+      <td>星期三</td> 
+      <td>星期四</td> 
+    </tr>`);
+
+        for (let i = 0; i < 3; i++) {
+            document.write("<tr>");
+            document.write(`<td>時段${chinese[i + 1]}</td>`);
+
+            for (let j = 0; j < 4; j++) {
+                document.write(`<td>${temp[i][j]}</td>`)
+            }
+
+            document.write("</tr>");
+        }
+
+        document.write("</table>");
+
+        // 第二題
+        let sum = 0;
+        for (let i = 0; i < 3; i++) {
+            sum += temp[i][0];
+        }
+        document.write(`星期一的平均溫度: ${sum / 3} <br>`);
+
+        sum = 0;
+        for (let i = 0; i < 3; i++) {
+            sum += temp[i][1];
+        }
+        document.write(`星期二的平均溫度: ${sum / 3} <br>`);
+
+        sum = 0;
+        for (let i = 0; i < 3; i++) {
+            sum += temp[i][2];
+        }
+        document.write(`星期三的平均溫度: ${sum / 3} <br>`);
+
+        sum = 0;
+        for (let i = 0; i < 3; i++) {
+            sum += temp[i][3];
+        }
+        document.write(`星期四的平均溫度: ${sum / 3} <br>`);
+
+        // 第三題
+        sum = 0;
+        for (let i = 0; i < 4; i++) {
+            sum += temp[0][i];
+        }
+        document.write(`時段一的平均溫度: ${sum / 4} <br>`);
+
+        sum = 0;
+        for (let i = 0; i < 4; i++) {
+            sum += temp[1][i];
+        }
+        document.write(`時段二的平均溫度: ${sum / 4} <br>`);
+
+        sum = 0;
+        for (let i = 0; i < 4; i++) {
+            sum += temp[2][i];
+        }
+        document.write(`時段三的平均溫度: ${sum / 4} <br>`);
+
+        // 第四題
+        let day = 0;
+        let time = 0;
+        let tmp = temp[0][0];
+
+        for (let i = 0; i < 3; i++) {
+            for (let j = 0; j < 4; j++) {
+                if (temp[i][j] > tmp) {
+                    tmp = temp[i][j];
+                    day = j;
+                    time = i;
+                }
+            }
+        }
+        document.write(`溫度最高: 星期${chinese[day + 1]}，時段${chinese[time + 1]}<br>`);
+
+        // 第五題
+        day = 0;
+        time = 0;
+        tmp = temp[0][0];
+
+        for (let i = 0; i < 3; i++) {
+            for (let j = 0; j < 4; j++) {
+                if (temp[i][j] < tmp) {
+                    tmp = temp[i][j];
+                    day = j;
+                    time = i;
+                }
+            }
+        }
+        document.write(`溫度最低: 星期${chinese[day + 1]}，時段${chinese[time + 1]}`);
+    </script>
+</body>
+
+</html>

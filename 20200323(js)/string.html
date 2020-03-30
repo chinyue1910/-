@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // trim 移除前後空白
+        let str = " 我是文字 "
+        let strtrim = str.trim();
+        console.log(strtrim);
+
+        // 轉大寫
+        let str2 = "UpperCase"
+        let up = str2.toUpperCase();
+        console.log(up);
+
+        // 轉小寫
+        let str3 = "LowerCase"
+        let low = str3.toLowerCase();
+        console.log(low);
+
+        // .includes() 是否包含指定文字，會回傳 true 或 false
+        let str4 = "Hello, welcome to the world of Javascript";
+        let strIncludesJS = str4.includes("Javascript");
+        console.log(strIncludesJS);
+
+        // .match() 是否符合 regex 規則，會回傳所有符合的文字陣列 
+        // i = 不分大小寫，g = global search
+        let strMatchJS = str4.match(/Javascript/ig);
+        console.log(strMatchJS);
+        document.write(strMatchJS);
+
+        // .replace() 取代文字
+        let str5 = "Xmas Xmas Xmas";
+        let xmasReplace = str5.replace("Xmas", "Christmas");
+        console.log(xmasReplace);
+
+        // 放 regex 可以多筆取代
+        let xmasReplaceRegex = str5.replace(/xmas/ig, 'Christmas');
+        console.log(xmasReplaceRegex);
+
+        // .substr(開始, 長度)
+        let greeting = "Hello my friend!";
+        let sub = greeting.substr(0, 5);
+        console.log(sub)
+
+        // .substr(開始位置, 結尾位置)
+        let substring = greeting.substring(0, 8);
+        console.log(substring)
+
+        // .slice 可放負數，代表倒數
+        let slice = greeting.slice(0, -8);
+        console.log(slice)
+
+        let strNumber = "123456";
+        let num = parseInt(strNumber);
+        console.log(num)
+
+        let strFloat = "12345.67";
+        let float = parseFloat(strFloat);
+        console.log(float)
+
+        let notNumber = "abcdefg";
+        let nan = parseInt(notNumber);
+        console.log(nan);
+        // 不能直接 nan == NaN，只能用 isNaN
+        console.log(isNaN(nan));
+
+        let alphabet = "a,b,c,d,e,f,g";
+        let alphabetArr = alphabet.split(",");
+        let alphabetArr2 = alphabet.split("")
+        console.log(alphabetArr)
+    </script>
+</body>
+
+</html>

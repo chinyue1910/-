@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Block and Inline</title>
+    <style>
+        .menu {
+            text-align: center;
+            background: #aaa;
+            width: 800px;
+            margin: auto;
+        }
+
+        .menu li {
+            background: #FFa;
+            display: inline-block;
+            width: 100px;
+            border: 1px solid #333;
+        }
+
+        .menu li a {
+            color: white;
+            background: black;
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>區塊盒、行內盒</h1>
+    <p>盒子分為區塊盒( block box )、行內盒( inline box )兩種基本型</p>
+    <h2>區塊盒</h2>
+    <div style="background: #FFa">Lorem ipsum dolor sit amet.</div>
+    <h1 style="background: #FFa">Lorem ipsum dolor sit amet.</h1>
+    <p style="background: #FFa">Lorem ipsum dolor sit amet.</p>
+    <ul>
+        <li>區塊盒前後斷行、填滿整個父元素，無法與其他元素並排</li>
+        <li>可以正常使用 width、height、margin 與 padding屬性</li>
+        <li>例子：div、h1、p、ul</li>
+    </ul>
+
+    <h2>行內盒</h2>
+    <span style="background: #FFa;">Lorem ipsum dolor sit amet.</span>
+    <span style="background: #FFa;">Lorem ipsum dolor sit amet.</span>
+    <span style="background: #FFa;">Lorem ipsum dolor sit amet.</span>
+    <ul>
+        <li>行內盒前後不斷行，寬度以本身內容寬度為主，width、height 不會有任何作用</li>
+        <li>例子：span、a、em、strong</li>
+    </ul>
+
+    <hr>
+    <h3>可以使用 display 設定其他類型的盒子，例如：display：inline-block</h3>
+    <ul class="menu">
+        <li><a href="#">link1</a></li>
+        <li><a href="#">link2</a></li>
+        <li><a href="#">link3</a></li>
+        <li><a href="#">link4</a></li>
+        <li><a href="#">link5</a></li>
+    </ul>
+
+
+</body>
+
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1 style="color: antiquewhite;"></h1>
+    <script>
+        // let num = Math.random();
+        // num = Math.round(num * 100)
+        // document.write(num)
+
+        // document.write("<hr>")
+
+        // const rand = (min, max) => {
+        //     return Math.floor(Math.random() * (max - 1 - min)) + min + 1
+        // }
+        // let min = parseInt(prompt("小"));
+        // let max = parseInt(prompt("大"));
+        // document.write(rand(min, max));
+
+        // document.write("<hr>")
+
+        const rand = (min, max) => {
+            return Math.round(Math.random() * (max - min)) + min
+        }
+
+        let result = [];
+        for (let i = 0; i < 6; i++) {
+            let random = rand(1,38);
+            while (result.includes(random)) {
+                random = rand(1,38);
+            }
+            result.push(random)
+        }
+
+        let special = rand(1,8)
+
+        document.write(`
+            <table border = "1" style = "margin : auto;">
+            <tr>
+                <td align=center colspan="7" style = "background : orange">A區開獎號碼</td>
+                <td align=center style = "background : pink">B區特別號碼</td>
+            </tr>
+            <tr>
+                <td style = "background:antiquewhite;">開出順序</td>
+            `)
+        for (let i of result){
+            document.write(`
+                <td align=center style = "font-weight:bolder;">${i}</td>
+            `)
+        }
+
+        result = result.sort((a,b) => {
+            return a-b
+        })
+
+        document.write(`
+                <td align=center style = "color:red; font-weight:bolder;">${special}</td>
+            </tr>
+            <tr>
+                <td style = "background:antiquewhite;">大小順序</td>
+        `)
+
+        for (let i of result){
+            document.write(`
+                <td align=center style = "font-weight:bolder;">${i}</td>
+            `)
+        }
+
+        document.write(`
+                <td align=center style = "color:red; font-weight:bolder;">${special}</td>
+            </tr>
+        </table>
+        `)
+
+        
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // let Ming = {
+        //     firstName: "小明",
+        //     lastName: "王",
+        //     skills: [],
+        //     sayHello: function () {
+        //         alert("你好，我的名字叫 " + this.lastName + this.firstName);
+        //     },
+        //     // 簡寫 addSkill: function (skill) {}
+        //     addSkill(skill) {
+        //         this.skills.push(skill);
+        //     }
+        // }
+
+        // Ming.sayHello();
+        // Ming.addSkill("javascript");
+        // console.log(Ming.skills);
+        // <------------------------------------------------------------------------->
+        // 宣告類別
+        class Person {
+            constructor(name, gender, id) {
+                this.name = name;
+                this.gender = gender;
+                this.id = id;
+            }
+            Introduce() {
+                alert(`我的名字叫 ${this.name}，性別是 ${this.gender}，身份證字號是 ${this.id}`);
+            }
+            ChangeName(name) {
+                this.name = name;
+            }
+        }
+
+        let Wang = new Person("王曉明", "男", "A123456789");
+        Wang.Introduce();
+        Wang.ChangeName("王大明");
+        Wang.Introduce();
+        console.log(Wang.id)
+
+        let Mei = new Person("蔡小美", "女", "A213456789");
+        Mei.Introduce();
+    </script>
+</body>
+
+</html>
