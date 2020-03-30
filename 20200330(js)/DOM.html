@@ -16,7 +16,15 @@
     <h3 class="myclass1">第1個h3</h3>
     <h3 class="myclass1">第2個h3</h3>
 
+    <h4 id="byebye">刪掉</h4>
+
     <a href="http://google.com" id="link">連結</a>
+
+    <ul id="ul1">
+        <li>1</li>
+        <li>2</li>
+        <li><a href="http://google.com">連結</a></li>
+    </ul>
     <script>
         // 用 ID 抓 HTML 元素
         const title = document.getElementById("title");
@@ -50,6 +58,13 @@
         link.setAttribute("href", "http://fb.com")
         link.href = "http://fb.com"
         console.log(link.href)
+
+        const byebye = document.getElementById("byebye");
+        byebye.remove();
+
+        const ul1 = document.getElementById("ul1")
+        // innerHTML 會將 HTML 內容以文字輸出
+        console.log(ul1.innerHTML)
     </script>
 </body>
 
