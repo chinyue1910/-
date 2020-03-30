@@ -15,6 +15,8 @@
 
     <h3 class="myclass1">第1個h3</h3>
     <h3 class="myclass1">第2個h3</h3>
+
+    <a href="http://google.com" id="link">連結</a>
     <script>
         // 用 ID 抓 HTML 元素
         const title = document.getElementById("title");
@@ -39,6 +41,15 @@
             element.style.color = "red";
         }
 
+        // 用 CSS 選擇器抓 HTML 元素
+        // querySelectorAll 取全部，結果是陣列
+        // querySelector 取第一個
+        const link = document.querySelector("#link")
+        console.log(link.href)
+        console.log(link.getAttribute("href"))
+        link.setAttribute("href", "http://fb.com")
+        link.href = "http://fb.com"
+        console.log(link.href)
     </script>
 </body>
 
