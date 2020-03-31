@@ -5,60 +5,131 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <style>
-        .clock-container {
-            margin: auto;
-            width: 480px;
-            height: 480px;
-            background-color: black;
-            border-radius: 50%;
-            position: relative;
-        }
-
-        .clock-digital {
-            position: absolute;
-            height: 444px;
-            width: 224px;
-            background-color: brown;
-            left: 18px;
-            top: 18px;
-            border-radius: 220px 0 0 220px;
-        }
-
-        .clock-analog {
-            position: absolute;
-            width: 224px;
-            height: 444px;
-            background-color: white;
-            right: 18px;
-            top: 18px;
-            border-radius: 0 220px 220px 0;
-        }
-
-        .clock-container .spear {
-            position: absolute;
-            width: 220px;
-            height: 1px;
-        }
-    </style>
 </head>
 
 <body>
-    <div class="clock-container">
-        <div class="clock-digital">
-            <div class="date"></div>
-            <div class="time"></div>
-            <div class="day"></div>
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <style>
+            #clock {
+                width: 200px;
+                height: 200px;
+                background: white;
+                border-radius: 50%;
+                margin: auto;
+                position: relative;
+                border: 3px solid chocolate;
+            }
+
+            #hour {
+                position: absolute;
+                width: 20%;
+                height: 6px;
+                background-color: red;
+                left: 30%;
+                top: calc(50% - 3px);
+                border-radius: 2px;
+                transform: rotate(0deg);
+                transform-origin: right center;
+                writing-mode: vertical-rl;
+            }
+
+            #minute {
+                position: absolute;
+                width: 40%;
+                height: 4px;
+                background-color: blue;
+                left: 10%;
+                top: calc(50% - 2px);
+                border-radius: 2px;
+                transform: rotate(0deg);
+                transform-origin: right center;
+            }
+
+
+            #second {
+                position: absolute;
+                width: 45%;
+                height: 2px;
+                background-color: black;
+                top: calc(50% - 1px);
+                left: 5%;
+                border-radius: 2px;
+                transform: rotate(0deg);
+                transform-origin: right center;
+            }
+
+            section {
+                position: absolute;
+                height: 50%;
+                width: 20px;
+                left: calc(50% - 10px);
+                display: block;
+                transform-origin: bottom center;
+                transform: rotate(0deg);
+                text-align: center;
+            }
+
+            span {
+                position: absolute;
+                font-size: 12px;
+                width: 20px;
+                height: 20px;
+                display: block;
+                box-sizing: border-box;
+                transform: rotate(0deg);
+            }
+        </style>
+    </head>
+
+    <body>
+        <div id="clock">
+            <div id="hour"></div>
+            <div id="minute"></div>
+            <div id="second"></div>
         </div>
-        <div class="clock-analog">
-            <div class="spear"></div>
-            <div class="hour"></div>
-            <div class="minute"></div>
-            <div class="second"></div>
-            <div class="dail"></div>
-        </div>
-    </div>
-    https://codepen.io/vineethtr/pen/GvROZV
+        <script>
+
+            for (let i = 1; i <= 60; i++) {
+                let clock = document.getElementById("clock")
+                let section = document.createElement("section")
+                clock.appendChild(section)
+                let span = document.createElement("span")
+                section.appendChild(span)
+                if (i % 5 === 0) {
+                    span.innerText = i / 5;
+                    section.style.fontFamily = "微軟正黑體";
+                }
+                else {
+                    span.innerText = ".";
+
+                }
+                section.style.transform = `rotate(${i * 6}deg)`
+                span.style.transform = `rotate(${-i * 6}deg)`
+            }
+
+            const hour = document.getElementById("hour")
+            const minute = document.getElementById("minute")
+            const second = document.getElementById("second")
+
+            const setDate = () => {
+                const now = new Date();
+                hour.style.transform = `rotate(${now.getHours() * 30 + 90}deg)`;
+                minute.style.transform = `rotate(${now.getMinutes() * 6 + 90}deg)`;
+                second.style.transform = `rotate(${now.getSeconds() * 6 + 90}deg)`;
+            }
+
+            setDate();
+            setInterval(setDate, 1000)
+        </script>
+    </body>
+
+    </html>
 </body>
 
 </html>
