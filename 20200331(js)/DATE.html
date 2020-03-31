@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 使用 Date 物件
+        const now = new Date()
+
+        console.log(now.getFullYear())
+        console.log(now.getMonth())
+        console.log(now.getDate())
+        console.log(now.getDay())
+
+        let str = now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds()
+        console.log("現在時間是 " + str);
+
+        console.log(now.toLocaleString("zh-tw"))
+    </script>
+</body>
+
+</html>
