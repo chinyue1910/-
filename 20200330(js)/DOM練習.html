@@ -10,6 +10,7 @@
 <body>
     <h1 id="pre"></h1>
     <script>
+        // 如果 prompt 按取消的話是 null
         let num = prompt("請輸入起始秒數(正整數)")
         while (isNaN(num) || num <= 0) {
             alert("就跟你說輸入正整數齁，87喔");
@@ -19,7 +20,9 @@
         let pre = document.getElementById("pre");
 
         let timer = setInterval(() => {
+
             pre.innerText = (`剩餘${num}秒`)
+
             num--;
             if (num < 0) {
                 clearInterval(timer)
