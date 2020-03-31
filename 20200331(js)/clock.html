@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #clock {
+            width: 200px;
+            height: 200px;
+            background-image: url("220px-JaketheDog.png");
+            border-radius: 50%;
+            margin: auto;
+            position: relative;
+            border: 3px solid black;
+        }
+
+        #hour {
+            position: absolute;
+            width: 20%;
+            height: 6px;
+            background-color: red;
+            left: 30%;
+            top: calc(50% - 3px);
+            border-radius: 2px;
+            transform: rotate(0deg);
+            transform-origin: right center;
+        }
+
+        #minute {
+            position: absolute;
+            width: 40%;
+            height: 4px;
+            background-color: blue;
+            left: 10%;
+            top: calc(50% - 2px);
+            border-radius: 2px;
+            transform: rotate(0deg);
+            transform-origin: right center;
+        }
+
+
+        #second {
+            position: absolute;
+            width: 45%;
+            height: 2px;
+            background-color: black;
+            top: calc(50% - 1px);
+            left: 5%;
+            border-radius: 2px;
+            transform: rotate(0deg);
+            transform-origin: right center;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="clock">
+        <div id="hour"></div>
+        <div id="minute"></div>
+        <div id="second"></div>
+        <script>
+            const hour = document.getElementById("hour")
+            const minute = document.getElementById("minute")
+            const second = document.getElementById("second")
+
+            const setDate = () => {
+                const now = new Date();
+                hour.style.transform = `rotate(${now.getHours() * 30 + 90}deg)`;
+                minute.style.transform = `rotate(${now.getMinutes() * 6 + 90}deg)`;
+                second.style.transform = `rotate(${now.getSeconds() * 6 + 90}deg)`;
+            }
+
+            setDate();
+            setInterval(setDate, 1000)
+        </script>
+    </div>
+</body>
+
+</html>
