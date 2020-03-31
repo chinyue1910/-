@@ -9,11 +9,11 @@
         #clock {
             width: 200px;
             height: 200px;
-            background-image: url("220px-JaketheDog.png");
+            background-image: black;
             border-radius: 50%;
             margin: auto;
             position: relative;
-            border: 3px solid black;
+            border: 3px solid chocolate;
         }
 
         #hour {
@@ -26,6 +26,7 @@
             border-radius: 2px;
             transform: rotate(0deg);
             transform-origin: right center;
+            writing-mode: vertical-rl;
         }
 
         #minute {
@@ -57,7 +58,7 @@
 
 <body>
     <div id="clock">
-        <div id="hour"></div>
+        <div id="hour">1</div>
         <div id="minute"></div>
         <div id="second"></div>
         <script>
