@@ -16,52 +16,68 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Document</title>
         <style>
+            body {
+                background-image: url(1.jpg);
+                background-size: cover;
+            }
+
             #clock {
                 width: 200px;
                 height: 200px;
-                background: white;
                 border-radius: 50%;
-                margin: auto;
+                margin: 50px auto;
                 position: relative;
-                border: 3px solid chocolate;
+
+            }
+
+            .bg {
+                width: 200px;
+                height: 200px;
+                border-radius: 50%;
+                position: absolute;
+                background-image: url(2.jpg);
+                filter: opacity(70%);
+                box-shadow: 0px 0px 5px black;
+                background-size: cover;
             }
 
             #hour {
                 position: absolute;
-                width: 20%;
-                height: 6px;
-                background-color: red;
-                left: 30%;
-                top: calc(50% - 3px);
-                border-radius: 2px;
+                width: 20px;
+                height: 60px;
+                background-image: url(hour.png);
+                background-size: cover;
+                top: 40px;
+                left: calc(50% - 10px);
                 transform: rotate(0deg);
-                transform-origin: right center;
-                writing-mode: vertical-rl;
+                transform-origin: bottom center;
+                box-sizing: border-box;
             }
 
             #minute {
                 position: absolute;
-                width: 40%;
-                height: 4px;
-                background-color: blue;
-                left: 10%;
-                top: calc(50% - 2px);
+                width: 10px;
+                height: 80px;
+                background-image: url(minute.png);
+                top: 20px;
+                left: calc(50% - 5px);
                 border-radius: 2px;
                 transform: rotate(0deg);
-                transform-origin: right center;
+                transform-origin: bottom center;
+                box-sizing: border-box;
+                background-size: cover;
             }
-
 
             #second {
                 position: absolute;
-                width: 45%;
-                height: 2px;
+                width: 1px;
+                height: 45%;
                 background-color: black;
-                top: calc(50% - 1px);
-                left: 5%;
+                left: calc(50% - 1px);
+                top: 5%;
                 border-radius: 2px;
                 transform: rotate(0deg);
-                transform-origin: right center;
+                transform-origin: bottom center;
             }
 
             section {
@@ -83,15 +99,133 @@
                 display: block;
                 box-sizing: border-box;
                 transform: rotate(0deg);
+                color: black;
+                filter: drop-shadow(0 0 0.5px white);
+            }
+
+            #gear1 {
+                animation: animation1 3s infinite linear;
+                background-image: url(gear1.png);
+                width: 50px;
+                height: 50px;
+                position: absolute;
+                background-size: cover;
+                left: calc(50% - 25px);
+                top: 100px;
+                transform-origin: center;
+                transform: rotate(0deg);
+            }
+
+            #gear2 {
+                animation: animation2 3s infinite linear;
+                background-image: url(gear2.png);
+                width: 20px;
+                height: 20px;
+                position: absolute;
+                background-size: cover;
+                left: calc(50% - 10px);
+                top: calc(50% - 10px);
+                z-index: 999999;
+                transform-origin: center;
+                transform: rotate(0deg);
+            }
+
+            #gear3 {
+                animation: animation3 3s infinite linear;
+                background-image: url(gear3.png);
+                width: 60px;
+                height: 60px;
+                position: absolute;
+                background-size: cover;
+                left: 95px;
+                top: 60px;
+                transform-origin: center;
+                transform: rotate(0deg);
+            }
+
+            #gear4 {
+                animation: animation4 3s infinite linear;
+                background-image: url(gear4.png);
+                width: 70px;
+                height: 70px;
+                position: absolute;
+                background-size: cover;
+                left: 40px;
+                top: 50px;
+                transform-origin: center;
+                transform: rotate(0deg);
+            }
+
+            @keyframes animation1 {
+                0% {
+                    transform: rotate(1440deg);
+                }
+
+                50% {
+                    transform: rotate(720deg);
+                }
+
+                100% {
+                    transform: rotate(0deg);
+                }
+            }
+
+            @keyframes animation2 {
+                0% {
+                    transform: rotate(0deg);
+                }
+
+                50% {
+                    transform: rotate(360deg);
+                }
+
+                100% {
+                    transform: rotate(720deg);
+                }
+            }
+
+            @keyframes animation3 {
+                0% {
+                    transform: rotate(0deg);
+                }
+
+                50% {
+                    transform: rotate(360deg);
+                }
+
+                100% {
+                    transform: rotate(720deg);
+                }
+            }
+
+            @keyframes animation4 {
+                0% {
+                    transform: rotate(360deg);
+                }
+
+                50% {
+                    transform: rotate(180deg);
+                }
+
+                100% {
+                    transform: rotate(0deg);
+                }
             }
         </style>
     </head>
 
     <body>
         <div id="clock">
+            <div class="bg"></div>
+            <div id="gear4"></div>
+            <div id="gear1"></div>
+            <div id="gear2"></div>
+            <div id="gear3"></div>
+
             <div id="hour"></div>
             <div id="minute"></div>
             <div id="second"></div>
+            <div class="circle"></div>
         </div>
         <script>
 
@@ -102,12 +236,13 @@
                 let span = document.createElement("span")
                 section.appendChild(span)
                 if (i % 5 === 0) {
-                    span.innerText = i / 5;
+                    let ary = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII"]
+                    span.innerText = ary[i / 5 - 1];
                     section.style.fontFamily = "微軟正黑體";
                 }
                 else {
-                    span.innerText = ".";
 
+                    span.innerText = ".";
                 }
                 section.style.transform = `rotate(${i * 6}deg)`
                 span.style.transform = `rotate(${-i * 6}deg)`
@@ -119,11 +254,10 @@
 
             const setDate = () => {
                 const now = new Date();
-                hour.style.transform = `rotate(${now.getHours() * 30 + 90}deg)`;
-                minute.style.transform = `rotate(${now.getMinutes() * 6 + 90}deg)`;
-                second.style.transform = `rotate(${now.getSeconds() * 6 + 90}deg)`;
+                hour.style.transform = `rotate(${now.getHours() * 30 + now.getMinutes() / 2}deg)`;
+                minute.style.transform = `rotate(${now.getMinutes() * 6 + now.getSeconds() / 10}deg)`;
+                second.style.transform = `rotate(${now.getSeconds() * 6}deg)`;
             }
-
             setDate();
             setInterval(setDate, 1000)
         </script>
