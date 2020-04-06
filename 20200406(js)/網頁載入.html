@@ -5,12 +5,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+        }
+
+        #loading {
+            width: 100vw;
+            height: 100vh;
+            position: fixed;
+            background: deepskyblue;
+            display: table;
+            transition: 1s;
+        }
+
+        #loading_inner {
+            display: table-cell;
+            vertical-align: middle;
+            text-align: center;
+            color: white;
+        }
+
+        .a {
+            width: 100vw;
+            height: 100vh;
+        }
+    </style>
 </head>
 
 <body>
-    <img src="https://images3.alphacoders.com/847/847928.jpg" alt="">
-    <img src="https://images.alphacoders.com/789/789452.jpg" alt="">
-    <img src="https://images5.alphacoders.com/685/685514.jpg" alt="">
+    <div id="loading">
+        <div id="loading_inner">
+            <img src="123.svg" alt="">
+            <h1>載入中</h1>
+        </div>
+    </div>
+
+    <img class="a" src="https://images3.alphacoders.com/847/847928.jpg" alt="">
+    <img class="a" src="https://images.alphacoders.com/789/789452.jpg" alt="">
+    <img class="a" src="https://images5.alphacoders.com/685/685514.jpg" alt="">
     <script>
         // 當載入狀態改變時
         // document.onreadystatechange
@@ -23,7 +56,11 @@
         // 當整個網頁載入完(連圖片都下載完)時
         // window.onload
         window.onload = () => {
-            console.log("window ok")
+            const loading = document.getElementById("loading")
+            loading.style.opacity = "0%"
+            setTimeout(() => {
+                loading.style.display = "none"
+            }, 1000)
         }
     </script>
 </body>
