@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="button" value="剪刀" class="btns">
+    <input type="button" value="石頭" class="btns">
+    <input type="button" value="布" class="btns">
+    <ul id="result"></ul>
+
+    <script>
+        const com_guester = ["剪刀", "石頭", "布"]
+        const btns = document.getElementsByClassName("btns")
+        const result = document.getElementById("result")
+        for (let btn of btns) {
+            btn.onclick = () => {
+                const li = document.createElement("li")
+                let com = com_guester[Math.round(Math.random() * 2)]
+                let player = btn.value
+                if (player == com) {
+                    alert("平手");
+                    li.innerText += `平手,你出${player},電腦出${com}`
+                }
+                else if (((player == "剪刀") && (com == "布")) || ((player == "石頭") && (com == "剪刀")) || ((player == "布") && (com == "石頭"))) {
+                    alert("你贏了");
+                    li.innerText += `你贏了,你出${player},電腦出${com}`
+                }
+                else {
+                    alert("你輸了");
+                    li.innerText += `你輸了,你出${player},電腦出${com}`
+                }
+                result.appendChild(li)
+            }
+        }
+
+
+
+
+    </script>
+</body>
+
+</html>

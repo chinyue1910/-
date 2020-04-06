@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #colorboard {
+            width: 250px;
+            height: 250px;
+        }
+
+        #colorboard1 {
+            width: 250px;
+            height: 250px;
+        }
+
+        span {
+            display: inline-block;
+            width: 25px;
+            height: auto;
+        }
+
+        .choose {
+            display: inline-block;
+            margin: 10px;
+            text-align: center;
+        }
+
+        #gradient {
+            width: 100vw;
+            height: 100vh;
+        }
+
+        .center {
+            position: absolute;
+            left: calc(50% - 282px);
+            top: calc(50% - 190px);
+            background-color: black;
+            color: white;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+
+<body id="gradient">
+    <div class="center">
+        <div class="choose">
+            <div id="colorboard"></div>
+            <input type="range" min="0" max="255" value="255" class="scrolls">
+            <span class="numbers"></span>
+            <input type="button" value="隨機" class="randoms">
+            <br>
+            <input type="range" min="0" max="255" value="128" class="scrolls">
+            <span class="numbers"></span>
+            <input type="button" value="隨機" class="randoms">
+            <br>
+            <input type="range" min="0" max="255" value="0" class="scrolls">
+            <span class="numbers"></span>
+            <input type="button" value="隨機" class="randoms">
+        </div>
+        <div class="choose">
+            <div id="colorboard1"></div>
+            <input type="range" min="0" max="255" value="0" class="scrolls">
+            <span class="numbers"></span>
+            <input type="button" value="隨機" class="randoms">
+            <br>
+            <input type="range" min="0" max="255" value="128" class="scrolls">
+            <span class="numbers"></span>
+            <input type="button" value="隨機" class="randoms">
+            <br>
+            <input type="range" min="0" max="255" value="255" class="scrolls">
+            <span class="numbers"></span>
+            <input type="button" value="隨機" class="randoms">
+        </div>
+    </div>
+    <script>
+        const scrolls = document.getElementsByClassName("scrolls")
+        const randoms = document.getElementsByClassName("randoms")
+        const colorboard = document.getElementById("colorboard")
+        const colorboard1 = document.getElementById("colorboard1")
+        const numbers = document.getElementsByClassName("numbers")
+        const gradient = document.getElementById("gradient")
+
+        for (let i in scrolls) {
+            colorboard.style.background = `rgb(${scrolls[0].value},${scrolls[1].value},${scrolls[2].value})`
+            colorboard1.style.background = `rgb(${scrolls[3].value},${scrolls[4].value},${scrolls[5].value})`
+            gradient.style.background = `linear-gradient(rgb(${scrolls[0].value},${scrolls[1].value},${scrolls[2].value}),rgb(${scrolls[3].value},${scrolls[4].value},${scrolls[5].value}))`
+            numbers[i].innerText = scrolls[i].value
+            scrolls[i].oninput = () => {
+                numbers[i].innerText = scrolls[i].value
+                colorboard.style.background = `rgb(${scrolls[0].value},${scrolls[1].value},${scrolls[2].value})`
+                colorboard1.style.background = `rgb(${scrolls[3].value},${scrolls[4].value},${scrolls[5].value})`
+                gradient.style.background = `linear-gradient(rgb(${scrolls[0].value},${scrolls[1].value},${scrolls[2].value}),rgb(${scrolls[3].value},${scrolls[4].value},${scrolls[5].value}))`
+            }
+        }
+        for (let i in randoms) {
+            randoms[i].onclick = () => {
+                let math_random = Math.round(Math.random() * 255)
+                numbers[i].innerText = math_random
+                scrolls[i].value = math_random
+                colorboard.style.background = `rgb(${scrolls[0].value},${scrolls[1].value},${scrolls[2].value})`
+                colorboard1.style.background = `rgb(${scrolls[3].value},${scrolls[4].value},${scrolls[5].value})`
+                gradient.style.background = `linear-gradient(rgb(${scrolls[0].value},${scrolls[1].value},${scrolls[2].value}),rgb(${scrolls[3].value},${scrolls[4].value},${scrolls[5].value}))`
+            }
+        }
+    </script>
+</body>
+
+</html>
