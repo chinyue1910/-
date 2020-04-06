@@ -9,6 +9,27 @@
 
 <body>
     <input type="button" value="點我" onclick="alert('你好')">
+    <input type="button" value="點我看時間" onclick="this.value = new Date().toLocaleTimeString('zh-tw')">
+    <input type="button" value="點我去 google" onclick="goto('http://google.com')">
+
+    <input type="button" value="點我" class="btns">
+    <input type="button" value="點我" class="btns">
+    <input type="button" value="點我" class="btns">
+    <input type="button" value="點我" class="btns">
+    <input type="button" value="點我" class="btns">
+
+    <script>
+        const goto = (link) => {
+            location.href = link;
+        }
+
+        const btns = document.getElementsByClassName("btns")
+        for (let btn of btns) {
+            btn.onclick = () => {
+                btn.value = "是沒有點過喔"
+            }
+        }
+    </script>
 </body>
 
 </html>
