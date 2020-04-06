@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <img src="https://images3.alphacoders.com/847/847928.jpg" alt="">
+    <img src="https://images.alphacoders.com/789/789452.jpg" alt="">
+    <img src="https://images5.alphacoders.com/685/685514.jpg" alt="">
+    <script>
+        // 當載入狀態改變時
+        // document.onreadystatechange
+        // interactive: 載入完 HTML 標籤時
+        // complete: 整個網頁載入完時
+        document.onreadystatechange = () => {
+            console.log(document.readyState)
+        }
+        // -------------------------------------------------------------
+        // 當整個網頁載入完(連圖片都下載完)時
+        // window.onload
+        window.onload = () => {
+            console.log("window ok")
+        }
+    </script>
+</body>
+
+</html>
