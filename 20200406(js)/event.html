@@ -12,12 +12,19 @@
     <input type="button" value="點我看時間" onclick="this.value = new Date().toLocaleTimeString('zh-tw')">
     <input type="button" value="點我去 google" onclick="goto('http://google.com')">
 
+    <hr>
+
     <input type="button" value="點我" class="btns">
     <input type="button" value="點我" class="btns">
     <input type="button" value="點我" class="btns">
     <input type="button" value="點我" class="btns">
     <input type="button" value="點我" class="btns">
 
+    <hr>
+
+    <a href="http://facabook.com" id="fb">去 Facebook</a>
+    <br>
+    <p id="keytext"></p>
     <script>
         const goto = (link) => {
             location.href = link;
@@ -28,6 +35,22 @@
             btn.onclick = () => {
                 btn.value = "是沒有點過喔"
             }
+        }
+
+        const fb = document.getElementById("fb");
+        fb.onclick = (event) => {
+            const input = prompt("輸入密碼")
+            if (input !== "1234") {
+                event.preventDefault();
+                console.log(event)
+                alert("上課不要看fb")
+            }
+        }
+
+        const keytext = document.getElementById("keytext");
+        document.onkeydown = (event) => {
+            keytext.innerText += event.key
+            keytext.style.color = "red"
         }
     </script>
 </body>
