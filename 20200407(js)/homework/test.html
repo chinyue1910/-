@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #big-box {
+            margin: auto;
+            width: 300px;
+            height: 800px;
+            padding-top: 400px;
+            box-sizing: border-box;
+        }
+
+        #box {
+            width: 300px;
+            height: 200px;
+            border-radius: 50%;
+            background-color: black;
+            position: relative;
+            background-image: url(./images/rabbit.png);
+            background-position: center 200px;
+            background-repeat: no-repeat;
+            background-size: contain;
+        }
+
+        img {
+            width: 300px;
+            height: auto;
+        }
+
+
+        .ani1 {
+            animation: animation 2s forwards;
+        }
+
+        .ani2 {
+            animation: animation1 2s;
+        }
+
+
+        @keyframes animation {
+            0% {
+                background-position: center 200px;
+            }
+
+            100% {
+                background-position: center center;
+            }
+        }
+
+        @keyframes animation1 {
+            0% {
+                background-position: center center;
+            }
+
+            100% {
+                background-position: center 200px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="big-box">
+        <div id="box">
+            <div id="img"></div>
+        </div>
+    </div>
+    <script>
+        let box = document.getElementById("box")
+        let timer = setInterval(() => {
+            setTimeout(() => {
+                box.classList.remove("ani2")
+                box.classList.add("ani1")
+                clearInterval(timer);
+                let timer1 = setTimeout(() => {
+                    box.classList.remove("ani1")
+                    box.classList.add("ani2")
+                }, 3000);
+            }, 2000);
+        }, 1000);
+    </script>
+</body>
+
+</html>
