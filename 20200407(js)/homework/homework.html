@@ -6,95 +6,194 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        body {
-            margin: 0;
-        }
-
         .hole {
             width: 200px;
-            height: 100px;
-            border-radius: 50%;
-            background-color: black;
-        }
-
-        #game {
-            position: absolute;
-            left: calc(50% - 529px);
-            top: calc(50% - 429px);
-        }
-
-        #btn-start {
-            position: absolute;
-            left: calc(50% - 200px);
-            top: calc(50% - 200px);
-            width: 400px;
             height: 200px;
-            background-image: url(./images/btn-start-bg.jpg);
-            background-size: cover;
-            border-radius: 3rem;
-            font-size: 80px;
-            font-weight: bolder;
-            cursor: pointer;
-            text-shadow: 5px 5px 5px white;
+            background-image: url(./images/swirl.png);
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: bottom;
+            vertical-align: top;
+        }
+
+        .out {
+            width: 200px;
+            height: 170px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        img {
+            width: 150px;
+            height: auto;
+            position: absolute;
+            left: calc(50% - 75px);
+            top: 170px;
+        }
+
+        .up {
+            animation: up 500ms forwards linear;
+        }
+
+        .down {
+            animation: down 500ms ease-in-out
+        }
+
+        @keyframes up {
+            0% {
+                top: 170px;
+            }
+
+            100% {
+                top: 0px;
+            }
+        }
+
+        @keyframes down {
+            0% {
+                top: 0%;
+            }
+
+            100% {
+                top: 170px;
+            }
         }
     </style>
 </head>
 
 <body>
-    <table id="game" cellspacing="50px">
-        <tr>
-            <td class="hole" id="hole13"></td>
-            <td class="hole" id="hole14"></td>
-            <td class="hole" id="hole15"></td>
-            <td class="hole" id="hole16"></td>
-        </tr>
-        <tr>
-            <td class="hole" id="hole9"></td>
-            <td class="hole" id="hole10"></td>
-            <td class="hole" id="hole11"></td>
-            <td class="hole" id="hole12"></td>
-        </tr>
-        <tr>
-            <td class="hole" id="hole5"></td>
-            <td class="hole" id="hole6"></td>
-            <td class="hole" id="hole7"></td>
-            <td class="hole" id="hole8"></td>
-        </tr>
-        <tr>
-            <td class="hole" id="hole1"></td>
-            <td class="hole" id="hole2"></td>
-            <td class="hole" id="hole3"></td>
-            <td class="hole" id="hole4"></td>
-        </tr>
-    </table>
-    <input type="button" value="遊戲開始" id="btn-start">
-    目前分數: <span id="text-score">0</span>
-    剩餘時間: <span id="text-time">10</span>
+    <div id="main">
+        <input type="button" value="START" id="btn-start">
+        <div align="center">
+            目前分數: <span id="text-score">0</span>
+            剩餘時間: <span id="text-time">10</span>
+        </div>
+        <table border="1" align="center">
+            <tr>
+                <td class="hole">
+                    <div class="out">
+                        <img class="good" src="./images/good.png" alt="">
+                        <img class="bad" src="./images/bad.png" alt="">
+                    </div>
+                </td>
+                <td class="hole">
+                    <div class="out">
+                        <img class="good" src="./images/good.png" alt="">
+                        <img class="bad" src="./images/bad.png" alt="">
+                    </div>
+                </td>
+                <td class="hole">
+                    <div class="out">
+                        <img class="good" src="./images/good.png" alt="">
+                        <img class="bad" src="./images/bad.png" alt="">
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="hole">
+                    <div class="out">
+                        <img class="good" src="./images/good.png" alt="">
+                        <img class="bad" src="./images/bad.png" alt="">
+                    </div>
+                </td>
+                <td class="hole">
+                    <div class="out">
+                        <img class="good" src="./images/good.png" alt="">
+                        <img class="bad" src="./images/bad.png" alt="">
+                    </div>
+                </td>
+                <td class="hole">
+                    <div class="out">
+                        <img class="good" src="./images/good.png" alt="">
+                        <img class="bad" src="./images/bad.png" alt="">
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="hole">
+                    <div class="out">
+                        <img class="good" src="./images/good.png" alt="">
+                        <img class="bad" src="./images/bad.png" alt="">
+                    </div>
+                </td>
+                <td class="hole">
+                    <div class="out">
+                        <img class="good" src="./images/good.png" alt="">
+                        <img class="bad" src="./images/bad.png" alt="">
+                    </div>
+                </td>
+                <td class="hole">
+                    <div class="out">
+                        <img class="good" src="./images/good.png" alt="">
+                        <img class="bad" src="./images/bad.png" alt="">
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <p id="result"></p>
     <script>
         const holes = document.getElementsByClassName("hole")
         const btnStart = document.getElementById("btn-start")
         const textScore = document.getElementById("text-score")
         const textTime = document.getElementById("text-time")
+        const good = document.getElementsByClassName("good")
+        const bad = document.getElementsByClassName("bad")
+        const result = document.getElementById("result")
 
         let score = 0;
         let inGame = false;
         let timeleft = 10;
-
         let timer = 0;
+        let n = 1;
 
         btnStart.onclick = () => {
-            btnStart.disabled = true;
-            btnStart.style.display = "none"
-            timer = setInterval(game, 1000);
-            game();
+            btnStart.disabled = true
+            timer = setInterval(game, 1000)
             score = 0
             textScore.innerText = score;
             inGame = true;
-            timeleft = 10
+            timeleft = 10;
             textTime.innerText = timeleft;
         }
 
         const game = () => {
+            result.innerHTML += `${n}:`
+            let ary = []
+            for (let i = 0; i < 3; i++) {
+                let rand = Math.round(Math.random() * 8) + 1
+                while (ary.includes(rand)) {
+                    rand = Math.round(Math.random() * 8) + 1
+                }
+                result.innerHTML += `${rand}`
+                ary.push(rand);
+                good[rand].classList.remove("down")
+                good[rand].classList.add("up");
+            }
+            result.innerHTML += `<br>`
+            setTimeout(() => {
+                for (let i of ary) {
+                    good[i].classList.remove("up")
+                    good[i].classList.add("down")
+                }
+            }, 500)
+
+            timeleft--;
+            textTime.innerText = timeleft
+            n++;
+
+
+            if (timeleft == 0) {
+                inGame = false;
+                clearInterval(timer)
+                for (let i of good) {
+                    i.classList.remove("up")
+                    i.classList.remove("down")
+                }
+
+                alert(`你得到${score}分`)
+                btnStart.disabled = false
+            }
 
         }
     </script>

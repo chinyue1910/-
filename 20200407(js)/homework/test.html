@@ -20,7 +20,7 @@
             border-radius: 50%;
             background-color: black;
             position: relative;
-            background-image: url(./images/rabbit.png);
+            background-image: url(./images/good.png);
             background-position: center 200px;
             background-repeat: no-repeat;
             background-size: contain;
@@ -33,11 +33,11 @@
 
 
         .ani1 {
-            animation: animation 2s forwards;
+            animation: animation 0.5s forwards;
         }
 
         .ani2 {
-            animation: animation1 2s;
+            animation: animation1 0.5s;
         }
 
 
@@ -72,16 +72,18 @@
     <script>
         let box = document.getElementById("box")
         let timer = setInterval(() => {
+            box.classList.remove("ani2")
+            box.classList.add("ani1")
             setTimeout(() => {
-                box.classList.remove("ani2")
-                box.classList.add("ani1")
-                clearInterval(timer);
-                let timer1 = setTimeout(() => {
-                    box.classList.remove("ani1")
-                    box.classList.add("ani2")
-                }, 3000);
-            }, 2000);
-        }, 1000);
+                // box.classList.remove("ani2")
+                // box.classList.add("ani1")
+                // clearInterval(timer);
+                // let timer1 = setTimeout(() => {
+                box.classList.remove("ani1")
+                box.classList.add("ani2")
+                // }, 3000);
+            }, 1000);
+        }, 500);
     </script>
 </body>
 

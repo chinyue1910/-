@@ -99,7 +99,6 @@
             btnStart.disabled = true;
             // 設定每秒變換一次
             timer = setInterval(game, 1000);
-            game();
             // 重置分數
             score = 0
             textScore.innerText = score;
@@ -143,7 +142,7 @@
                 }
 
 
-                // 啟動開始按鈕
+
                 alert(`你得到${score}分`);
                 if (storage == null || score > highscore.score) {
                     verywell.play();
@@ -159,6 +158,7 @@
                         localStorage.setItem("highscore", JSON.stringify(highscore))
                     }
                 }
+                // 啟動開始按鈕
                 btnStart.disabled = false;
             }
         }
