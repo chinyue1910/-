@@ -68,7 +68,7 @@
             目前分數: <span id="text-score">0</span>
             剩餘時間: <span id="text-time">10</span>
         </div>
-        <table border="1" align="center">
+        <table align="center">
             <tr>
                 <td class="hole">
                     <div class="out">
@@ -158,12 +158,16 @@
         }
 
         const game = () => {
+            for (let i of good) {
+                i.classList.remove("up")
+                i.classList.remove("down")
+            }
             result.innerHTML += `${n}:`
-            let ary = []
+            const ary = []
             for (let i = 0; i < 3; i++) {
-                let rand = Math.round(Math.random() * 8) + 1
+                let rand = Math.floor(Math.random() * 9)
                 while (ary.includes(rand)) {
-                    rand = Math.round(Math.random() * 8) + 1
+                    rand = Math.floor(Math.random() * 9)
                 }
                 result.innerHTML += `${rand}`
                 ary.push(rand);
@@ -186,10 +190,10 @@
             if (timeleft == 0) {
                 inGame = false;
                 clearInterval(timer)
-                for (let i of good) {
-                    i.classList.remove("up")
-                    i.classList.remove("down")
-                }
+                // for (let i of good) {
+                //     i.classList.remove("up")
+                //     i.classList.remove("down")
+                // }
 
                 alert(`你得到${score}分`)
                 btnStart.disabled = false
