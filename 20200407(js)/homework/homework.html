@@ -10,7 +10,7 @@
             width: 200px;
             height: 200px;
             background-image: url(./images/swirl.png);
-            background-size: contain;
+            background-size: 200px 80px;
             background-repeat: no-repeat;
             background-position: bottom;
             vertical-align: top;
@@ -18,25 +18,42 @@
 
         .out {
             width: 200px;
-            height: 170px;
+            height: 160px;
             overflow: hidden;
             position: relative;
+            z-index: 100;
         }
 
-        img {
-            width: 150px;
-            height: auto;
+        .good {
+            background-image: url(./images/good.png);
+            background-size: 120px 120px;
+            background-position: center;
+            background-repeat: no-repeat;
+            width: 200px;
+            height: 200px;
             position: absolute;
-            left: calc(50% - 75px);
+            left: calc(50% - 100px);
+            top: 170px;
+        }
+
+        .bad {
+            background-image: url(./images/good.png);
+            background-size: 120px 120px;
+            background-position: center;
+            background-repeat: no-repeat;
+            width: 200px;
+            height: 200px;
+            position: absolute;
+            left: calc(50% - 100px);
             top: 170px;
         }
 
         .up {
-            animation: up 500ms forwards linear;
+            animation: up 500ms forwards ease;
         }
 
         .down {
-            animation: down 500ms ease-in-out
+            animation: down 500ms ease-in
         }
 
         @keyframes up {
@@ -55,83 +72,90 @@
             }
 
             100% {
-                top: 170px;
+                top: 120px;
             }
+        }
+
+        #table {
+            cursor: url(./images/bomb1.png) 35 35, auto;
+        }
+
+        #table:active {
+            cursor: url(./images/bomb2.png) 60 35, auto;
         }
     </style>
 </head>
 
 <body>
     <div id="main">
-        <input type="button" value="START" id="btn-start">
         <div align="center">
+            <input type="button" value="START" id="btn-start">
             目前分數: <span id="text-score">0</span>
-            剩餘時間: <span id="text-time">10</span>
+            剩餘時間: <span id="text-time">60</span>
         </div>
-        <table align="center">
+        <table align="center" id="table">
             <tr>
                 <td class="hole">
                     <div class="out">
-                        <img class="good" src="./images/good.png" alt="">
-                        <img class="bad" src="./images/bad.png" alt="">
+                        <div class="good img"></div>
+                        <div class="bad img"></div>
                     </div>
                 </td>
                 <td class="hole">
                     <div class="out">
-                        <img class="good" src="./images/good.png" alt="">
-                        <img class="bad" src="./images/bad.png" alt="">
+                        <div class="good img"></div>
+                        <div class="bad img"></div>
                     </div>
                 </td>
                 <td class="hole">
                     <div class="out">
-                        <img class="good" src="./images/good.png" alt="">
-                        <img class="bad" src="./images/bad.png" alt="">
+                        <div class="good img"></div>
+                        <div class="bad img"></div>
                     </div>
                 </td>
             </tr>
             <tr>
                 <td class="hole">
                     <div class="out">
-                        <img class="good" src="./images/good.png" alt="">
-                        <img class="bad" src="./images/bad.png" alt="">
+                        <div class="good img"></div>
+                        <div class="bad img"></div>
                     </div>
                 </td>
                 <td class="hole">
                     <div class="out">
-                        <img class="good" src="./images/good.png" alt="">
-                        <img class="bad" src="./images/bad.png" alt="">
+                        <div class="good img"></div>
+                        <div class="bad img"></div>
                     </div>
                 </td>
                 <td class="hole">
                     <div class="out">
-                        <img class="good" src="./images/good.png" alt="">
-                        <img class="bad" src="./images/bad.png" alt="">
+                        <div class="good img"></div>
+                        <div class="bad img"></div>
                     </div>
                 </td>
             </tr>
             <tr>
                 <td class="hole">
                     <div class="out">
-                        <img class="good" src="./images/good.png" alt="">
-                        <img class="bad" src="./images/bad.png" alt="">
+                        <div class="good img"></div>
+                        <div class="bad img"></div>
                     </div>
                 </td>
                 <td class="hole">
                     <div class="out">
-                        <img class="good" src="./images/good.png" alt="">
-                        <img class="bad" src="./images/bad.png" alt="">
+                        <div class="good img"></div>
+                        <div class="bad img"></div>
                     </div>
                 </td>
                 <td class="hole">
                     <div class="out">
-                        <img class="good" src="./images/good.png" alt="">
-                        <img class="bad" src="./images/bad.png" alt="">
+                        <div class="good img"></div>
+                        <div class="bad img"></div>
                     </div>
                 </td>
             </tr>
         </table>
     </div>
-    <p id="result"></p>
     <script>
         const holes = document.getElementsByClassName("hole")
         const btnStart = document.getElementById("btn-start")
@@ -139,67 +163,90 @@
         const textTime = document.getElementById("text-time")
         const good = document.getElementsByClassName("good")
         const bad = document.getElementsByClassName("bad")
-        const result = document.getElementById("result")
 
         let score = 0;
         let inGame = false;
-        let timeleft = 10;
+        let timeleft = 60;
+        // 冒出來
         let timer = 0;
-        let n = 1;
+        // 時間
+        let timer2 = 0
 
         btnStart.onclick = () => {
             btnStart.disabled = true
-            timer = setInterval(game, 1000)
+            timer = setInterval(game, 2500)
+            game()
             score = 0
+            timer2 = setInterval(countdown, 1000)
             textScore.innerText = score;
             inGame = true;
-            timeleft = 10;
+            timeleft = 60;
             textTime.innerText = timeleft;
         }
 
         const game = () => {
+            // 被打到重新出來會重製圖片
             for (let i of good) {
                 i.classList.remove("up")
                 i.classList.remove("down")
+                i.style.backgroundImage = "url(./images/good.png)"
             }
-            result.innerHTML += `${n}:`
+            for (let i of bad) {
+                i.classList.remove("up")
+                i.classList.remove("down")
+            }
+            // 取隨機兩個不重複的冒出來
             const ary = []
             for (let i = 0; i < 3; i++) {
                 let rand = Math.floor(Math.random() * 9)
                 while (ary.includes(rand)) {
                     rand = Math.floor(Math.random() * 9)
                 }
-                result.innerHTML += `${rand}`
                 ary.push(rand);
                 good[rand].classList.remove("down")
                 good[rand].classList.add("up");
             }
-            result.innerHTML += `<br>`
-            setTimeout(() => {
+
+            let timer1 = setTimeout(() => {
                 for (let i of ary) {
                     good[i].classList.remove("up")
                     good[i].classList.add("down")
                 }
-            }, 500)
-
-            timeleft--;
-            textTime.innerText = timeleft
-            n++;
-
+            }, 2000)
 
             if (timeleft == 0) {
+                for (let i of good) {
+                    i.classList.remove("up")
+                    i.classList.remove("down")
+                }
                 inGame = false;
                 clearInterval(timer)
-                // for (let i of good) {
-                //     i.classList.remove("up")
-                //     i.classList.remove("down")
-                // }
-
+                clearTimeout(timer1)
                 alert(`你得到${score}分`)
                 btnStart.disabled = false
             }
-
         }
+
+        const countdown = () => {
+            timeleft--;
+            textTime.innerText = timeleft
+            if (timeleft == 0) {
+                clearTimeout(timer2)
+            }
+        }
+
+        for (let i of good) {
+            i.onclick = () => {
+                if (inGame && (i.classList.contains("up") || i.classList.contains("down"))) {
+                    i.style.backgroundImage = "url(./images/goodhit.png)"
+                    i.classList.add("down")
+                    score++
+                    textScore.innerText = score
+                }
+            }
+        }
+
+
     </script>
 </body>
 
