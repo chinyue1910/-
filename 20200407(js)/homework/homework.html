@@ -59,10 +59,12 @@
         @keyframes up {
             0% {
                 top: 170px;
+                background-size: 0px 0px;
             }
 
             100% {
                 top: 0px;
+                background-size: 120px 120px;
             }
         }
 
@@ -174,7 +176,7 @@
 
         btnStart.onclick = () => {
             btnStart.disabled = true
-            timer = setInterval(game, 2500)
+            timer = setInterval(game, 3000)
             game()
             score = 0
             countdowntime = setInterval(countdown, 1000)
@@ -232,7 +234,7 @@
                     bad[i].classList.remove("up")
                     bad[i].classList.add("down")
                 }
-            }, 2000)
+            }, 2500)
 
             if (timeleft == 0) {
                 for (let i of good) {
