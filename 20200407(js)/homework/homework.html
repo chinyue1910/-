@@ -6,46 +6,70 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        .hole {
+        body {
+            background-image: url(./images/background.jpg);
+            background-size: cover;
+            background-repeat: no-repeat;
+            margin: 0;
+        }
+
+        #btn-start {
             width: 200px;
-            height: 200px;
+            height: 100px;
+            font-size: 50px;
+            background-image: url(./images/btn-start-bg.jpg);
+            background-size: cover;
+            border-radius: 3rem;
+            font-weight: bolder;
+            color: yellow;
+            box-shadow: 2px 2px 5px black;
+            border: 0px;
+            text-shadow: 0 0 5px black;
+        }
+
+        #btn-start:hover {
+            cursor: pointer;
+        }
+
+        .hole {
+            width: 300px;
+            height: 300px;
             background-image: url(./images/swirl.png);
-            background-size: 200px 80px;
+            background-size: 300px 120px;
             background-repeat: no-repeat;
             background-position: bottom;
             vertical-align: top;
         }
 
         .out {
-            width: 200px;
-            height: 160px;
+            width: 300px;
+            height: 240px;
             overflow: hidden;
             position: relative;
-            z-index: 100;
         }
 
         .good {
             background-image: url(./images/good.png);
-            background-size: 120px 120px;
+            background-size: 180px 180px;
             background-position: center;
             background-repeat: no-repeat;
-            width: 200px;
-            height: 200px;
+            width: 300px;
+            height: 300px;
             position: absolute;
-            left: calc(50% - 100px);
-            top: 170px;
+            left: calc(50% - 150px);
+            top: 240px;
         }
 
         .bad {
             background-image: url(./images/good.png);
-            background-size: 120px 120px;
+            background-size: 180px 180px;
             background-position: center;
             background-repeat: no-repeat;
-            width: 200px;
-            height: 200px;
+            width: 300px;
+            height: 300px;
             position: absolute;
-            left: calc(50% - 100px);
-            top: 170px;
+            left: calc(50% - 150px);
+            top: 240px;
         }
 
         .up {
@@ -58,13 +82,13 @@
 
         @keyframes up {
             0% {
-                top: 170px;
+                top: 240px;
                 background-size: 0px 0px;
             }
 
             100% {
                 top: 0px;
-                background-size: 120px 120px;
+                background-size: 180px 180px;
             }
         }
 
@@ -74,90 +98,105 @@
             }
 
             100% {
-                top: 120px;
+                top: 240px;
             }
         }
 
         #table {
-            cursor: url(./images/bomb1.png) 35 35, auto;
+            cursor: url(./images/cursor_black.png) 50 50, auto;
+            z-index: 0;
+            border-radius: 3rem;
+            background-color: rgba(0, 0, 0, 0.5);
         }
 
         #table:active {
-            cursor: url(./images/bomb2.png) 60 35, auto;
+            cursor: url(./images/cursor_white.png) 50 50, auto;
+        }
+
+        .board {
+            font-size: 40px;
+            color: white;
+            text-shadow: 1px 1px 1px black;
         }
     </style>
 </head>
 
 <body>
-    <div id="main">
-        <div align="center">
-            <input type="button" value="START" id="btn-start">
-            目前分數: <span id="text-score">0</span>
-            剩餘時間: <span id="text-time">60</span>
-        </div>
-        <table align="center" id="table">
-            <tr>
-                <td class="hole">
-                    <div class="out">
-                        <div class="good img"></div>
-                        <div class="bad img"></div>
-                    </div>
-                </td>
-                <td class="hole">
-                    <div class="out">
-                        <div class="good img"></div>
-                        <div class="bad img"></div>
-                    </div>
-                </td>
-                <td class="hole">
-                    <div class="out">
-                        <div class="good img"></div>
-                        <div class="bad img"></div>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td class="hole">
-                    <div class="out">
-                        <div class="good img"></div>
-                        <div class="bad img"></div>
-                    </div>
-                </td>
-                <td class="hole">
-                    <div class="out">
-                        <div class="good img"></div>
-                        <div class="bad img"></div>
-                    </div>
-                </td>
-                <td class="hole">
-                    <div class="out">
-                        <div class="good img"></div>
-                        <div class="bad img"></div>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td class="hole">
-                    <div class="out">
-                        <div class="good img"></div>
-                        <div class="bad img"></div>
-                    </div>
-                </td>
-                <td class="hole">
-                    <div class="out">
-                        <div class="good img"></div>
-                        <div class="bad img"></div>
-                    </div>
-                </td>
-                <td class="hole">
-                    <div class="out">
-                        <div class="good img"></div>
-                        <div class="bad img"></div>
-                    </div>
-                </td>
-            </tr>
-        </table>
-    </div>
+    <table width="100%">
+        <tr valign="middle">
+            <td align="right">
+                <input type="button" value="START" id="btn-start">
+            </td>
+            <td align="center">
+                <table align="center" id="table">
+                    <tr>
+                        <td class="hole">
+                            <div class="out">
+                                <div class="good img"></div>
+                                <div class="bad img"></div>
+                            </div>
+                        </td>
+                        <td class="hole">
+                            <div class="out">
+                                <div class="good img"></div>
+                                <div class="bad img"></div>
+                            </div>
+                        </td>
+                        <td class="hole">
+                            <div class="out">
+                                <div class="good img"></div>
+                                <div class="bad img"></div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="hole">
+                            <div class="out">
+                                <div class="good img"></div>
+                                <div class="bad img"></div>
+                            </div>
+                        </td>
+                        <td class="hole">
+                            <div class="out">
+                                <div class="good img"></div>
+                                <div class="bad img"></div>
+                            </div>
+                        </td>
+                        <td class="hole">
+                            <div class="out">
+                                <div class="good img"></div>
+                                <div class="bad img"></div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="hole">
+                            <div class="out">
+                                <div class="good img"></div>
+                                <div class="bad img"></div>
+                            </div>
+                        </td>
+                        <td class="hole">
+                            <div class="out">
+                                <div class="good img"></div>
+                                <div class="bad img"></div>
+                            </div>
+                        </td>
+                        <td class="hole">
+                            <div class="out">
+                                <div class="good img"></div>
+                                <div class="bad img"></div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+            <td align="left">
+                <div class="board">目前分數: <span id="text-score">0</span></div>
+                <div class="board">剩餘時間: <span id="text-time">60</span></div>
+            </td>
+        </tr>
+    </table>
     <script>
         const holes = document.getElementsByClassName("hole")
         const btnStart = document.getElementById("btn-start")
