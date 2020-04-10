@@ -58,6 +58,7 @@
             position: absolute;
             left: calc(50% - 150px);
             top: 240px;
+            transform-origin: center bottom;
         }
 
         .bad {
@@ -70,6 +71,7 @@
             position: absolute;
             left: calc(50% - 150px);
             top: 240px;
+            transform-origin: center bottom;
         }
 
         .up {
@@ -193,7 +195,7 @@
             </td>
             <td align="left">
                 <div class="board">目前分數: <span id="text-score">0</span></div>
-                <div class="board">剩餘時間: <span id="text-time">60</span></div>
+                <div class="board">剩餘時間: <span id="text-time">10</span></div>
             </td>
         </tr>
     </table>
@@ -207,22 +209,31 @@
 
         let score = 0;
         let inGame = false;
-        let timeleft = 60;
+        let timeleft = 10;
         // 冒出來
         let timer = 0;
         // 倒數時間
         let countdowntime = 0
 
         btnStart.onclick = () => {
-            btnStart.disabled = true
-            timer = setInterval(game, 3000)
-            game()
             score = 0
-            countdowntime = setInterval(countdown, 1000)
             textScore.innerText = score;
             inGame = true;
-            timeleft = 60;
+            timeleft = 10;
             textTime.innerText = timeleft;
+            btnStart.disabled = true
+            countdowntime = setInterval(countdown, 1000)
+            timer = setInterval(game, 3000)
+            game()
+        }
+
+        const countdown = () => {
+            timeleft--;
+            console.log(timeleft)
+            textTime.innerText = timeleft
+            if (timeleft == 0) {
+                clearInterval(countdowntime)
+            }
         }
 
         const game = () => {
@@ -253,7 +264,6 @@
                 arygood.push(ary[hole])
                 ary.splice(hole, 1)
             }
-            console.log(ary)
             // 壞的冒出來
             for (let i = 0; i < 3; i++) {
                 let hole = (rand(6 - i))
@@ -262,8 +272,6 @@
                 arybad.push(ary[hole])
                 ary.splice(hole, 1)
             }
-            console.log(arygood)
-            console.log(arybad)
             let timerend = setTimeout(() => {
                 for (let i of arygood) {
                     good[i].classList.remove("up")
@@ -276,6 +284,8 @@
             }, 2500)
 
             if (timeleft == 0) {
+                clearInterval(timer)
+                clearTimeout(timerend)
                 for (let i of good) {
                     i.classList.remove("up")
                     i.classList.remove("down")
@@ -285,18 +295,9 @@
                     i.classList.remove("down")
                 }
                 inGame = false;
-                clearInterval(timer)
-                clearTimeout(timerend)
+
                 alert(`你得到${score}分`)
                 btnStart.disabled = false
-            }
-        }
-
-        const countdown = () => {
-            timeleft--;
-            textTime.innerText = timeleft
-            if (timeleft == 0) {
-                clearInterval(countdowntime)
             }
         }
 
@@ -304,6 +305,7 @@
             i.onclick = () => {
                 if (inGame) {
                     i.style.backgroundImage = "url(./images/goodhit.png)"
+                    i.classList.remove("up")
                     i.classList.add("down")
                     score++
                     textScore.innerText = score
@@ -315,6 +317,7 @@
             i.onclick = () => {
                 if (inGame) {
                     i.style.backgroundImage = "url(./images/badhit.png)"
+                    i.classList.remove("up")
                     i.classList.add("down")
                     if (score == 0) {
                         score == score
