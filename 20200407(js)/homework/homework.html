@@ -19,10 +19,10 @@
             font-size: 50px;
             background-image: url(./images/btn-start-bg.jpg);
             background-size: cover;
-            border-radius: 3rem;
+            border-radius: 15px;
             font-weight: bolder;
             color: yellow;
-            box-shadow: 2px 2px 5px black;
+            box-shadow: inset 0 4px rgba(255, 255, 255, 0.2), inset 0 -4px rgba(0, 0, 0, 0.05);
             border: 0px;
             text-shadow: 0 0 5px black;
         }
@@ -161,7 +161,6 @@
 
         #table {
             cursor: url(./images/cursor_black.png) 50 50, auto;
-            z-index: 0;
             border-radius: 3rem;
             background-color: rgba(0, 0, 0, 0.5);
         }
@@ -178,7 +177,23 @@
 
         span {
             display: inline-block;
-            width: 30pxpx;
+            width: 30px;
+        }
+
+        #rules {
+            color: white;
+        }
+
+        #rules td {
+            width: 150px;
+            height: 150px;
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        #rules td img {
+            width: auto;
+            height: 150px;
         }
     </style>
 </head>
@@ -186,7 +201,19 @@
 <body>
     <table width="100%">
         <tr valign="middle">
-            <td align="right">
+            <td align="center" style="background-color: rgba(0, 0, 0, 0.5);">
+                <table id="rules" border="1px" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td>出場角色</td>
+                        <td><img src="./images/good.png" alt=""></td>
+                        <td><img src="./images/bad.png" alt=""></td>
+                    </tr>
+                    <tr>
+                        <td>得分</td>
+                        <td>1分</td>
+                        <td>-1分</td>
+                    </tr>
+                </table>
                 <input type="button" value="START" id="btn-start">
             </td>
             <td align="center">
@@ -253,7 +280,7 @@
                     </tr>
                 </table>
             </td>
-            <td align="center">
+            <td align="center" style="background-color: rgba(0, 0, 0, 0.5); border-radius: 3rem;">
                 <div class="board">目前分數: <span id="text-score">0</span></div>
                 <div class="board">剩餘時間: <span id="text-time">60</span></div>
                 <hr style="width: 250px">
@@ -290,6 +317,8 @@
         }
 
         btnStart.onclick = () => {
+            textTime.style.color = "white"
+            textTime.style.fontSize = "40px"
             score = 0
             textScore.innerText = score;
             inGame = true;
@@ -306,7 +335,7 @@
             textTime.innerText = timeleft
             if (timeleft < 10) {
                 textTime.style.color = "red"
-                textTime.style.fontSize = "30px"
+                textTime.style.fontSize = "60px"
             }
             if (timeleft == 0) {
                 clearInterval(countdowntime)
