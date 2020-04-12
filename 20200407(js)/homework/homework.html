@@ -17,6 +17,30 @@
             margin: 0;
         }
 
+        #game {
+            display: inline-block;
+            margin-left: 15%;
+            margin-top: 2%;
+            background-color: rgba(0, 0, 0, 0.5);
+            height: 850px;
+            box-sizing: border-box;
+            border-radius: 2rem;
+            position: relative;
+        }
+
+        #menu {
+            display: inline-block;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 50px;
+            float: right;
+            margin-right: 15%;
+            margin-top: 2%;
+            height: 850px;
+            box-sizing: border-box;
+            border-radius: 2rem;
+            text-align: center;
+        }
+
         #btn-start {
             width: 400px;
             height: 200px;
@@ -28,7 +52,7 @@
             border: 0px;
             text-shadow: 0 0 5px black;
             position: absolute;
-            left: calc(50% - 180px);
+            left: calc(50% - 200px);
             top: calc(50% - 100px);
             z-index: 1;
             background-color: rgba(0, 0, 0, 0);
@@ -39,11 +63,41 @@
             cursor: pointer;
         }
 
+        .board {
+            font-size: 40px;
+            color: white;
+            text-shadow: 1px 1px 1px black;
+            text-align: center;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .btn {
+            width: 50px;
+            height: 50px;
+            background-size: 50px 50px;
+            border: 0px;
+            background-color: rgba(0, 0, 0, 0);
+            padding: 0;
+            vertical-align: middle;
+        }
+
+        .btn:hover {
+            cursor: pointer;
+        }
+
+        #btn-pause {
+            background-image: url(./images/pause.png);
+        }
+
+        #btn-play {
+            background-image: url(./images/play.png);
+        }
 
         #number {
             position: absolute;
-            left: calc(50% - 100px);
-            top: calc(50% - 100px);
+            left: calc(50% - 150px);
+            top: calc(50% - 150px);
             z-index: 1;
             width: 300px;
             height: 300px;
@@ -52,18 +106,18 @@
         }
 
         .hole {
-            width: 300px;
-            height: 300px;
+            width: 250px;
+            height: 250px;
             background-image: url(./images/swirl.png);
-            background-size: 300px 120px;
+            background-size: 250px 120px;
             background-repeat: no-repeat;
             background-position: bottom;
             vertical-align: top;
         }
 
         .out {
-            width: 300px;
-            height: 240px;
+            width: 250px;
+            height: 200px;
             overflow: hidden;
             position: relative;
         }
@@ -73,24 +127,24 @@
             background-size: 180px 180px;
             background-position: center;
             background-repeat: no-repeat;
-            width: 300px;
-            height: 300px;
+            width: 250px;
+            height: 250px;
             position: absolute;
-            left: calc(50% - 150px);
-            top: 240px;
+            left: calc(50% - 125px);
+            top: 200px;
             transform-origin: center bottom;
         }
 
         .bad {
-            background-image: url(./images/good.png);
+            background-image: url(./images/bad.png);
             background-size: 180px 180px;
             background-position: center;
             background-repeat: no-repeat;
-            width: 300px;
-            height: 300px;
+            width: 250px;
+            height: 250px;
             position: absolute;
-            left: calc(50% - 150px);
-            top: 240px;
+            left: calc(50% - 125px);
+            top: 200px;
             transform-origin: center bottom;
         }
 
@@ -104,7 +158,7 @@
 
         @keyframes up {
             0% {
-                top: 240px;
+                top: 200px;
                 background-size: 0px 0px;
             }
 
@@ -120,7 +174,7 @@
             }
 
             100% {
-                top: 240px;
+                top: 200px;
             }
         }
 
@@ -136,7 +190,7 @@
             50%,
             to {
                 opacity: 1;
-                top: 240px;
+                top: 200px;
             }
 
             25%,
@@ -156,7 +210,7 @@
             }
 
             to {
-                top: 240px;
+                top: 200px;
                 transform: translate3d(0, 0, 0);
                 transform: translate3d(0, 0, 0);
             }
@@ -181,18 +235,10 @@
 
         #table {
             cursor: url(./images/cursor_black.png) 50 50, auto;
-            border-radius: 3rem;
-            background-color: rgba(0, 0, 0, 0.5);
         }
 
         #table:active {
             cursor: url(./images/cursor_white.png) 50 50, auto;
-        }
-
-        .board {
-            font-size: 40px;
-            color: white;
-            text-shadow: 1px 1px 1px black;
         }
 
         span {
@@ -220,106 +266,103 @@
 </head>
 
 <body>
-    <input type="button" value="START" id="btn-start">
-    <table width="100%">
-        <tr valign="middle">
-            <td align="center" style="background-color: rgba(0, 0, 0, 0.5); border-radius: 3rem;">
-                <table id="rules" border="1px" cellspacing="0" cellpadding="0">
-                    <tr>
-                        <td>出場角色</td>
-                        <td>得分</td>
-                    </tr>
-                    <tr>
-                        <td><img src="./images/good.png" alt=""></td>
-                        <td>1分</td>
-                    </tr>
-                    <tr>
-                        <td><img src="./images/bad.png" alt=""></td>
-                        <td>-1分</td>
-                    </tr>
-                </table>
-            </td>
-            <td align="center">
-                <table align="center" id="table">
-                    <tr>
-                        <td colspan="3" align="right">
-                            <input type="button">
-                            <input type="button">
-                            <input type="button">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="hole">
-                            <div class="out">
-                                <div class="good img"></div>
-                                <div class="bad img"></div>
-                            </div>
-                        </td>
-                        <td class="hole">
-                            <div class="out">
-                                <div class="good img"></div>
-                                <div class="bad img"></div>
-                            </div>
-                        </td>
-                        <td class="hole">
-                            <div class="out">
-                                <div class="good img"></div>
-                                <div class="bad img"></div>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="hole">
-                            <div class="out">
-                                <div class="good img"></div>
-                                <div class="bad img"></div>
-                            </div>
-                        </td>
-                        <td class="hole">
-                            <div class="out">
-                                <div class="good img"></div>
-                                <div class="bad img"></div>
-                            </div>
-                        </td>
-                        <td class="hole">
-                            <div class="out">
-                                <div class="good img"></div>
-                                <div class="bad img"></div>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="hole">
-                            <div class="out">
-                                <div class="good img"></div>
-                                <div class="bad img"></div>
-                            </div>
-                        </td>
-                        <td class="hole">
-                            <div class="out">
-                                <div class="good img"></div>
-                                <div class="bad img"></div>
-                            </div>
-                        </td>
-                        <td class="hole">
-                            <div class="out">
-                                <div class="good img"></div>
-                                <div class="bad img"></div>
-                            </div>
-                        </td>
-                    </tr>
-                </table>
-            </td>
-            <td align="center" style="background-color: rgba(0, 0, 0, 0.5); border-radius: 3rem;">
-                <div class="board">目前分數: <span id="text-score">0</span></div>
-                <div class="board">剩餘時間: <span id="text-time">30</span></div>
-                <hr style="width: 250px">
-                <div class="board">最高分</div>
-                <div class="board">玩家: <span id="text-highplayer">none</span></div>
-                <div class="board">分數: <span id="text-highscore">0</span></div>
-            </td>
-        </tr>
-    </table>
+    <div id="game">
+        <input type="button" value="START" id="btn-start">
+        <table align="center" id="table">
+            <tr>
+                <td class="board">
+                    目前分數: <span id="text-score">0</span>
+                </td>
+                <td class="board">
+                    剩餘時間: <span id="text-time">30</span>
+                </td>
+                <td class="board">
+                    <input class="btn" id="btn-pause" type="button">
+                    <input class="btn" id="btn-play" type="button">
+                </td>
+            </tr>
+            <tr>
+                <td class="hole">
+                    <div class="out">
+                        <div class="good img"></div>
+                        <div class="bad img"></div>
+                    </div>
+                </td>
+                <td class="hole">
+                    <div class="out">
+                        <div class="good img"></div>
+                        <div class="bad img"></div>
+                    </div>
+                </td>
+                <td class="hole">
+                    <div class="out">
+                        <div class="good img"></div>
+                        <div class="bad img"></div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="hole">
+                    <div class="out">
+                        <div class="good img"></div>
+                        <div class="bad img"></div>
+                    </div>
+                </td>
+                <td class="hole">
+                    <div class="out">
+                        <div class="good img"></div>
+                        <div class="bad img"></div>
+                    </div>
+                </td>
+                <td class="hole">
+                    <div class="out">
+                        <div class="good img"></div>
+                        <div class="bad img"></div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="hole">
+                    <div class="out">
+                        <div class="good img"></div>
+                        <div class="bad img"></div>
+                    </div>
+                </td>
+                <td class="hole">
+                    <div class="out">
+                        <div class="good img"></div>
+                        <div class="bad img"></div>
+                    </div>
+                </td>
+                <td class="hole">
+                    <div class="out">
+                        <div class="good img"></div>
+                        <div class="bad img"></div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div id="menu">
+        <table id="rules" border="1px" cellspacing="0" cellpadding="0">
+            <tr>
+                <td>出場角色</td>
+                <td>得分</td>
+            </tr>
+            <tr>
+                <td><img src="./images/good.png" alt=""></td>
+                <td>1分</td>
+            </tr>
+            <tr>
+                <td><img src="./images/bad.png" alt=""></td>
+                <td>-1分</td>
+            </tr>
+        </table>
+        <hr style="width: 250px">
+        <div class="board">最高分</div>
+        <div class="board">玩家: <span id="text-highplayer">none</span></div>
+        <div class="board">分數: <span id="text-highscore">0</span></div>
+    </div>
     <script>
         const holes = document.getElementsByClassName("hole")
         const btnStart = document.getElementById("btn-start")
@@ -330,6 +373,9 @@
         const textHighPlayer = document.getElementById("text-highplayer")
         const textHighScore = document.getElementById("text-highscore")
         const table = document.getElementById("table")
+        const btnPause = document.getElementById("btn-pause")
+        const btnPlay = document.getElementById("btn-play")
+
 
         let score = 0;
         let inGame = false;
@@ -347,24 +393,52 @@
             textHighScore.innerText = highscore.score;
         }
 
+        btnPlay.disabled = true;
+
         btnStart.onclick = () => {
+            score = 0
+            textScore.innerText = score;
+            timeleft = 30;
+            textTime.innerText = timeleft;
             btnStart.style.display = "none"
             btnStart.insertAdjacentHTML("afterend", '<div id="number"></div>')
             const number = document.getElementById("number")
             setTimeout(() => {
                 number.remove()
-                textTime.style.color = "white"
-                textTime.style.fontSize = "40px"
-                score = 0
-                textScore.innerText = score;
                 inGame = true;
-                timeleft = 10;
-                textTime.innerText = timeleft;
                 // btnStart.disabled = true
                 countdowntime = setInterval(countdown, 1000)
                 timer = setInterval(game, 5000)
                 game()
             }, 6000)
+        }
+
+        btnPause.onclick = () => {
+            clearInterval(countdowntime);
+            clearInterval(timer);
+            timeleft = timeleft;
+            textTime.innerText = timeleft;
+            btnPlay.disabled = false;
+            for (let i of good) {
+                i.style.animationPlayState = "paused"
+            }
+            for (let i of bad) {
+                i.style.animationPlayState = "paused"
+            }
+        }
+
+        btnPlay.onclick = () => {
+            btnPlay.disabled = true;
+            timeleft = timeleft;
+            textTime.innerText = timeleft;
+            countdowntime = setInterval(countdown, 1000)
+            timer = setInterval(game, 5000)
+            for (let i of good) {
+                i.style.animationPlayState = "running"
+            }
+            for (let i of bad) {
+                i.style.animationPlayState = "running"
+            }
         }
 
         const countdown = () => {
