@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        span {
+            display: inline-block;
+            width: 100px;
+            height: auto;
+        }
+
+        .delete {
+            display: inline-block;
+            border-bottom: 1px solid black;
+        }
+
+        #btn {
+            border-bottom: 1px solid black;
+        }
+
+        .slideout {
+            transition: 2s;
+            filter: opacity(0%);
+            margin-left: 400px;
+        }
+
+        #text:focus {
+            background-color: deepskyblue;
+        }
+
+        li {
+            line-height: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>待辦清單</h1>
+    <input type="text" id="text" placeholder="請輸入你會忘記的事情" maxlength="10">
+    <input type="button" value="新增" id="btn">
+    <ul id="list"></ul>
+    <script src="jquery-3.5.0.min.js"></script>
+    <script>
+        $(() => {
+            $("#btn").on("click", function () {
+                $("#list").append(`<li><span>${$("#text").val()}</span><input type="button" class="delete" value="刪除"></li>`)
+
+                // // jq 的事件不需要向原生 js 一樣寫 for
+                // $(".delete").on("click", function () {
+                //     $(this).closest("li").addClass("slideout")
+                //     setTimeout(() => {
+                //         $(this).closest("li").remove()
+                //     }, 2000)
+                // })
+                $("#text").val("")
+            })
+            // // .on(事件, 過濾 ,function)
+            $("#list").on("click", ".delete", function () {
+                $(this).parent().addClass("slideout")
+                setTimeout(() => {
+                    $(this).parent().remove()
+                }, 2000)
+            })
+            // $('#list').click(".delete", function () {
+            //     $(this).parent().remove()
+            // })
+        })
+
+    </script>
+</body>
+
+</html>
