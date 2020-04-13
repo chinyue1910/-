@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #img {
+            width: 400px;
+            height: 400px;
+            background-size: 400px 400px;
+        }
+
+        .a {
+            background-image: url(./bad.png);
+        }
+
+        .b {
+            background-image: url(./badhit.png);
+        }
+    </style>
+</head>
+
+<body>
+    <input type="button" value="點我變壞" id="btn">
+    <hr>
+    <div id="img" class="a"></div>
+    <script src="jquery-3.5.0.min.js"></script>
+    <script>
+        $("#btn").click(function () {
+            if ($("#img").hasClass("a")) {
+                $(this).val("點我變好")
+                $("#img").removeClass("a")
+                $("#img").addClass("b")
+            }
+            else {
+                $(this).val("點我變壞")
+                $("#img").removeClass("b")
+                $("#img").addClass("a")
+            }
+        })
+    </script>
+</body>
+
+</html>

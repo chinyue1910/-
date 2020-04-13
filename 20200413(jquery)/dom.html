@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .blue {
+            color: blue;
+        }
+
+        .big {
+            font-size: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>111</h1>
+    <h1>222</h1>
+    <h1>333</h1>
+    <input type="text" id="input1">
+    <br>
+    <a href="http://google.com" id="link1">Google</a>
+    <ul id="ul1">
+        <li>1</li>
+        <li class="green">2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+    </ul>
+    <ul id="ul2">
+        <li>1</li>
+        <li>
+            <ul id="ul2-1">
+                <li>1</li>
+                <li id="myll1"><span id="myspan">2</span></li>
+                <li>3</li>
+            </ul>
+        </li>
+        <li>3</li>
+        <li>
+            <ul id="ul2-2">
+                <li>1</li>
+                <li id="myli">2</li>
+                <li>3</li>
+            </ul>
+        </li>
+        <li>5</li>
+    </ul>
+    <input type="button" value="按我啦87喔" id="btn1">
+    <script src="jquery-3.5.0.min.js"></script>
+    <script>
+        // 當讀取完頁面的 HTML 內容後
+        $(document).ready(() => {
+            console.log("hi")
+        })
+
+        // $(document).ready() 的簡寫
+        $(() => {
+            // 抓 DOM 語法: $(CSS選擇器)
+            // .text() = innerText
+            // .text() 如果括號內有文字就是改文字，沒東西就是取文字
+            // 一次抓全部符合的
+            console.log($("h1").text())
+            $("h1").text("改innnerText")
+            // 改其中一個
+            console.log($("h1").eq(0).text())
+            $("h1").eq(0).text("抓到第一個了")
+
+            // .html() = innerHTML
+            // .html() 如果括號內有文字就是改文字，沒東西就是取文字
+            $("h1").eq(1).html("<i>改innerHTML<i>")
+
+            // .val() = value
+            // .val() 如果括號內有值就是改值，沒東西就是取值
+            $("#input1").val("改 id='input' 的 value")
+
+            // .attr(屬性名、值)
+            // 如果沒有設定就是取值
+            console.log($("#link1").attr("href"))
+            $("#link1").attr("href", "http://facebook.com")
+            $("#link1").text("Facebook")
+
+            // .css(樣式名、值)
+            // 如果沒有設定就是取值
+            $("h1").eq(2).css("color", "red")
+            $("#link1").css({ "font-size": "50px", "color": "green" })
+            console.log($("#link1").css("color"))
+
+            // .addClass() 新增 class
+            // .removeClass() 移除 class
+            // .hasClass() 有沒有指定的 class
+            $("h1").eq(0).addClass("blue big")
+            console.log($("h1").eq(0).hasClass("blue"))
+
+            // .find(CSS選擇器)
+            // 在東西裡面找所有符合選擇器的東西
+            $("#ul1").find("li").eq(2).css("color", "red")
+
+            // .prev() 同一層的上一個東西
+            // .prevAll() 同一層的所有上面的東西，()裡面可以放選擇器篩選
+            // .next() 同一層的下一個東西
+            // .nextAll() 同一層的所有下面的東西，()裡面可以放選擇器篩選
+            $("#ul1 li").eq(2).prevAll(".green").addClass("big")
+
+            // .sublings() 同一層的其他東西，()裡面可以放選擇器篩選
+            $("#ul1 .green").siblings().css("color", "blue")
+
+            // 用事件名當函式
+            $("#btn1").click(() => {
+
+            })
+
+            // 有些事件沒有事件名函式，要用 .on(事件, function)
+            $("#btn1").on("click", () => {
+                // append() 在同一層後面加入新的 html
+                // prepend() 在同一層前面加入新的 html  
+                $("#ul1").append("<li>後面新的</li>")
+                $("#ul1").prepend("<li>前面新的</li>")
+            })
+
+            // parent() 上面一層
+            // parents() 上面所有，()裡面可以放選擇器篩選，從上一層開始找
+            // closest() 往上找，直到找到符合 () 裡面選擇器的第一個，從目前的開始找
+            $("#myli").parent().css("background", "blue")
+            $("#myspan").closest("li").css("background", "red")
+
+            $("#myli").siblings().remove()
+        })
+    </script>
+</body>
+
+</html>

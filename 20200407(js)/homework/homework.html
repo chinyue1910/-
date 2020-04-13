@@ -408,7 +408,7 @@
                 inGame = true;
                 // btnStart.disabled = true
                 countdowntime = setInterval(countdown, 1000)
-                timer = setInterval(game, 5000)
+                timer = setInterval(game, 3000)
                 game()
             }, 6000)
         }
@@ -432,7 +432,7 @@
             timeleft = timeleft;
             textTime.innerText = timeleft;
             countdowntime = setInterval(countdown, 1000)
-            timer = setInterval(game, 5000)
+            timer = setInterval(game, 3000)
             for (let i of good) {
                 i.style.animationPlayState = "running"
             }
@@ -512,7 +512,7 @@
                 for (let i of arybad) {
                     bad[i].classList.replace("up", "down")
                 }
-            }, 3000)
+            }, 1500)
             if (timeleft == 0) {
                 clearInterval(timer)
                 clearTimeout(timerend)
