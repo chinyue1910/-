@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #box {
+            width: 400px;
+            height: 400px;
+            position: absolute;
+            background-color: black;
+        }
+    </style>
+</head>
+
+<body>
+    <input type="button" value="按我向右" id="btn">
+    <div id="box"></div>
+    <script src="jquery-3.5.0.min.js"></script>
+    <script>
+        let time = 0;
+        $("#btn").mousedown(function () {
+            $("#box").animate({
+                left: "+=1000px",
+            }, 3000)
+
+        })
+        $("#btn").mouseup(function () {
+            $("#box").stop(true)
+        })
+
+    </script>
+</body>
+
+</html>
