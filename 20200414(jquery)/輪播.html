@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #gallery {
+            width: 150px;
+            height: 150px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        #imgs {
+            position: absolute;
+            height: 150px;
+            width: max-content;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="gallery">
+        <div id="imgs">
+            <img src="../20200407(js)/homework/images/0.png">
+            <img src="../20200407(js)/homework/images/1.png">
+            <img src="../20200407(js)/homework/images/2.png">
+            <img src="../20200407(js)/homework/images/3.png">
+            <img src="../20200407(js)/homework/images/4.png">
+            <img src="../20200407(js)/homework/images/5.png">
+        </div>
+    </div>
+    <input type="button" value="<" id="left">
+    <input type="button" value=">" id="right">
+    <script src="jquery-3.5.0.min.js"></script>
+    <script>
+        $(function () {
+            let now = 0;
+            const total = $("#imgs img").length
+            $("#right").click(function () {
+                if (now < total - 1) {
+                    now++;
+                    const move = now * 150;
+                    $("#imgs").stop(true, true)
+                    $("#imgs").animate({
+                        left: `-${move}px`
+                    }, 1000)
+                }
+                console.log(now)
+            })
+            $("#left").click(function () {
+                if (now > 0) {
+                    now--;
+                    const move = now * 150;
+                    $("#imgs").stop(true, true)
+                    $("#imgs").animate({
+                        left: `-${move}px`
+                    }, 1000)
+                }
+                console.log(now)
+            })
+
+        })
+    </script>
+</body>
+
+</html>

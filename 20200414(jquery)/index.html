@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #game {
+            width: 400px;
+            height: 400px;
+            background-color: black;
+            cursor: url(./images/cursor_white.png) 50 50, auto;
+            overflow: hidden;
+            position: relative;
+        }
+
+        #game img {
+            position: absolute;
+            height: 150px;
+            width: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="game"></div>
+    <input type="button" value="開始遊戲" id="btn-start">
+    <p>分數: <span id="text-score">0</span></p>
+    <p>剩餘時間: <span id="text-time">10</span>秒</p>
+    <img src="" alt="">
+    <script src="jquery-3.5.0.min.js"></script>
+    <script>
+        // 分數
+        let score = 0;
+        // 剩餘時間
+        let timeleft = 10;
+        // 遊戲計時器
+        let gametimer = 0;
+        // 殭屍流水號
+        let zombie = 0;
+
+        const rand = (num) => {
+            return Math.round(Math.random() * num)
+        }
+
+        const movezb = (zombie) => {
+            $(`#zb${zombie}`).animate({
+                top: rand(70) + "%",
+                left: rand(70) + "%"
+            }, 3000, function () {
+                moverzb(zombie);
+            })
+        }
+
+        $("#btn-start").click(function () {
+            // 停用開始按鈕
+            $(this).attr("disabled", true)
+
+            // 重設
+            score = 0;
+            $("#text-score").text(score)
+            timeleft = 10;
+            $("#text-time").text(timeleft)
+
+            // 遊戲倒數
+            gametimer = setInterval(() => {
+                // 倒數
+                timeleft--;
+                $("#text-time").text(timeleft)
+
+                // 時間到
+                if (timeleft == 0) {
+                    // 停止計時器
+                    clearInterval(gametimer)
+                    // 啟用按鈕
+                    $(this).attr("disabled", false)
+                    setTimeout(() => {
+                        alert("時間到")
+                    }, 1000)
+                    // 清場
+                    $("#game img").remove();
+                }
+                else {
+                    const num = rand(10);
+                    if (num > 0) {
+                        $("#game").append(`<img src="./images/1.gif" id="zb${zombie}">`)
+                        $(`#zb${zombie}`).css({
+                            top: rand(70) + "%",
+                            left: rand(70) + "%"
+                        })
+                        movezb(zombie);
+                        zombie++
+                    }
+                }
+            }, 1000)
+
+            $("#game").on("click", "img", function () {
+                $(this).attr("src", "./images/blood.png")
+                $(this).stop()
+                $(this).css("pointer-events", "none")
+                score++;
+                $("#text-score").text(score)
+            })
+        })
+    </script>
+</body>
+
+</html>
