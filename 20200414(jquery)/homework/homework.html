@@ -6,6 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
+        body {
+            margin: 0;
+        }
+
         #box {
             width: 400px;
             height: 400px;
@@ -20,12 +24,23 @@
     <div id="box"></div>
     <script src="jquery-3.5.0.min.js"></script>
     <script>
-        let time = 0;
+        let limit = 0;
+        const move = (limit) => {
+            console.log(limit)
+            if (limit >= 50) {
+                $("#box").stop(true)
+            }
+            else {
+                $("#box").animate({
+                    left: `+=1px`,
+                }, 1, "linear", function () {
+                    limit++;
+                    move(limit)
+                })
+            }
+        }
         $("#btn").mousedown(function () {
-            $("#box").animate({
-                left: "+=1000px",
-            }, 3000)
-
+            move(limit)
         })
         $("#btn").mouseup(function () {
             $("#box").stop(true)
