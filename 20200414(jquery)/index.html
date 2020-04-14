@@ -83,7 +83,7 @@
                 }
                 else {
                     const num = rand(10);
-                    if (num > 0) {
+                    if (num > 5) {
                         $("#game").append(`<img src="./images/1.gif" id="zb${zombie}">`)
                         $(`#zb${zombie}`).css({
                             top: rand(70) + "%",
@@ -94,14 +94,13 @@
                     }
                 }
             }, 1000)
-
-            $("#game").on("click", "img", function () {
-                $(this).attr("src", "./images/blood.png")
-                $(this).stop()
-                $(this).css("pointer-events", "none")
-                score++;
-                $("#text-score").text(score)
-            })
+        })
+        $("#game").on("click", "img", function () {
+            $(this).attr("src", "./images/blood.png")
+            $(this).stop()
+            $(this).css("pointer-events", "none")
+            score++;
+            $("#text-score").text(score)
         })
     </script>
 </body>
