@@ -8,44 +8,230 @@
     <style>
         body {
             margin: 0;
+            background-color: deepskyblue;
         }
 
         #box {
-            width: 400px;
-            height: 400px;
-            position: absolute;
+            width: 1200px;
+            height: 800px;
+            position: relative;
             background-color: black;
+            margin: auto;
+            margin-top: 50px;
+        }
+
+        #stickbar {
+            width: 200px;
+            height: 200px;
+            background-image: url(./images/joystick-bar.png);
+            background-position: bottom;
+            background-size: 200px 60px;
+            background-repeat: no-repeat;
+            display: inline-block;
+            margin-right: 100px;
+        }
+
+        #stick {
+            width: 200px;
+            height: 150px;
+            background-image: url(./images/joystick.png);
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: auto 150px;
+            transform-origin: center bottom;
+        }
+
+        #catcher {
+            width: 200px;
+            height: 300px;
+            position: absolute;
+            left: 10px;
+            background-image: url(./images/machine.png);
+            background-size: auto 240px;
+            background-repeat: no-repeat;
+            background-position: center top;
+        }
+
+        .hook {
+            width: 100px;
+            height: 90px;
+            position: absolute;
+            top: 210px;
+
+        }
+
+        #left-hook {
+            left: 0;
+            background-image: url(./images/machine-left.png);
+            background-size: auto 90px;
+            background-position: 35px 8px;
+            background-repeat: no-repeat;
+            transform-origin: 55px 2px;
+            transform: rotate(45deg);
+        }
+
+        #right-hook {
+            right: 0;
+            background-image: url(./images/machine-right.png);
+            background-size: auto 90px;
+            background-position: 30px 8px;
+            background-repeat: no-repeat;
+            transform-origin: 34px 2px;
+            transform: rotate(-45deg);
+        }
+
+        .btn {
+            display: none;
+        }
+
+        #btn-catch {
+            width: 200px;
+            height: 200px;
+            background-color: rgba(0, 0, 0, 0);
+            border: none;
+            background-image: url(./images/start.png);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        #btn-catch:active {
+            background-size: 190px 190px;
         }
     </style>
 </head>
 
 <body>
-    <input type="button" value="按我向右" id="btn">
-    <div id="box"></div>
+    <div id="box">
+        <div id="catcher">
+            <div class="hook" id="left-hook"></div>
+            <div class="hook" id="right-hook"></div>
+        </div>
+    </div>
+    <br><br>
+    <div style="text-align: center;">
+        <div id="stickbar">
+            <div id="stick"></div>
+        </div>
+        <input type="button" class="btn" id="btn-right">
+        <input type="button" class="btn" id="btn-left">
+        <input type="button" id="btn-catch">
+    </div>>
+
     <script src="jquery-3.5.0.min.js"></script>
     <script>
-        let limit = 0;
-        const move = (limit) => {
-            console.log(limit)
-            if (limit >= 50) {
-                $("#box").stop(true)
+        let ingame = false;
+        // 向右邊
+        const moveRight = () => {
+            if ($("#catcher").css("left") == "1000px") {
+                $("#catcher").stop(true)
             }
             else {
-                $("#box").animate({
-                    left: `+=1px`,
+                $("#catcher").animate({
+                    left: `+=5px`,
                 }, 1, "linear", function () {
-                    limit++;
-                    move(limit)
+                    moveRight()
                 })
             }
         }
-        $("#btn").mousedown(function () {
-            move(limit)
+        $("#btn-right").mousedown(function () {
+            if ($("#catcher").css("top") == "0px" && ingame == false) {
+                $("#stick").css("transform", "rotate(45deg)")
+                moveRight()
+            }
         })
-        $("#btn").mouseup(function () {
-            $("#box").stop(true)
+        $("#btn-right").mouseup(function () {
+            if ($("#catcher").css("top") == "0px" && ingame == false) {
+                $("#catcher").stop(true)
+                $("#stick").css("transform", "rotate(0deg)")
+            }
+        })
+        // 向左邊
+        const moveLeft = () => {
+            if ($("#catcher").css("left") == "10px") {
+                $("#catcher").stop(true)
+            }
+            else {
+                $("#catcher").animate({
+                    left: `-=5px`
+                }, 1, "linear", function () {
+                    moveLeft()
+                })
+            }
+        }
+        $("#btn-left").mousedown(function () {
+            if ($("#catcher").css("top") == "0px" && ingame == false) {
+                $("#stick").css("transform", "rotate(-45deg)")
+                moveLeft()
+            }
+        })
+        $("#btn-left").mouseup(function () {
+            if ($("#catcher").css("top") == "0px" && ingame == false) {
+                $("#catcher").stop(true)
+                $("#stick").css("transform", "rotate(0deg)")
+            }
+        })
+        // 夾取
+        let moves = false;
+        $("#btn-catch").click(function () {
+            ingame = true
+            if (($("#catcher").css("top") == "0px")) {
+                $("#catcher").animate({
+                    top: `500px`
+                }, 3000, "linear", function () {
+                    $("#catcher").animate({
+                        top: `0px`
+                    }, 3000, "linear", function () {
+                        $("#catcher").animate({
+                            left: `10px`
+                        }, 3000, "linear", function () {
+                            ingame = false
+                        })
+
+                    })
+                })
+            }
+            else if (($("#catcher").css("top") !== "0px") && moves == false) {
+                $("#catcher").stop(true)
+                $("#catcher").animate({
+                    top: `0px`
+                }, 3000, "linear", function () {
+                    $("#catcher").animate({
+                        left: `10px`
+                    }, 2000, "linear", function () {
+                        ingame = false
+                    })
+                })
+                moves = true
+            }
+            moves = false
         })
 
+        $(window).keydown(function (event) {
+            switch (event.keyCode) {
+                case 39: $("#btn-right").mousedown();
+                    break;
+                case 37: $("#btn-left").mousedown()
+                    break;
+            }
+        })
+        $(window).keyup(function (event) {
+            switch (event.keyCode) {
+                case 39: $("#btn-right").mouseup();
+                    break;
+                case 37: $("#btn-left").mouseup();
+                    break;
+            }
+        })
+        $(window).keydown(function (event) {
+            if (event.keyCode == 32) {
+                $("#btn-catch").click();
+                $("#btn-catch").css("background-size", "190px 190px")
+                setTimeout(() => {
+                    $("#btn-catch").css("background-size", "200px 200px")
+                }, 100)
+            }
+        })
     </script>
 </body>
 
