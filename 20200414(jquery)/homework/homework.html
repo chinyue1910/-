@@ -8,14 +8,16 @@
     <style>
         body {
             margin: 0;
-            background-color: deepskyblue;
+            background-image: url(./images/bg.jpg);
+            background-size: cover;
+            background-repeat: no-repeat;
         }
 
         #box {
             width: 1200px;
-            height: 800px;
+            height: 600px;
             position: relative;
-            background-color: black;
+            background-color: rgba(0, 0, 0, 0.8);
             margin: auto;
             margin-top: 50px;
         }
@@ -42,42 +44,97 @@
         }
 
         #catcher {
-            width: 200px;
-            height: 300px;
+            width: 100px;
+            height: 150px;
             position: absolute;
-            left: 10px;
+            left: 50px;
             background-image: url(./images/machine.png);
-            background-size: auto 240px;
+            background-size: auto 120px;
             background-repeat: no-repeat;
             background-position: center top;
         }
 
         .hook {
-            width: 100px;
-            height: 90px;
+            width: 50px;
+            height: 100px;
             position: absolute;
-            top: 210px;
-
+            top: 110px;
         }
 
         #left-hook {
             left: 0;
             background-image: url(./images/machine-left.png);
             background-size: auto 90px;
-            background-position: 35px 8px;
             background-repeat: no-repeat;
-            transform-origin: 55px 2px;
+            background-position: 10px 3px;
+            transform-origin: center top;
             transform: rotate(45deg);
+        }
+
+        .leftclip {
+            animation: leftclip 1s linear forwards;
+        }
+
+        .leftclip-reverse {
+            animation: leftclip-reverse 500ms linear forwards;
+        }
+
+        @keyframes leftclip {
+            from {
+                transform: rotate(45deg);
+            }
+
+            to {
+                transform: rotate(0deg);
+            }
+        }
+
+        @keyframes leftclip-reverse {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(45deg);
+            }
         }
 
         #right-hook {
             right: 0;
             background-image: url(./images/machine-right.png);
             background-size: auto 90px;
-            background-position: 30px 8px;
             background-repeat: no-repeat;
-            transform-origin: 34px 2px;
+            background-position: 16px 3px;
+            transform-origin: center top;
             transform: rotate(-45deg);
+        }
+
+        .rightclip {
+            animation: rightclip 1s linear forwards;
+        }
+
+        .rightclip-reverse {
+            animation: rightclip-reverse 500ms linear forwards;
+        }
+
+        @keyframes rightclip {
+            from {
+                transform: rotate(-45deg);
+            }
+
+            to {
+                transform: rotate(0deg);
+            }
+        }
+
+        @keyframes rightclip-reverse {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(-45deg);
+            }
         }
 
         .btn {
@@ -123,7 +180,7 @@
         let ingame = false;
         // 向右邊
         const moveRight = () => {
-            if ($("#catcher").css("left") == "1000px") {
+            if ($("#catcher").css("left") == "1050px") {
                 $("#catcher").stop(true)
             }
             else {
@@ -135,20 +192,20 @@
             }
         }
         $("#btn-right").mousedown(function () {
+            $("#stick").css("transform", "rotate(45deg)")
             if ($("#catcher").css("top") == "0px" && ingame == false) {
-                $("#stick").css("transform", "rotate(45deg)")
                 moveRight()
             }
         })
         $("#btn-right").mouseup(function () {
+            $("#stick").css("transform", "rotate(0deg)")
             if ($("#catcher").css("top") == "0px" && ingame == false) {
                 $("#catcher").stop(true)
-                $("#stick").css("transform", "rotate(0deg)")
             }
         })
         // 向左邊
         const moveLeft = () => {
-            if ($("#catcher").css("left") == "10px") {
+            if ($("#catcher").css("left") == "50px") {
                 $("#catcher").stop(true)
             }
             else {
@@ -160,51 +217,70 @@
             }
         }
         $("#btn-left").mousedown(function () {
+            $("#stick").css("transform", "rotate(-45deg)")
             if ($("#catcher").css("top") == "0px" && ingame == false) {
-                $("#stick").css("transform", "rotate(-45deg)")
                 moveLeft()
             }
         })
         $("#btn-left").mouseup(function () {
+            $("#stick").css("transform", "rotate(0deg)")
             if ($("#catcher").css("top") == "0px" && ingame == false) {
                 $("#catcher").stop(true)
-                $("#stick").css("transform", "rotate(0deg)")
             }
         })
         // 夾取
-        let moves = false;
+        let incatch = true;
         $("#btn-catch").click(function () {
-            ingame = true
+            ingame = true;
             if (($("#catcher").css("top") == "0px")) {
                 $("#catcher").animate({
-                    top: `500px`
+                    top: `400px`
                 }, 3000, "linear", function () {
+                    $("#left-hook").addClass("leftclip")
+                    $("#left-hook").removeClass("leftclip-reverse")
+                    $("#right-hook").addClass("rightclip")
+                    $("#right-hook").removeClass("rightclip-reverse")
+                    setTimeout(() => {
+                        $("#catcher").animate({
+                            top: `0px`
+                        }, 3000, "linear", function () {
+                            $("#catcher").animate({
+                                left: `50px`
+                            }, 1000, "linear", function () {
+                                $("#left-hook").addClass("leftclip-reverse")
+                                $("#left-hook").removeClass("leftclip")
+                                $("#right-hook").addClass("rightclip-reverse")
+                                $("#right-hook").removeClass("rightclip")
+                                ingame = false
+                            })
+                        })
+                    }, 1000)
+                })
+            }
+            else if (($("#catcher").css("top") !== "0px") && incatch == true) {
+                incatch = false
+                $("#catcher").stop(true)
+                $("#left-hook").addClass("leftclip")
+                $("#left-hook").removeClass("leftclip-reverse")
+                $("#right-hook").addClass("rightclip")
+                $("#right-hook").removeClass("rightclip-reverse")
+                setTimeout(() => {
                     $("#catcher").animate({
                         top: `0px`
                     }, 3000, "linear", function () {
                         $("#catcher").animate({
-                            left: `10px`
-                        }, 3000, "linear", function () {
+                            left: `50px`
+                        }, 2000, "linear", function () {
+                            $("#left-hook").addClass("leftclip-reverse")
+                            $("#left-hook").removeClass("leftclip")
+                            $("#right-hook").addClass("rightclip-reverse")
+                            $("#right-hook").removeClass("rightclip")
                             ingame = false
+                            incatch = true
                         })
-
                     })
-                })
+                }, 1000)
             }
-            else if (($("#catcher").css("top") !== "0px") && moves == false) {
-                $("#catcher").stop(true)
-                $("#catcher").animate({
-                    top: `0px`
-                }, 3000, "linear", function () {
-                    $("#catcher").animate({
-                        left: `10px`
-                    }, 2000, "linear", function () {
-                        ingame = false
-                    })
-                })
-                moves = true
-            }
-            moves = false
         })
 
         $(window).keydown(function (event) {
