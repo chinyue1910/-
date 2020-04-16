@@ -8,7 +8,7 @@
     <style>
         body {
             margin: 0;
-            background-image: url(./images/bg.jpg);
+            /* background-image: url(./images/bg.jpg); */
             background-size: cover;
             background-repeat: no-repeat;
         }
@@ -21,6 +21,14 @@
             margin: auto;
             margin-top: 50px;
         }
+
+        #box img {
+            position: absolute;
+            height: auto;
+            width: 200px;
+        }
+
+
 
         #stickbar {
             width: 200px;
@@ -52,6 +60,14 @@
             background-size: auto 120px;
             background-repeat: no-repeat;
             background-position: center top;
+        }
+
+        #roll {
+            position: absolute;
+            width: 10px;
+            bottom: 150px;
+            background-color: red;
+            left: calc(50% - 5px);
         }
 
         .hook {
@@ -161,6 +177,7 @@
 <body>
     <div id="box">
         <div id="catcher">
+            <div id="roll"></div>
             <div class="hook" id="left-hook"></div>
             <div class="hook" id="right-hook"></div>
         </div>
@@ -178,14 +195,14 @@
     <script src="jquery-3.5.0.min.js"></script>
     <script>
         let ingame = false;
-        // 向右邊
+        // 向右邊----------------------------------------------------------
         const moveRight = () => {
-            if ($("#catcher").css("left") == "1050px") {
+            if (parseInt($("#catcher").css("left")) > 1050) {
                 $("#catcher").stop(true)
             }
             else {
                 $("#catcher").animate({
-                    left: `+=5px`,
+                    left: `+=10px`,
                 }, 1, "linear", function () {
                     moveRight()
                 })
@@ -193,24 +210,24 @@
         }
         $("#btn-right").mousedown(function () {
             $("#stick").css("transform", "rotate(45deg)")
-            if ($("#catcher").css("top") == "0px" && ingame == false) {
+            if (parseInt($("#catcher").css("top")) <= 0 && ingame == false) {
                 moveRight()
             }
         })
         $("#btn-right").mouseup(function () {
             $("#stick").css("transform", "rotate(0deg)")
-            if ($("#catcher").css("top") == "0px" && ingame == false) {
+            if (parseInt($("#catcher").css("top")) <= 0 && ingame == false) {
                 $("#catcher").stop(true)
             }
         })
-        // 向左邊
+        // 向左邊----------------------------------------------------------
         const moveLeft = () => {
-            if ($("#catcher").css("left") == "50px") {
+            if (parseInt($("#catcher").css("left")) < 50) {
                 $("#catcher").stop(true)
             }
             else {
                 $("#catcher").animate({
-                    left: `-=5px`
+                    left: `-=10px`
                 }, 1, "linear", function () {
                     moveLeft()
                 })
@@ -218,71 +235,136 @@
         }
         $("#btn-left").mousedown(function () {
             $("#stick").css("transform", "rotate(-45deg)")
-            if ($("#catcher").css("top") == "0px" && ingame == false) {
+            if (parseInt($("#catcher").css("top")) <= 0 && ingame == false) {
                 moveLeft()
             }
         })
         $("#btn-left").mouseup(function () {
             $("#stick").css("transform", "rotate(0deg)")
-            if ($("#catcher").css("top") == "0px" && ingame == false) {
+            if (parseInt($("#catcher").css("top")) <= 0 && ingame == false) {
                 $("#catcher").stop(true)
             }
         })
-        // 夾取
-        let incatch = true;
+        // 牛----------------------------------------------------------
+        let ring = 0
+        const rand = (num) => {
+            return Math.round(Math.random() * num)
+        }
+
+        const moveleft = (ring) => {
+            $(`#ring${ring}`).animate({
+                top: `-=50`,
+                left: `-=100px`
+            }, 500, "swing", function () {
+                $(`#ring${ring}`).animate({
+                    top: `+=50`,
+                    left: `-=100px`
+                }, 500, "swing", function () {
+                    if (parseInt($(`#ring${ring}`).css("left")) < 100) {
+                        $(`#ring${ring}`).stop(true);
+                        move(ring)
+                    }
+                    else {
+                        moveleft(ring)
+                    }
+                })
+            })
+        }
+
+        const move = (ring) => {
+            $(`#ring${ring}`).animate({
+                top: `-=50`,
+                left: `+=100px`
+            }, 500, "swing", function () {
+                $(`#ring${ring}`).animate({
+                    top: `+=50`,
+                    left: `+=100px`
+                }, 500, "swing", function () {
+                    if (parseInt($(`#ring${ring}`).css("left")) > 880) {
+                        $(`#ring${ring}`).stop(true);
+                        moveleft(ring)
+                    }
+                    else {
+                        move(ring)
+                    }
+                })
+            })
+        }
+
+        $("#box").append(`<img src="./images/ring.gif" id="ring${ring}">`)
+        $(`#ring${ring}`).css({
+            top: "430px",
+            left: `${rand(1000)}px`
+        })
+        // moveleft(ring)
+        // 夾取----------------------------------------------------------
+        const moveback = () => {
+            if (parseInt($("#catcher").css("left")) < 50) {
+                $("#catcher").stop(true)
+                $("#left-hook").addClass("leftclip-reverse")
+                $("#left-hook").removeClass("leftclip")
+                $("#right-hook").addClass("rightclip-reverse")
+                $("#right-hook").removeClass("rightclip")
+                ingame = false
+                incatch = false
+            }
+            else {
+                $("#catcher").animate({
+                    left: `-=5px`
+                }, 1, "linear", function () {
+                    moveback()
+                })
+            }
+        }
+
+        const layup = () => {
+            if (parseInt($("#catcher").css("top")) < 0) {
+                $("#catcher").stop(true)
+                incatch = true
+                moveback()
+            }
+            else {
+                $("#catcher").animate({
+                    top: `-=5px`
+                }, 1, "linear", function () {
+                    layup()
+                })
+            }
+        }
+
+        let incatch = false;
         $("#btn-catch").click(function () {
             ingame = true;
-            if (($("#catcher").css("top") == "0px")) {
+            if (parseInt($("#catcher").css("top")) <= 0 && incatch == false) {
+                $("#catcher").stop(true)
                 $("#catcher").animate({
-                    top: `400px`
+                    top: `380px`
                 }, 3000, "linear", function () {
                     $("#left-hook").addClass("leftclip")
                     $("#left-hook").removeClass("leftclip-reverse")
                     $("#right-hook").addClass("rightclip")
                     $("#right-hook").removeClass("rightclip-reverse")
+                    if (parseInt($("#catcher").css("left")) - 300 < parseInt($(`#ring${ring}`).css("left")) && parseInt($(`#ring${ring}`).css("left")) < parseInt($("#catcher").css("left")) + 300) {
+                        $(`#ring${ring}`).attr("src", "./images/machine.png")
+                    }
                     setTimeout(() => {
-                        $("#catcher").animate({
-                            top: `0px`
-                        }, 3000, "linear", function () {
-                            $("#catcher").animate({
-                                left: `50px`
-                            }, 1000, "linear", function () {
-                                $("#left-hook").addClass("leftclip-reverse")
-                                $("#left-hook").removeClass("leftclip")
-                                $("#right-hook").addClass("rightclip-reverse")
-                                $("#right-hook").removeClass("rightclip")
-                                ingame = false
-                            })
-                        })
+                        layup()
                     }, 1000)
                 })
             }
-            else if (($("#catcher").css("top") !== "0px") && incatch == true) {
-                incatch = false
+            else if (($("#catcher").css("top") !== "0px") && incatch == false) {
+                incatch = true
                 $("#catcher").stop(true)
                 $("#left-hook").addClass("leftclip")
                 $("#left-hook").removeClass("leftclip-reverse")
                 $("#right-hook").addClass("rightclip")
                 $("#right-hook").removeClass("rightclip-reverse")
                 setTimeout(() => {
-                    $("#catcher").animate({
-                        top: `0px`
-                    }, 3000, "linear", function () {
-                        $("#catcher").animate({
-                            left: `50px`
-                        }, 2000, "linear", function () {
-                            $("#left-hook").addClass("leftclip-reverse")
-                            $("#left-hook").removeClass("leftclip")
-                            $("#right-hook").addClass("rightclip-reverse")
-                            $("#right-hook").removeClass("rightclip")
-                            ingame = false
-                            incatch = true
-                        })
-                    })
+                    layup()
                 }, 1000)
             }
         })
-
+        // 按鈕行為----------------------------------------------------------
         $(window).keydown(function (event) {
             switch (event.keyCode) {
                 case 39: $("#btn-right").mousedown();
