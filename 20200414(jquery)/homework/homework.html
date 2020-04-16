@@ -254,11 +254,11 @@
         const moveleft = (ring) => {
             $(`#ring${ring}`).animate({
                 top: `-=50`,
-                left: `-=100px`
+                left: `-=50px`
             }, 500, "swing", function () {
                 $(`#ring${ring}`).animate({
                     top: `+=50`,
-                    left: `-=100px`
+                    left: `-=50px`
                 }, 500, "swing", function () {
                     if (parseInt($(`#ring${ring}`).css("left")) < 100) {
                         $(`#ring${ring}`).stop(true);
@@ -274,11 +274,11 @@
         const move = (ring) => {
             $(`#ring${ring}`).animate({
                 top: `-=50`,
-                left: `+=100px`
+                left: `+=50px`
             }, 500, "swing", function () {
                 $(`#ring${ring}`).animate({
                     top: `+=50`,
-                    left: `+=100px`
+                    left: `+=50px`
                 }, 500, "swing", function () {
                     if (parseInt($(`#ring${ring}`).css("left")) > 880) {
                         $(`#ring${ring}`).stop(true);
@@ -296,7 +296,7 @@
             top: "430px",
             left: `${rand(1000)}px`
         })
-        // moveleft(ring)
+        moveleft(ring)
         // 夾取----------------------------------------------------------
         const moveback = () => {
             if (parseInt($("#catcher").css("left")) < 50) {
@@ -339,13 +339,13 @@
                 $("#catcher").stop(true)
                 $("#catcher").animate({
                     top: `380px`
-                }, 3000, "linear", function () {
+                }, 1000, "linear", function () {
                     $("#left-hook").addClass("leftclip")
                     $("#left-hook").removeClass("leftclip-reverse")
                     $("#right-hook").addClass("rightclip")
                     $("#right-hook").removeClass("rightclip-reverse")
-                    if (parseInt($("#catcher").css("left")) - 300 < parseInt($(`#ring${ring}`).css("left")) && parseInt($(`#ring${ring}`).css("left")) < parseInt($("#catcher").css("left")) + 300) {
-                        $(`#ring${ring}`).attr("src", "./images/machine.png")
+                    if (parseInt($("#catcher").css("left")) < parseInt($(`#ring${ring}`).css("left")) + 100 && parseInt($(`#ring${ring}`).css("left")) + 100 < parseInt($("#catcher").css("left")) + 200) {
+                        $(`#ring${ring}`).stop(true)
                     }
                     setTimeout(() => {
                         layup()
