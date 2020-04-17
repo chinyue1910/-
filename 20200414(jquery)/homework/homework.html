@@ -253,38 +253,53 @@
 
         const moveleft = (ring) => {
             $(`#ring${ring}`).animate({
-                left: `-=5px`
-            }, 100, "swing", function () {
-                if (parseInt($(`#ring${ring}`).css("left")) < 100) {
-                    $(`#ring${ring}`).stop(true);
-                    move(ring)
-                }
-                else {
-                    moveleft(ring)
-                }
+                left: `-=50px`,
+                top: "-=50px"
+            }, 500, "swing", function () {
+                $(`#ring${ring}`).animate({
+                    left: `-=50px`,
+                    top: "+=50px"
+                }, 500, "swing", function () {
+                    if (parseInt($(`#ring${ring}`).css("left")) < 100) {
+                        $(`#ring${ring}`).stop(true);
+                        move(ring)
+                    }
+                    else {
+                        moveleft(ring)
+                    }
+                })
             })
         }
 
         const move = (ring) => {
             $(`#ring${ring}`).animate({
-                left: `+=5px`
-            }, 100, "swing", function () {
-                if (parseInt($(`#ring${ring}`).css("left")) > 880) {
-                    $(`#ring${ring}`).stop(true);
-                    moveleft(ring)
-                }
-                else {
-                    move(ring)
-                }
+                left: `+=50px`,
+                top: `-=50px`
+            }, 500, "swing", function () {
+                $(`#ring${ring}`).animate({
+                    left: `+=50px`,
+                    top: "+=50px"
+                }, 500, "swing", function () {
+                    if (parseInt($(`#ring${ring}`).css("left")) > 880) {
+                        $(`#ring${ring}`).stop(true);
+                        moveleft(ring)
+                    }
+                    else {
+                        move(ring)
+                    }
+                })
             })
         }
+        setInterval(() => {
+            $("#box").append(`<img src="./images/ring.gif" id="ring${ring}">`)
+            $(`#ring${ring}`).css({
+                top: "430px",
+                left: `${rand(1000)}px`
+            })
+            moveleft(ring)
+            ring++
+        }, 1000);
 
-        $("#box").append(`<img src="./images/ring.gif" id="ring${ring}">`)
-        $(`#ring${ring}`).css({
-            top: "430px",
-            left: `${rand(1000)}px`
-        })
-        // moveleft(ring)
         // 夾取----------------------------------------------------------
         const moveback = () => {
             if (parseInt($("#catcher").css("left")) < 50) {
@@ -323,6 +338,9 @@
         const shippingback = (ring) => {
             if (parseInt($(`#ring${ring}`).css("left")) < 20) {
                 $(`#ring${ring}`).stop(true)
+                $(`#ring${ring}`).animate({
+                    top: "1000px"
+                })
             }
             else {
                 $(`#ring${ring}`).animate({
@@ -347,7 +365,6 @@
                 })
             }
         }
-
         let incatch = false;
         $("#btn-catch").click(function () {
             ingame = true;
@@ -361,14 +378,20 @@
                     $("#right-hook").addClass("rightclip")
                     $("#right-hook").removeClass("rightclip-reverse")
                     if (
-                        parseInt($("#catcher").css("left")) + 50 < parseInt($(`#ring${ring}`).css("left") + 100) < parseInt($("#catcher").css("left")) + 100
+                        (parseInt($("#catcher").css("left")) + 50 < parseInt($(`#ring${ring}`).css("left")) + 100) &&
+                        (parseInt($(`#ring${ring}`).css("left")) + 100 < parseInt($("#catcher").css("left")) + 150)
                     ) {
                         $(`#ring${ring}`).stop(true)
+                        $(`#ring${ring}`).css("left", `${parseInt($("#catcher").css("left")) - 40}px`)
+                        $(`#catcher`).css("top", `${parseInt($(`#ring${ring}`).css("top")) - 80}px`)
+                        setTimeout(() => {
+                            shipping(ring);
+                        }, 100)
                     }
                     setTimeout(() => {
-                        shipping(ring);
                         layup()
                     }, 100)
+
                 })
             }
             else if (($("#catcher").css("top") !== "0px") && incatch == false) {
