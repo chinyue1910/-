@@ -298,7 +298,10 @@
             })
             moveleft(ring)
             ring++
-        }, 1000);
+            for (let i = 0; i < $(`img`).length; i++) {
+                console.log($(`img`).eq(i).css("left"))
+            }
+        }, 4000);
 
         // 夾取----------------------------------------------------------
         const moveback = () => {
