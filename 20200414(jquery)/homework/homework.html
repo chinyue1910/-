@@ -254,13 +254,13 @@
         const moveleft = (ring) => {
             $(`#ring${ring}`).animate({
                 left: `-=50px`,
-                top: "-=50px"
+                top: "-=100px"
             }, 500, "swing", function () {
                 $(`#ring${ring}`).animate({
                     left: `-=50px`,
-                    top: "+=50px"
+                    top: "+=100px"
                 }, 500, "swing", function () {
-                    if (parseInt($(`#ring${ring}`).css("left")) < 100) {
+                    if (parseInt($(`#ring${ring}`).css("left")) < 220) {
                         $(`#ring${ring}`).stop(true);
                         move(ring)
                     }
@@ -274,13 +274,13 @@
         const move = (ring) => {
             $(`#ring${ring}`).animate({
                 left: `+=50px`,
-                top: `-=50px`
+                top: `-=100px`
             }, 500, "swing", function () {
                 $(`#ring${ring}`).animate({
                     left: `+=50px`,
-                    top: "+=50px"
+                    top: "+=100px"
                 }, 500, "swing", function () {
-                    if (parseInt($(`#ring${ring}`).css("left")) > 880) {
+                    if (parseInt($(`#ring${ring}`).css("left")) > 900) {
                         $(`#ring${ring}`).stop(true);
                         moveleft(ring)
                     }
@@ -290,18 +290,21 @@
                 })
             })
         }
-        setInterval(() => {
-            $("#box").append(`<img src="./images/ring.gif" id="ring${ring}">`)
-            $(`#ring${ring}`).css({
-                top: "430px",
-                left: `${rand(1000)}px`
-            })
-            moveleft(ring)
-            ring++
-            for (let i = 0; i < $(`img`).length; i++) {
-                console.log($(`img`).eq(i).css("left"))
-            }
-        }, 4000);
+        // setInterval(() => {
+        //     $("#box").append(`<img src="./images/ring.gif" id="ring${ring}">`)
+        //     $(`#ring${ring}`).css({
+        //         top: "430px",
+        //         left: `${rand(780) + 120}px`
+        //     })
+        //     let random = rand(1)
+        //     if (random == 0) {
+        //         move(ring)
+        //     }
+        //     else {
+        //         moveleft(ring)
+        //     }
+        //     ring++
+        // }, 1000);
 
         // 夾取----------------------------------------------------------
         const moveback = () => {
@@ -342,8 +345,8 @@
             if (parseInt($(`#ring${ring}`).css("left")) < 20) {
                 $(`#ring${ring}`).stop(true)
                 $(`#ring${ring}`).animate({
-                    top: "1000px"
-                })
+                    top: "600px"
+                }, 2000)
             }
             else {
                 $(`#ring${ring}`).animate({
@@ -380,16 +383,18 @@
                     $("#left-hook").removeClass("leftclip-reverse")
                     $("#right-hook").addClass("rightclip")
                     $("#right-hook").removeClass("rightclip-reverse")
-                    if (
-                        (parseInt($("#catcher").css("left")) + 50 < parseInt($(`#ring${ring}`).css("left")) + 100) &&
-                        (parseInt($(`#ring${ring}`).css("left")) + 100 < parseInt($("#catcher").css("left")) + 150)
-                    ) {
-                        $(`#ring${ring}`).stop(true)
-                        $(`#ring${ring}`).css("left", `${parseInt($("#catcher").css("left")) - 40}px`)
-                        $(`#catcher`).css("top", `${parseInt($(`#ring${ring}`).css("top")) - 80}px`)
-                        setTimeout(() => {
-                            shipping(ring);
-                        }, 100)
+                    for (let i = 0; i < $("img").length; i++) {
+                        if (
+                            (parseInt($("#catcher").css("left")) + 50 < parseInt($("img").eq(i).css("left")) + 100) &&
+                            (parseInt($("img").eq(i).css("left")) + 100 < parseInt($("#catcher").css("left")) + 150)
+                        ) {
+                            $("img").eq(i).stop(true)
+                            $("img").eq(i).css("left", `${parseInt($("#catcher").css("left")) - 40}px`)
+                            $(`#catcher`).css("top", `${parseInt($("img").eq(i).css("top")) - 80}px`)
+                            setTimeout(() => {
+                                shipping(i);
+                            }, 100)
+                        }
                     }
                     setTimeout(() => {
                         layup()
@@ -406,7 +411,7 @@
                 $("#right-hook").removeClass("rightclip-reverse")
                 setTimeout(() => {
                     layup()
-                }, 1000)
+                }, 100)
             }
         })
         // 按鈕行為----------------------------------------------------------
