@@ -8,7 +8,7 @@
     <style>
         body {
             margin: 0;
-            /* background-image: url(./images/bg.jpg); */
+            background-image: url(./images/bg.jpg);
             background-size: cover;
             background-repeat: no-repeat;
         }
@@ -19,7 +19,9 @@
             position: relative;
             background-color: rgba(0, 0, 0, 0.8);
             margin: auto;
-            margin-top: 50px;
+            margin-top: 25px;
+            border: 20px solid gold;
+            border-radius: 50px;
         }
 
         #box img {
@@ -27,8 +29,6 @@
             height: auto;
             width: 200px;
         }
-
-
 
         #stickbar {
             width: 200px;
@@ -64,10 +64,11 @@
 
         #roll {
             position: absolute;
-            width: 10px;
+            width: 20px;
             bottom: 150px;
-            background-color: red;
-            left: calc(50% - 5px);
+            background-image: url(./images/roll.png);
+            background-size: cover;
+            left: calc(50% - 10px);
         }
 
         .hook {
@@ -254,11 +255,11 @@
         const moveleft = (ring) => {
             $(`#ring${ring}`).animate({
                 left: `-=50px`,
-                top: "-=100px"
+                top: `-=50px`
             }, 500, "swing", function () {
                 $(`#ring${ring}`).animate({
-                    left: `-=50px`,
-                    top: "+=100px"
+                    left: `-=10px`,
+                    top: `+=50px`
                 }, 500, "swing", function () {
                     if (parseInt($(`#ring${ring}`).css("left")) < 220) {
                         $(`#ring${ring}`).stop(true);
@@ -274,11 +275,11 @@
         const move = (ring) => {
             $(`#ring${ring}`).animate({
                 left: `+=50px`,
-                top: `-=100px`
+                top: `-=50px`
             }, 500, "swing", function () {
                 $(`#ring${ring}`).animate({
                     left: `+=50px`,
-                    top: "+=100px"
+                    top: `+=50px`
                 }, 500, "swing", function () {
                     if (parseInt($(`#ring${ring}`).css("left")) > 900) {
                         $(`#ring${ring}`).stop(true);
@@ -290,21 +291,26 @@
                 })
             })
         }
-        // setInterval(() => {
-        //     $("#box").append(`<img src="./images/ring.gif" id="ring${ring}">`)
-        //     $(`#ring${ring}`).css({
-        //         top: "430px",
-        //         left: `${rand(780) + 120}px`
-        //     })
-        //     let random = rand(1)
-        //     if (random == 0) {
-        //         move(ring)
-        //     }
-        //     else {
-        //         moveleft(ring)
-        //     }
-        //     ring++
-        // }, 1000);
+        setInterval(() => {
+            if ($("img").length > 5) {
+                clearInterval()
+            }
+            else {
+                $("#box").append(`<img src="./images/ring.gif" id="ring${ring}">`)
+                $(`#ring${ring}`).css({
+                    top: "430px",
+                    left: `${rand(780) + 120}px`
+                })
+                let random = rand(1)
+                if (random == 0) {
+                    move(ring)
+                }
+                else {
+                    moveleft(ring)
+                }
+                ring++
+            }
+        }, 1000);
 
         // 夾取----------------------------------------------------------
         const moveback = () => {
@@ -329,6 +335,7 @@
         const layup = () => {
             if (parseInt($("#catcher").css("top")) < 0) {
                 $("#catcher").stop(true)
+                $("#catcher").css("top", "0px")
                 incatch = true
                 moveback()
             }
@@ -341,33 +348,56 @@
             }
         }
 
-        const shippingback = (ring) => {
-            if (parseInt($(`#ring${ring}`).css("left")) < 20) {
-                $(`#ring${ring}`).stop(true)
-                $(`#ring${ring}`).animate({
-                    top: "600px"
-                }, 2000)
+        const roll = () => {
+            if (parseInt($("#catcher").css("top")) == 0) {
+                $("#roll").stop(true)
+                $("#roll").css("height", "0px")
             }
             else {
-                $(`#ring${ring}`).animate({
-                    left: `-=10px`
+                $("#roll").animate({
+                    height: "-=5px"
                 }, 1, "linear", function () {
-                    shippingback(ring)
+                    roll()
                 })
             }
         }
 
-        const shipping = (ring) => {
-            $(`#ring${ring}`).stop(true)
-            if (parseInt($(`#ring${ring}`).css("top")) < 80) {
-                $(`#ring${ring}`).stop(true)
-                shippingback(ring)
+        const shippingback = (i) => {
+            if (parseInt($("img").eq(i).css("left")) < 20) {
+                $("img").eq(i).stop(true)
+                $("img").eq(i).animate({
+                    top: "600px"
+                }, 1000, "linear", function () {
+                    $("img").eq(i).attr("src", "./images/blood.png")
+                    setTimeout(() => {
+                        for (let i = 0; i < $("img").length; i++) {
+                            if ($("img").eq(i).css("top") == "600px") {
+                                $("img").eq(i).remove()
+                            }
+                        }
+                    }, 500)
+                })
             }
             else {
-                $(`#ring${ring}`).animate({
+                $("img").eq(i).animate({
+                    left: `-=10px`
+                }, 1, "linear", function () {
+                    shippingback(i)
+                })
+            }
+        }
+
+        const shipping = (i) => {
+            $("img").eq(i).stop(true)
+            if (parseInt($("img").eq(i).css("top")) < 80) {
+                $("img").eq(i).stop(true)
+                shippingback(i)
+            }
+            else {
+                $("img").eq(i).animate({
                     top: `-=5px`
                 }, 1, "linear", function () {
-                    shipping(ring)
+                    shipping(i)
                 })
             }
         }
@@ -376,6 +406,9 @@
             ingame = true;
             if (parseInt($("#catcher").css("top")) <= 0 && incatch == false) {
                 $("#catcher").stop(true)
+                $("#roll").animate({
+                    height: "350px"
+                }, 1000, "linear")
                 $("#catcher").animate({
                     top: `350px`
                 }, 1000, "linear", function () {
@@ -383,6 +416,7 @@
                     $("#left-hook").removeClass("leftclip-reverse")
                     $("#right-hook").addClass("rightclip")
                     $("#right-hook").removeClass("rightclip-reverse")
+                    incatch = true
                     for (let i = 0; i < $("img").length; i++) {
                         if (
                             (parseInt($("#catcher").css("left")) + 50 < parseInt($("img").eq(i).css("left")) + 100) &&
@@ -390,27 +424,30 @@
                         ) {
                             $("img").eq(i).stop(true)
                             $("img").eq(i).css("left", `${parseInt($("#catcher").css("left")) - 40}px`)
-                            $(`#catcher`).css("top", `${parseInt($("img").eq(i).css("top")) - 80}px`)
+                            $("#catcher").css("top", `${parseInt($("img").eq(i).css("top")) - 80}px`)
+                            $("#roll").css("height", `${parseInt($("img").eq(i).css("top")) - 80}px`)
                             setTimeout(() => {
                                 shipping(i);
                             }, 100)
                         }
                     }
                     setTimeout(() => {
+                        roll()
                         layup()
                     }, 100)
-
                 })
             }
             else if (($("#catcher").css("top") !== "0px") && incatch == false) {
                 incatch = true
                 $("#catcher").stop(true)
+                $("#roll").stop(true)
                 $("#left-hook").addClass("leftclip")
                 $("#left-hook").removeClass("leftclip-reverse")
                 $("#right-hook").addClass("rightclip")
                 $("#right-hook").removeClass("rightclip-reverse")
                 setTimeout(() => {
                     layup()
+                    roll()
                 }, 100)
             }
         })
