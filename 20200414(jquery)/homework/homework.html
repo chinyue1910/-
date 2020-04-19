@@ -13,6 +13,11 @@
             background-repeat: no-repeat;
         }
 
+        #main {
+            margin: auto;
+            width: fit-content;
+        }
+
         #box {
             width: 1200px;
             height: 600px;
@@ -20,14 +25,47 @@
             background-color: rgba(0, 0, 0, 0.8);
             margin: auto;
             margin-top: 25px;
-            border: 20px solid gold;
-            border-radius: 50px;
+            border: 20px solid rgba(255, 215, 0);
+            border-bottom: 0
         }
 
         #box img {
             position: absolute;
             height: auto;
             width: 200px;
+            z-index: 50;
+        }
+
+        #gap {
+            position: absolute;
+            left: 0px;
+            bottom: -20px;
+            width: 210px;
+            height: 200px;
+            border-right: 20px solid rgba(255, 215, 0);
+            border-radius: 20px 20px 0 0;
+        }
+
+        #gift {
+            position: absolute;
+            width: 250px;
+            height: 250px;
+            display: inline-block;
+            background-color: rgba(0, 0, 0, 0.8);
+            float: left;
+            border: 20px solid rgba(255, 215, 0);
+            border-top: 0;
+            box-sizing: border-box;
+            z-index: 0;
+        }
+
+        #control {
+            border-top: 20px solid gold;
+            text-align: center;
+            padding: 25px 0;
+            height: 250px;
+            box-sizing: border-box;
+            margin-left: 250px;
         }
 
         #stickbar {
@@ -167,6 +205,7 @@
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
+            display: inline-block;
         }
 
         #btn-catch:active {
@@ -176,23 +215,25 @@
 </head>
 
 <body>
-    <div id="box">
-        <div id="catcher">
-            <div id="roll"></div>
-            <div class="hook" id="left-hook"></div>
-            <div class="hook" id="right-hook"></div>
+    <div id="main">
+        <div id="box">
+            <div id="catcher">
+                <div id="roll"></div>
+                <div class="hook" id="left-hook"></div>
+                <div class="hook" id="right-hook"></div>
+            </div>
+            <div id="gap"></div>
         </div>
+        <div id="gift"></div>
+        <div id="control">
+            <div id="stickbar">
+                <div id="stick"></div>
+            </div>
+            <input type="button" class="btn" id="btn-right">
+            <input type="button" class="btn" id="btn-left">
+            <input type="button" id="btn-catch">
+        </div>>
     </div>
-    <br><br>
-    <div style="text-align: center;">
-        <div id="stickbar">
-            <div id="stick"></div>
-        </div>
-        <input type="button" class="btn" id="btn-right">
-        <input type="button" class="btn" id="btn-left">
-        <input type="button" id="btn-catch">
-    </div>>
-
     <script src="jquery-3.5.0.min.js"></script>
     <script>
         let ingame = false;
@@ -261,7 +302,7 @@
                     left: `-=10px`,
                     top: `+=50px`
                 }, 500, "swing", function () {
-                    if (parseInt($(`#ring${ring}`).css("left")) < 220) {
+                    if (parseInt($(`#ring${ring}`).css("left")) < 300) {
                         $(`#ring${ring}`).stop(true);
                         move(ring)
                     }
@@ -299,7 +340,7 @@
                 $("#box").append(`<img src="./images/ring.gif" id="ring${ring}">`)
                 $(`#ring${ring}`).css({
                     top: "430px",
-                    left: `${rand(780) + 120}px`
+                    left: `${rand(700) + 300}px`
                 })
                 let random = rand(1)
                 if (random == 0) {
@@ -366,12 +407,12 @@
             if (parseInt($("img").eq(i).css("left")) < 20) {
                 $("img").eq(i).stop(true)
                 $("img").eq(i).animate({
-                    top: "600px"
+                    top: "650px"
                 }, 1000, "linear", function () {
                     $("img").eq(i).attr("src", "./images/blood.png")
                     setTimeout(() => {
                         for (let i = 0; i < $("img").length; i++) {
-                            if ($("img").eq(i).css("top") == "600px") {
+                            if ($("img").eq(i).css("top") == "650px") {
                                 $("img").eq(i).remove()
                             }
                         }
