@@ -9,7 +9,7 @@
         body {
             margin: 0;
             background-image: url(./images/bg.jpg);
-            background-size: cover;
+            background-size: 100vw 100vh;
             background-repeat: no-repeat;
         }
 
@@ -26,13 +26,14 @@
             margin: auto;
             margin-top: 25px;
             border: 20px solid rgba(255, 215, 0);
-            border-bottom: 0
+            border-bottom: 0;
+            border-radius: 20px 20px 0 0;
         }
 
         #box img {
             position: absolute;
             height: auto;
-            width: 200px;
+            width: 150px;
             z-index: 50;
         }
 
@@ -57,6 +58,7 @@
             border-top: 0;
             box-sizing: border-box;
             z-index: 0;
+            border-radius: 0 0 20px 20px;
         }
 
         #control {
@@ -98,6 +100,7 @@
             background-size: auto 120px;
             background-repeat: no-repeat;
             background-position: center top;
+            z-index: 100;
         }
 
         #roll {
@@ -140,13 +143,13 @@
             }
 
             to {
-                transform: rotate(15deg);
+                transform: rotate(20deg);
             }
         }
 
         @keyframes leftclip-reverse {
             from {
-                transform: rotate(15deg);
+                transform: rotate(20deg);
             }
 
             to {
@@ -178,13 +181,13 @@
             }
 
             to {
-                transform: rotate(-15deg);
+                transform: rotate(-20deg);
             }
         }
 
         @keyframes rightclip-reverse {
             from {
-                transform: rotate(-15deg);
+                transform: rotate(-20deg);
             }
 
             to {
@@ -206,10 +209,13 @@
             background-position: center;
             background-repeat: no-repeat;
             display: inline-block;
+            outline-color: rgba(0, 0, 0, 0);
         }
 
-        #btn-catch:active {
-            background-size: 190px 190px;
+        .opcity {
+            top: 750px;
+            filter: opacity(0);
+            transition: 2s;
         }
     </style>
 </head>
@@ -295,51 +301,39 @@
 
         const moveleft = (ring) => {
             $(`#ring${ring}`).animate({
-                left: `-=50px`,
-                top: `-=50px`
-            }, 500, "swing", function () {
-                $(`#ring${ring}`).animate({
-                    left: `-=10px`,
-                    top: `+=50px`
-                }, 500, "swing", function () {
-                    if (parseInt($(`#ring${ring}`).css("left")) < 300) {
-                        $(`#ring${ring}`).stop(true);
-                        move(ring)
-                    }
-                    else {
-                        moveleft(ring)
-                    }
-                })
+                left: `-=5px`
+            }, 1, "swing", function () {
+                if (parseInt($(`#ring${ring}`).css("left")) < 220) {
+                    $(`#ring${ring}`).stop(true);
+                    move(ring)
+                }
+                else {
+                    moveleft(ring)
+                }
             })
         }
 
         const move = (ring) => {
             $(`#ring${ring}`).animate({
-                left: `+=50px`,
-                top: `-=50px`
-            }, 500, "swing", function () {
-                $(`#ring${ring}`).animate({
-                    left: `+=50px`,
-                    top: `+=50px`
-                }, 500, "swing", function () {
-                    if (parseInt($(`#ring${ring}`).css("left")) > 900) {
-                        $(`#ring${ring}`).stop(true);
-                        moveleft(ring)
-                    }
-                    else {
-                        move(ring)
-                    }
-                })
+                left: `+=5px`
+            }, 1, "swing", function () {
+                if (parseInt($(`#ring${ring}`).css("left")) > 1000) {
+                    $(`#ring${ring}`).stop(true);
+                    moveleft(ring)
+                }
+                else {
+                    move(ring)
+                }
             })
         }
         setInterval(() => {
-            if ($("img").length > 10) {
+            if ($("img").length > 1) {
                 clearInterval()
             }
             else {
                 $("#box").append(`<img src="./images/ring.gif" id="ring${ring}">`)
                 $(`#ring${ring}`).css({
-                    top: "430px",
+                    top: "450px",
                     left: `${rand(700) + 300}px`
                 })
                 let random = rand(1)
@@ -404,19 +398,21 @@
         }
 
         const shippingback = (i) => {
-            if (parseInt($("img").eq(i).css("left")) < 20) {
+            if (parseInt($("img").eq(i).css("left")) < 30) {
                 $("img").eq(i).stop(true)
+                $("img").eq(i).attr("src", "./images/fall.gif")
                 $("img").eq(i).animate({
-                    top: "650px"
+                    top: "700px"
                 }, 1000, "linear", function () {
-                    $("img").eq(i).attr("src", "./images/blood.png")
+                    $("img").eq(i).attr("src", "./images/no.gif")
+                    $("img").eq(i).addClass("opcity")
                     setTimeout(() => {
                         for (let i = 0; i < $("img").length; i++) {
-                            if ($("img").eq(i).css("top") == "650px") {
+                            if ($("img").eq(i).css("top") == "700px") {
                                 $("img").eq(i).remove()
                             }
                         }
-                    }, 500)
+                    }, 2000)
                 })
             }
             else {
@@ -430,7 +426,7 @@
 
         const shipping = (i) => {
             $("img").eq(i).stop(true)
-            if (parseInt($("img").eq(i).css("top")) < 80) {
+            if (parseInt($("img").eq(i).css("top")) < 120) {
                 $("img").eq(i).stop(true)
                 shippingback(i)
             }
@@ -448,10 +444,10 @@
             if (parseInt($("#catcher").css("top")) <= 0 && incatch == false) {
                 $("#catcher").stop(true)
                 $("#roll").animate({
-                    height: "350px"
+                    height: "330px"
                 }, 1000, "linear")
                 $("#catcher").animate({
-                    top: `350px`
+                    top: `330px`
                 }, 1000, "linear", function () {
                     $("#left-hook").addClass("leftclip")
                     $("#left-hook").removeClass("leftclip-reverse")
@@ -460,14 +456,13 @@
                     incatch = true
                     for (let i = 0; i < $("img").length; i++) {
                         if (
-                            (parseInt($("#catcher").css("left")) + 50 < parseInt($("img").eq(i).css("left")) + 100) &&
-                            (parseInt($("img").eq(i).css("left")) + 100 < parseInt($("#catcher").css("left")) + 150)
+                            (parseInt($("#catcher").css("left")) + 50 < parseInt($("img").eq(i).css("left")) + 75) &&
+                            (parseInt($("img").eq(i).css("left")) + 75 < parseInt($("#catcher").css("left")) + 150)
                         ) {
                             $("img").eq(i).stop(true)
-                            $("img").eq(i).css("left", `${parseInt($("#catcher").css("left")) - 40}px`)
-                            $("#catcher").css("top", `${parseInt($("img").eq(i).css("top")) - 80}px`)
-                            $("#roll").css("height", `${parseInt($("img").eq(i).css("top")) - 80}px`)
+                            $("img").eq(i).css("left", `${parseInt($("#catcher").css("left")) - 20}px`)
                             setTimeout(() => {
+                                $("img").eq(i).attr("src", "./images/catch.gif")
                                 shipping(i);
                             }, 100)
                         }
