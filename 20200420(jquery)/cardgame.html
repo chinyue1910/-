@@ -15,7 +15,7 @@
             /* 整張卡片的旋轉 */
             transform: rotateY(180deg);
             /* 0.5 秒翻轉動畫 */
-            transition: transform .5s;
+            transition: transform 1s;
             float: left;
             margin: 10px 50px;
         }
@@ -39,11 +39,16 @@
             position: absolute;
             /* 把背面的 div 轉到 front 後面貼齊 */
             transform: rotateY(180deg);
+            backface-visibility: hidden;
         }
 
         #game {
             width: 800px;
             margin: auto;
+        }
+
+        .open {
+            transform: rotateY(0deg);
         }
     </style>
 </head>
@@ -51,9 +56,10 @@
 <body>
     <div id="game"></div>
     <script src="jquery-3.5.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <script>
         $(function () {
-            for (let i = 0; i < 16; i++) {
+            for (let i = 0; i < 4; i++) {
                 $("#game").append(`
                 <div class="poker">
                     <div class="front"></div>
@@ -72,6 +78,32 @@
                 // 不能用 insertBefore 的原因是因為給予 num 時會給到 insertBefore() 裡面的位置，而導致放在前的沒有 num
                 $(".poker").eq(target).insertAfter($(".poker").eq(i))
             }
+
+            $(".poker").on("click", function () {
+                if ($(".open").length < 2 && !$(this).hasClass("open")) {
+                    $(this).addClass("open")
+                }
+
+                if ($(".open").length == 2) {
+                    if ($(".open").eq(0).find(".front").css("background-image") == $(".open").eq(1).find(".front").css("background-image")) {
+                        setTimeout(() => {
+                            $(".open").fadeTo(1000, 0).addClass("ok")
+                        }, 1000)
+                    }
+                    setTimeout(() => {
+                        $(".open").removeClass("open")
+                        if ($(".ok").length == $(".poker").length) {
+                            setTimeout(() => {
+                                Swal.fire({
+                                    icon: "success",
+                                    title: "恭喜",
+                                    text: "恭喜過關"
+                                })
+                            })
+                        }
+                    }, 2000)
+                }
+            })
         })
     </script>
 </body>
