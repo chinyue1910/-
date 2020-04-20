@@ -7,17 +7,14 @@
     <title>Document</title>
     <style>
         .poker {
-            width: 100px;
-            height: 180px;
-            /* 設定子元素在 3D 空間內 */
+            width: 200px;
+            height: 300px;
             transform-style: preserve-3d;
             position: relative;
-            /* 整張卡片的旋轉 */
             transform: rotateY(180deg);
-            /* 0.5 秒翻轉動畫 */
             transition: transform 1s;
             float: left;
-            margin: 10px 50px;
+            margin: 0 5px;
         }
 
         .front {
@@ -32,7 +29,7 @@
         .back {
             width: 100%;
             height: 100%;
-            background-image: url(./poker/Red_back.jpg);
+            background-image: url(./images/bg.png);
             background-size: contain;
             background-repeat: no-repeat;
             background-position: center;
@@ -43,8 +40,8 @@
         }
 
         #game {
-            width: 800px;
             margin: auto;
+            width: 1260px;
         }
 
         .open {
@@ -55,11 +52,12 @@
 
 <body>
     <div id="game"></div>
-    <script src="jquery-3.5.0.min.js"></script>
+
+    <script src="../jquery-3.5.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <script>
         $(function () {
-            for (let i = 0; i < 16; i++) {
+            for (let i = 0; i < 18; i++) {
                 $("#game").append(`
                 <div class="poker">
                     <div class="front"></div>
@@ -70,8 +68,8 @@
 
             for (let i = 0; i < $(".poker").length; i++) {
                 let num = i % ($(".poker").length / 2) + 1
-                $(".poker").eq(i).find(".front").css("background-image", `url(./poker/${num}H.jpg)`)
-                $(".poker").eq(i).attr("data-card", `${num}`)
+                $(".poker").eq(i).find(".front").css("background-image", `url(./images/${num}.png)`)
+                $(".poker").eq(i).attr("data-poker", `${num}`)
 
                 // 隨機抽一張牌，放到目前迴圈牌後面
                 let target = Math.floor(Math.random() * $(".poker").length);
