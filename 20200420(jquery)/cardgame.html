@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .poker {
+            width: 100px;
+            height: 180px;
+            /* 設定子元素在 3D 空間內 */
+            transform-style: preserve-3d;
+            position: relative;
+            /* 整張卡片的旋轉 */
+            transform: rotateY(180deg);
+            /* 0.5 秒翻轉動畫 */
+            transition: transform .5s;
+            float: left;
+            margin: 10px 50px;
+        }
+
+        .front {
+            width: 100%;
+            height: 100%;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            position: absolute;
+        }
+
+        .back {
+            width: 100%;
+            height: 100%;
+            background-image: url(./poker/Red_back.jpg);
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            position: absolute;
+            /* 把背面的 div 轉到 front 後面貼齊 */
+            transform: rotateY(180deg);
+        }
+
+        #game {
+            width: 800px;
+            margin: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="game"></div>
+    <script src="jquery-3.5.0.min.js"></script>
+    <script>
+        $(function () {
+            for (let i = 0; i < 16; i++) {
+                $("#game").append(`
+                <div class="poker">
+                    <div class="front"></div>
+                    <div class="back"></div>
+                </div>
+                `)
+            }
+
+            for (let i = 0; i < $(".poker").length; i++) {
+                let num = i % ($(".poker").length / 2) + 1
+                $(".poker").eq(i).find(".front").css("background-image", `url(./poker/${num}H.jpg)`)
+                $(".poker").eq(i).attr("data-card", `${num}`)
+
+                // 隨機抽一張牌，放到目前迴圈牌後面
+                let target = Math.floor(Math.random() * $(".poker").length);
+                // 不能用 insertBefore 的原因是因為給予 num 時會給到 insertBefore() 裡面的位置，而導致放在前的沒有 num
+                $(".poker").eq(target).insertAfter($(".poker").eq(i))
+            }
+        })
+    </script>
+</body>
+
+</html>

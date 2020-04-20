@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <script>
+        Swal.fire({
+            // icon
+            icon: "success",
+            // 標題
+            title: "標題",
+            // 文字和 HTML 二選一
+            text: "內文",
+            html: "<b>html內文</b>",
+            // 是否有取消按鈕
+            showCancelButton: true,
+            // 按鈕文字
+            confirmButtonText: "確定",
+            cancelButtonText: "取消",
+            // 輸入
+            input: "text"
+        }).then(result => {
+            // 如果確定
+            if (result.value) {
+                Swal.fire({
+                    title: result.value
+                })
+            }
+            // 如果取消
+            else {
+                Swal.fire({
+                    icon: "error",
+                    title: "取消"
+                })
+            }
+        })
+    </script>
+</body>
+
+</html>

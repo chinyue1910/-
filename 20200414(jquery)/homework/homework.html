@@ -215,7 +215,7 @@
         .opcity {
             top: 750px;
             filter: opacity(0);
-            transition: 2s;
+            transition: .5s;
         }
     </style>
 </head>
@@ -327,7 +327,7 @@
             })
         }
         setInterval(() => {
-            if ($("img").length > 1) {
+            if ($("img").length > 5) {
                 clearInterval()
             }
             else {
@@ -412,7 +412,7 @@
                                 $("img").eq(i).remove()
                             }
                         }
-                    }, 2000)
+                    }, 500)
                 })
             }
             else {
