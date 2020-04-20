@@ -52,11 +52,31 @@
 
 <body>
     <div id="game"></div>
-
     <script src="../jquery-3.5.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <script>
         $(function () {
+            const Anduin = new Audio()
+            Anduin.src = "./music/Anduin.ogg"
+            const Garrosh = new Audio()
+            Garrosh.src = "./music/Garrosh.ogg"
+            const Guldan = new Audio()
+            Guldan.src = "./music/Guldan.ogg"
+            const Jaina = new Audio()
+            Jaina.src = "./music/Jaina.ogg"
+            const Malfurion = new Audio()
+            Malfurion.src = "./music/Malfurion.ogg"
+            const Rexxar = new Audio()
+            Rexxar.src = "./music/Rexxar.ogg"
+            const Thrall = new Audio()
+            Thrall.src = "./music/Thrall.ogg"
+            const Uther = new Audio()
+            Uther.src = "./music/Uther.ogg"
+            const Valeera = new Audio()
+            Valeera.src = "./music/Valeera.ogg"
+            const bg = new Audio()
+            bg.src = "./music/bg.ogg"
+
             for (let i = 0; i < 18; i++) {
                 $("#game").append(`
                 <div class="poker">
@@ -86,6 +106,26 @@
                     if ($(".open").eq(0).find(".front").css("background-image") == $(".open").eq(1).find(".front").css("background-image")) {
                         setTimeout(() => {
                             $(".open").fadeTo(1000, 0).addClass("ok")
+                            switch ($(".open").eq(0).attr("data-poker")) {
+                                case "1": Malfurion.play(); bg.play()
+                                    break;
+                                case "2": Rexxar.play(); bg.play()
+                                    break;
+                                case "3": Jaina.play(); bg.play()
+                                    break;
+                                case "4": Uther.play(); bg.play()
+                                    break;
+                                case "5": Anduin.play(); bg.play()
+                                    break;
+                                case "6": Valeera.play(); bg.play()
+                                    break;
+                                case "7": Thrall.play(); bg.play()
+                                    break;
+                                case "8": Guldan.play(); bg.play()
+                                    break;
+                                case "9": Garrosh.play(); bg.play()
+                                    break;
+                            }
                         }, 1000)
                     }
                     setTimeout(() => {
