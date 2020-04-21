@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // fetch (請求網址, 設定)
+        fetch("https://kktix.com/events.json")
+            // 轉換回傳資料格式
+            .then(response => {
+                return response.json()
+            })
+            // 成功時的 function
+            .then(json => {
+                console.log(json)
+            })
+            // 失敗時的 function
+            .catch(error => {
+                alert("無法取得資料")
+            })
+    </script>
+</body>
+
+</html>
