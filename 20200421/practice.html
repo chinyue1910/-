@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1 id="title"></h1>
+    <h1 id="update"></h1>
+    <table id="table" border="1">
+    </table>
+    <script src="jquery-3.5.0.min.js"></script>
+    <script>
+        $.get("https://kktix.com/events.json", function (response) {
+            $("#title").text(Object.keys(response)[0] + ":" + response.title)
+            $("#update").text(Object.keys(response)[1] + ":" + response.updated)
+            for (let i of response.entry) {
+                $("#table").append(`<tr>
+                    <td>${i.title}</td>
+                    <td>${i.summary}</td>
+                    <td><a href="${i.url}">訂票</a></td>
+                </tr>`)
+            }
+        })
+    </script>
+</body>
+
+</html>
