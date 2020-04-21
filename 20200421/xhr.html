@@ -26,6 +26,28 @@
         }
         // 送出請求
         xhr.send()
+        // --------------------------------------------------------------------------
+        // 建立 xhr
+        let xhr2 = new XMLHttpRequest();
+        // 設定請求方式與網址
+        xhr2.open("post", "https://jsonplaceholder.typicode.com/posts")
+        // 設定送出的資料格式為 json
+        xhr2.setRequestHeader("Content-type", "application/json")
+        // 設定成功時執行的 function
+        xhr2.onload = () => {
+            let json = JSON.parse(xhr2.responseText);
+            console.log(json)
+        }
+        // 設定失敗時執行的 function
+        xhr2.onerror = () => {
+            console.log(error);
+        }
+        // 送出請求
+        xhr2.send(JSON.stringify({
+            "title": "aaa",
+            "body": "bbb",
+            "userid": 1
+        }))
     </script>
 </body>
 
