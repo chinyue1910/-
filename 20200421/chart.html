@@ -5,10 +5,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        #chart {
+            width: 800px;
+            height: 500px;
+            margin: auto;
+        }
+    </style>
 </head>
 
 <body>
-    <canvas id="bar"></canvas>
+    <div id="chart">
+        <canvas id="bar"></canvas>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
     <script>
         // getContext("2d") 取得 canvas 的 2d 繪圖參數
