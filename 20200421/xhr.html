@@ -36,7 +36,9 @@
         // 設定成功時執行的 function
         xhr2.onload = () => {
             let json = JSON.parse(xhr2.responseText);
-            console.log(json)
+            for (let i in json) {
+                console.log(json[i])
+            }
         }
         // 設定失敗時執行的 function
         xhr2.onerror = () => {
