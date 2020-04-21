@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #chart {
+            width: 800px;
+            height: 500px;
+            margin: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="chart">
+        <canvas id="bar"></canvas>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+    <script>
+        // getContext("2d") 取得 canvas 的 2d 繪圖參數
+        const barCanvas = document.getElementById("bar").getContext("2d")
+        const barChart = new Chart(barCanvas, {
+            type: "line",
+            data: {
+                // 資料區間名稱
+                labels: ["一月", "二月", "三月", "四月"],
+                // 資料組
+                datasets: [
+                    {
+                        // 名稱
+                        label: "台北",
+                        // 資料
+                        data: [200, 500, 100, 300],
+                        backgroundColor: "deepskyblue",
+                        borderColor: "blue",
+                        borderWidth: "3",
+                        // 是否填滿
+                        fill: false,
+                        // 彎曲程度
+                        lineTension: 0.5
+                    }
+                ]
+            },
+            options: {
+                title: {
+                    text: "圖表標題",
+                    display: true
+                },
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
