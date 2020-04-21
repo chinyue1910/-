@@ -15,7 +15,10 @@
         xhr.open("get", "https://kktix.com/events.json")
         // 設定成功時執行的 function
         xhr.onload = () => {
-            console.log(xhr);
+            let json = JSON.parse(xhr.responseText);
+            for (let i of json.entry) {
+                document.write(i.summary + "<br><br>")
+            }
         }
         // 設定失敗時執行的 function
         xhr.onerror = () => {
