@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 建立 xhr
+        let xhr = new XMLHttpRequest();
+        // 設定請求方式與網址
+        xhr.open("get", "https://kktix.com/events.json")
+        // 設定成功時執行的 function
+        xhr.onload = () => {
+            console.log(xhr);
+        }
+        // 設定失敗時執行的 function
+        xhr.onerror = () => {
+            console.log(error);
+        }
+        // 送出請求
+        xhr.send()
+    </script>
+</body>
+
+</html>
