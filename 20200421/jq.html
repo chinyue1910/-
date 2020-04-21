@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script src="jquery-3.5.0.min.js"></script>
+    <script>
+        $.ajax({
+            url: "https://kktix.com/events.json",
+            method: "GET",
+            // 回來的資料型態
+            dataType: "json",
+            // 成功時的 function
+            success: function (response) {
+                console.log(response.title)
+            },
+            // 錯誤時的 function
+            error: function (xhr, ajaxOptions, thrownError) {
+                console.log(xhr.status);
+                console.log(xhr.responseText);
+                console.log(thrownError)
+            }
+        })
+    </script>
+</body>
+
+</html>
