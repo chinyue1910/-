@@ -22,7 +22,26 @@
     <script src="./jquery-3.5.0.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.20/datatables.min.js"></script>
     <script>
-        const table = $("#table").DataTable()
+        const table = $("#table").DataTable({
+            // 控制顯示數量選單的選項
+            lengthMenu: [
+                // 數值
+                [30, 50, -1],
+                // 顯示文字
+                [30, 50, "全部"]
+            ],
+            // 欄位設定
+            columnDefs: [
+                {
+                    // 目標欄位
+                    targets: 1,
+                    // 是否可排序
+                    orderable: false,
+                    // 是否可搜尋
+                    searchable: false
+                }
+            ]
+        })
 
         $.get("https://kktix.com/events.json", function (response) {
             for (let i of response.entry) {
