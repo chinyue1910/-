@@ -56,24 +56,15 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <script>
         $(function () {
-            const Anduin = new Audio()
-            Anduin.src = "./music/Anduin.ogg"
+            let music = new Audio()
+            music.src = "./music/Malfurion.ogg"
+
             const Garrosh = new Audio()
             Garrosh.src = "./music/Garrosh.ogg"
             const Guldan = new Audio()
             Guldan.src = "./music/Guldan.ogg"
-            const Jaina = new Audio()
-            Jaina.src = "./music/Jaina.ogg"
-            const Malfurion = new Audio()
-            Malfurion.src = "./music/Malfurion.ogg"
-            const Rexxar = new Audio()
-            Rexxar.src = "./music/Rexxar.ogg"
             const Thrall = new Audio()
             Thrall.src = "./music/Thrall.ogg"
-            const Uther = new Audio()
-            Uther.src = "./music/Uther.ogg"
-            const Valeera = new Audio()
-            Valeera.src = "./music/Valeera.ogg"
             const bg = new Audio()
             bg.src = "./music/bg.ogg"
 
@@ -107,25 +98,34 @@
                         setTimeout(() => {
                             $(".open").fadeTo(1000, 0).addClass("ok")
                             switch ($(".open").eq(0).attr("data-poker")) {
-                                case "1": Malfurion.play(); bg.play()
+                                case "1": music.play();
                                     break;
-                                case "2": Rexxar.play(); bg.play()
+                                case "2": music.src = "./music/Rexxar.ogg";
+                                    music.play();
                                     break;
-                                case "3": Jaina.play(); bg.play()
+                                case "3": music.src = "./music/Jaina.ogg";
+                                    music.play();
                                     break;
-                                case "4": Uther.play(); bg.play()
+                                case "4": music.src = "./music/Uther.ogg";
+                                    music.play();
                                     break;
-                                case "5": Anduin.play(); bg.play()
+                                case "5": music.src = "./music/Anduin.ogg";
+                                    music.play();
                                     break;
-                                case "6": Valeera.play(); bg.play()
+                                case "6": music.src = "./music/Valeera.ogg";
+                                    music.play();
                                     break;
-                                case "7": Thrall.play(); bg.play()
+                                case "7": music.src = "./music/Thrall.ogg";
+                                    music.play();
                                     break;
-                                case "8": Guldan.play(); bg.play()
+                                case "8": music.src = "./music/Guldan.ogg";
+                                    music.play();
                                     break;
-                                case "9": Garrosh.play(); bg.play()
+                                case "9": music.src = "./music/Garrosh.ogg";
+                                    music.play();
                                     break;
                             }
+                            bg.play()
                         }, 1000)
                     }
                     setTimeout(() => {
