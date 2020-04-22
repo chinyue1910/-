@@ -5,7 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
     <style>
+        body {
+            background-image: url(./images/heartstone.jpg);
+        }
+
         .poker {
             width: 200px;
             height: 300px;
@@ -40,18 +45,31 @@
         }
 
         #game {
-            margin: auto;
             width: 1260px;
+            float: left;
         }
 
         .open {
             transform: rotateY(0deg);
+        }
+
+        #right {
+            font-size: 100px;
+            color: red;
+            text-align: center;
+            height: 90vh;
+            line-height: 90vh;
+        }
+
+        #text {
+            color: blue
         }
     </style>
 </head>
 
 <body>
     <div id="game"></div>
+    <div id="right">翻牌次數:<span id="text">0</span></div>
     <script src="../jquery-3.5.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <script>
@@ -60,7 +78,7 @@
             music.src = "./music/Malfurion.ogg"
             const bg = new Audio()
             bg.src = "./music/bg.ogg"
-
+            let score = 0
             for (let i = 0; i < 18; i++) {
                 $("#game").append(`
                 <div class="poker">
@@ -72,7 +90,7 @@
 
             for (let i = 0; i < $(".poker").length; i++) {
                 let num = i % ($(".poker").length / 2) + 1
-                $(".poker").eq(i).find(".front").css("background-image", `url(./images/${num}.png)`)
+                $(".poker").eq(i).find(".front").css("background-image", `url(./images/gif/${num}.gif)`)
                 $(".poker").eq(i).attr("data-poker", `${num}`)
 
                 // 隨機抽一張牌，放到目前迴圈牌後面
@@ -89,6 +107,7 @@
                 if ($(".open").length == 2) {
                     if ($(".open").eq(0).find(".front").css("background-image") == $(".open").eq(1).find(".front").css("background-image")) {
                         setTimeout(() => {
+                            $(".open").addClass("animated heartBeat")
                             $(".open").fadeTo(1000, 0).addClass("ok")
                             switch ($(".open").eq(0).attr("data-poker")) {
                                 case "1": music.play();
@@ -118,11 +137,13 @@
                                     music.play();
                                     break;
                             }
-                            bg.play()
+                            bg.play();
                         }, 1000)
                     }
                     setTimeout(() => {
                         $(".open").removeClass("open")
+                        score++;
+                        $("#text").text(score)
                         if ($(".ok").length == $(".poker").length) {
                             setTimeout(() => {
                                 Swal.fire({
