@@ -9,6 +9,7 @@
     <style>
         body {
             background-image: url(./images/heartstone.jpg);
+            background-size: cover;
         }
 
         .poker {
@@ -46,30 +47,24 @@
 
         #game {
             width: 1260px;
-            float: left;
+            margin: auto;
         }
 
         .open {
             transform: rotateY(0deg);
         }
 
-        #right {
-            font-size: 100px;
-            color: red;
-            text-align: center;
-            height: 90vh;
-            line-height: 90vh;
-        }
-
         #text {
-            color: blue
+            float: left;
+            margin-top: 70vh;
+            margin-left: 50px;
         }
     </style>
 </head>
 
 <body>
+    <img id="text" src="./images/class/1.png">
     <div id="game"></div>
-    <div id="right">翻牌次數:<span id="text">0</span></div>
     <script src="../jquery-3.5.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <script>
@@ -78,7 +73,7 @@
             music.src = "./music/Malfurion.ogg"
             const bg = new Audio()
             bg.src = "./music/bg.ogg"
-            let score = 0
+            let score = 1
             for (let i = 0; i < 18; i++) {
                 $("#game").append(`
                 <div class="poker">
@@ -105,9 +100,10 @@
                 }
 
                 if ($(".open").length == 2) {
+                    $(".poker").css("pointer-events", "none");
                     if ($(".open").eq(0).find(".front").css("background-image") == $(".open").eq(1).find(".front").css("background-image")) {
                         setTimeout(() => {
-                            $(".open").addClass("animated heartBeat")
+                            $(".open").addClass("animated flash")
                             $(".open").fadeTo(1000, 0).addClass("ok")
                             switch ($(".open").eq(0).attr("data-poker")) {
                                 case "1": music.play();
@@ -140,10 +136,12 @@
                             bg.play();
                         }, 1000)
                     }
+                    $("#text").removeClass("animated tada")
                     setTimeout(() => {
                         $(".open").removeClass("open")
                         score++;
-                        $("#text").text(score)
+                        $(".poker").css("pointer-events", "");
+                        $("#text").attr("src", `./images/class/${score}.png`).addClass("animated tada")
                         if ($(".ok").length == $(".poker").length) {
                             setTimeout(() => {
                                 Swal.fire({
