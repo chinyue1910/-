@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Before與After</title>
+</head>
+<style>
+    * {
+        font-family: "微軟正黑體";
+    }
+
+    .container {
+        width: 75%;
+        margin: 1% auto;
+    }
+
+    h1 {
+        color: white;
+        background: black;
+        padding: 1rem;
+    }
+
+    .col {
+        width: 45%;
+        float: left;
+        margin: 2.5%;
+    }
+
+    .clearfix::after {
+        content: "";
+        display: block;
+        clear: both;
+    }
+
+    .bg {
+        position: relative;
+        height: 300px;
+        color: white;
+    }
+
+    .bg::before {
+        content: "";
+        position: absolute;
+        /* width: 100%;
+        height: 100%; */
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        /* 同上面的作用，都可以填滿 .bg */
+        background: url("https://picsum.photos/1920/1080/?random=1") no-repeat center/cover;
+        z-index: -1;
+    }
+
+    .bg::after {
+        content: "";
+        position: absolute;
+        /* width: 100%;
+        height: 100%; */
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        /* 同上面的作用，都可以填滿 .bg */
+        background: rgba(0, 0, 0, 0.5);
+        z-index: -1;
+    }
+
+    .box3 {
+        width: 150px;
+        height: 150px;
+        background: url("https://picsum.photos/150/150/?random=1");
+        margin: auto;
+        position: relative;
+    }
+
+    .box3::before {
+        content: "";
+        width: 150px;
+        height: 150px;
+        position: absolute;
+        background: url("https://picsum.photos/150/150/?random=2");
+        top: 0;
+        left: -100%;
+        transition: 0.5s;
+    }
+
+    .box3::after {
+        content: "";
+        width: 150px;
+        height: 150px;
+        position: absolute;
+        background: url("https://picsum.photos/150/150/?random=3");
+        top: 0;
+        right: -100%;
+        transition: 0.5s;
+    }
+
+    .box3:hover::before {
+        left: 110%;
+
+    }
+
+    .box3:hover::after {
+        right: 110%;
+    }
+
+    .box4 {
+        width: 300px;
+        height: 300px;
+        margin: 100px auto;
+        position: relative;
+        text-align: center;
+        line-height: 300px;
+        color: white;
+        font-size: 50px;
+    }
+
+    .box4::before {
+        content: "";
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        background: radial-gradient(rgba(0, 0, 0, 0.5), black), url("https://picsum.photos/1920/1080/?random=1") center / cover;
+        z-index: -1;
+        left: 0;
+        transition: 1s;
+    }
+
+    .box4:hover::before {
+        transform: rotate(405deg);
+    }
+
+    .breadcrumb li {
+        list-style-type: none;
+        float: left;
+        position: relative;
+        font-size: 30px;
+    }
+
+    .breadcrumb li~li {
+        margin-left: 20px;
+    }
+
+    .breadcrumb li~li::before {
+        content: ">";
+        position: absolute;
+        top: 0;
+        left: -15px;
+    }
+</style>
+
+<body>
+    <div class="container">
+        <h1>::before、::after 啟動條件與功用特性</h1>
+        <ol style="font-size: 30px;">
+            <li>必須、一定要有 content:"";(至少要空內容)</li>
+            <li>剛誕生的::before、::after 為 inline 特性</li>
+            <li>主要輔助本體，產生更多層次的樣式效果</li>
+            <li>無法使用在置換元素(Replace element)、img、input...</li>
+        </ol>
+    </div>
+    <div class="container">
+        <h1>當作清除浮動</h1>
+    </div>
+    <div class="container clearfix">
+        <!-- ::before -->
+        <div class="col">
+            <img src="https://picsum.photos/600/400/?random=1">
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aspernatur vitae voluptates qui quae maiores
+                delectus quam optio id, assumenda magnam distinctio ipsam ut nesciunt neque dicta laboriosam,
+                necessitatibus perspiciatis facilis!</p>
+        </div>
+        <div class="col">
+            <img src="https://picsum.photos/600/400/?random=1">
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aspernatur vitae voluptates qui quae maiores
+                delectus quam optio id, assumenda magnam distinctio ipsam ut nesciunt neque dicta laboriosam,
+                necessitatibus perspiciatis facilis!</p>
+        </div>
+        <!-- ::after -->
+    </div>
+    <hr style="border-width: 5px;">
+    <div class="container">
+        <h1>當作背景容器使用</h1>
+    </div>
+    <div class="container">
+        <div class="bg">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita deserunt minus inventore illum officiis
+            ipsum harum ad recusandae dignissimos error iusto labore rem rerum nulla dolor assumenda necessitatibus,
+            corporis eos.
+        </div>
+    </div>
+    <hr style="border-width: 5px;">
+    <div class="container">
+        <h1>摸到你了，分身該做事情了喔</h1>
+    </div>
+    <div class="container">
+        <div class="box3"> </div>
+    </div>
+    <hr style="border-width: 5px;">
+    <div class="container">
+        <h1>當作旋轉框，不影響主體內容</h1>
+    </div>
+    <div class="container">
+        <div class="box4">泰山職訓局</div>
+    </div>
+    <hr style="border-width: 5px;">
+    <div class="container">
+        <h1>當作麵包屑使用</h1>
+    </div>
+    <div class="container">
+        <ul class="breadcrumb">
+            <li>首頁</li>
+            <li>3C商品</li>
+            <li>手機</li>
+            <li>Android</li>
+        </ul>
+    </div>
+</body>
+
+</html>
