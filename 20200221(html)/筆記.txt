@@ -1,0 +1,25 @@
+外掛套件安裝
+
+1.Auto Close Tag
+
+2.Auto Rename Tag
+
+3.Fake Image Snippet Collection
+
+4.highlight matching tag
+
+5.Live Server
+
+6.Bracket Pair Colorizer
+
+7.ESLint
+
+8.JavaScript (ES6) code snippets
+
+9.jQuery Code Snippets
+
+10.Chinese
+
+
+
+

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>選擇器</title>
+    <style>
+        /* 
+            類別選擇器
+            1. 類別名稱必定以.句點開頭
+            2. 只允許 字元、數字、連字"-"、底線"_"
+            3. 句點後必須以字元開始，不能用數字開頭、中文命名
+            4. 類別、ID的名稱有大小寫區分。
+         */
+        
+        .a {
+            color: blue;
+            font-size: 40px;
+        }
+        
+        li {
+            color: green;
+            font-size: 20px;
+        }
+        
+        .box {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+        }
+        
+        .b {
+            color: purple;
+        }
+        
+        #a {
+            width: 300px;
+            height: 300px;
+            background-color: orange;
+        }
+        /* 後代選擇器，選擇後代子孫 */
+        
+        nav p {
+            color: blue;
+        }
+        /* 子代選擇器，只選擇兒子 */
+        
+        nav>p {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 class="a">Class 選擇器</h1>
+    <p>Class是CSS樣式最常被使用的選擇器，具有重複使用的特性，往後學習<a class="a" href="#">Bootstraps</a>時，可以看到大量樣式被設計成Class</p>
+    <h2>相同標籤，不同外觀</h2>
+    <ul>
+        <li>Lorem ipsum dolor sit amet.</li>
+        <li>Lorem ipsum dolor sit amet.</li>
+        <li class="b">Lorem ipsum dolor sit amet.</li>
+        <li>Lorem ipsum dolor sit amet.</li>
+        <li>Lorem ipsum dolor sit amet.</li>
+    </ul>
+
+    <div class="box"></div><br>
+    <div class="box"></div><br>
+    <div class="box"></div><br>
+    <div class="box"></div>
+
+    <hr>
+
+    <h1>ID選擇器</h1>
+    <p>在一份文件裡面，只能有一個獨一無二的ID，具有唯一的特性，通常作為網頁邏輯區塊名稱或是 JS、JQ控制元素的選擇器</p>
+
+    <div id="a"></div>
+    <div id="container" style="color: green; font-size: 30px;">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Harum, vitae.</div>
+    <button id="btn">Click me to hide and see</button>
+    
+    <script src="jquery-3.4.1.min.js"></script>
+    <script>
+        $('#btn').click(function() {
+            $('#container').slideToggle();
+        });
+        //         document.getElementById('btn'); 等同於 JS
+        //         $('btn') 等同於 JQ
+    </script>
+
+    <hr>
+
+    <h1>後代選擇器與子代選擇器</h1>
+    <nav>
+        <p>Lorem ipsum dolor sit amet.</p>
+        <div>
+            <p>Lorem ipsum dolor sit amet.</p>
+        </div>
+    </nav>
+
+</body>
+
+</html>

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BOX MODEL</title>
+    <style>
+        hr {
+            margin: 25px 0;
+        }
+
+        /* 盒子設定寬、高是放置內容的容器，也就是放置文字、圖片的地方 */
+        /* 如果高沒有設定 auto，容器會隨著內容長高，設定 height，可能會發生內容溢出的問題 */
+        .box1 {
+            width: 300px;
+            height: 300px;
+            background-color: lightcoral;
+        }
+
+        .box2 {
+            width: 300px;
+            background-color: lightcoral;
+        }
+
+        .box3 {
+            width: 300px;
+            height: 200px;
+            background-color: lightgreen;
+            /* hidden、scroll */
+            overflow: scroll;
+        }
+
+        /* 設定盒子的 margin、padding、border */
+        .box4 {
+            width: 300px;
+            background-color: lightsalmon;
+            /* margin 外距，可以做負數設定 */
+            /* 個別指定 */
+            margin-top: 50px;
+            margin-right: 50px;
+            margin-bottom: 50px;
+            margin-left: 50px;
+            /* 四值 順時針 top、right、bottom、left */
+            margin: 50px 50px 50px 50px;
+            /* 雙值 第一個數值為上、下，第二個數值為左、右 */
+            margin: 50px 50px;
+            /* 單值，四個方向設定同一個數值 */
+            margin: 50px;
+
+            /* padding 內距 */
+            /* 個別指定 */
+            padding-top: 20px;
+            padding-right: 20px;
+            padding-bottom: 20px;
+            padding-left: 20px;
+            /* 四值 順時針 top、right、bottom、left */
+            padding: 20px 20px 20px 20px;
+            /* 雙值 第一個數值為上、下，第二個數值為左、右 */
+            padding: 20px 20px;
+            /* 單值，四個方向設定同一個數值 */
+            padding: 20px;
+
+            /* border 邊框 */
+            /* 設定每一邊的屬性 */
+            /* solid、dotted、dashed、double */
+            border-top-width: 10px;
+            border-top-style: solid;
+            border-top-color: #aaa;
+
+            border-right-width: 10px;
+            border-right-style: dotted;
+            border-right-color: #aaa;
+
+            border-bottom-width: 10px;
+            border-bottom-style: double;
+            border-bottom-color: #aaa;
+
+            border-left-width: 10px;
+            border-left-style: dashed;
+            border-left-color: #aaa;
+
+            /* 直接對四個邊設定各種屬性 */
+            border-width: 10px;
+            border-style: solid;
+            border-color: #aaa;
+
+            /* 常使用，可以設定每一邊的縮寫 */
+            border-top: 10px solid #aaa;
+            border-right: 10px solid #aaa;
+            border-bottom: 10px solid #aaa;
+            border-left: 10px solid #aaa;
+
+            /* 常使用，四邊的縮寫 */
+            border: 10px solid #aaa;
+            /* 外框，不會影響區塊的佈局，只作為外觀呈現 */
+            outline: 10px dashed rgb(0, 68, 255);
+        }
+
+        .box5 {
+            width: 300px;
+            height: 300px;
+            background: lightblue;
+            margin-bottom: 50px;
+        }
+
+        .box6 {
+            width: 300px;
+            height: 300px;
+            background: lime;
+            margin-top: 20px;
+        }
+
+        /* 計算一個盒子的總寬度 */
+        .box7 {
+            width: 300px;
+            padding: 0 10px;
+            margin: 0 10px;
+            border-left: 5px solid lawngreen;
+            border-right: 5px solid lawngreen;
+            /* 計算總寬度 */
+            /* 300+10+10+10+10+5+5=350 */
+        }
+
+        /*設定盒子圓角 */
+        .box8 {
+            width: 300px;
+            height: 300px;
+            border: 10px solid #333;
+            /* 個別圓角 */
+            border-top-left-radius: 30px;
+            border-top-right-radius: 30px;
+            border-bottom-left-radius: 30px;
+            border-bottom-right-radius: 30px;
+            /* 單值 */
+            border-radius: 30px;
+            /* 雙值，第一個數值為左上、右下，第二個數值為右上、左下 */
+            border-radius: 30px 30px;
+            /* 四值，順序 左上、右上、右下、左下 */
+            border-radius: 30px 30px 30px 30px;
+        }
+
+        .circle {
+            width: 500px;
+            height: 500px;
+            border: 10px solid #aaa;
+            border-radius: 50%;
+            margin: auto;
+            /* inset 內陰影 */
+            box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.5);
+        }
+    </style>
+</head>
+
+<body>
+    <h1>box1 畫一個盒子，設定寬、高、背景顏色</h1>
+    <div class="box1"></div>
+    <hr>
+    <h2>box2 不設地高度、高度以內容高度為主</h2>
+    <div class="box2">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Reiciendis fuga exercitationem sint
+        officia quo et rerum debitis nesciunt fugiat eaque ab ad adipisci quisquam autem aperiam qui sequi voluptates
+        doloremque earum porro illo rem, nam excepturi aliquam? Commodi, magnam. Et suscipit veniam laborum enim
+        consequatur praesentium illo aperiam commodi consequuntur minus sequi, quasi vitae! Facere nulla nam nihil qui
+        quidem optio, perferendis modi? Aliquam enim fugit eaque sint animi, iusto ipsam consequatur delectus at
+        reprehenderit itaque perspiciatis eligendi! Doloremque, illum, consectetur est sunt itaque eligendi voluptas
+        aspernatur, nihil voluptatem atque inventore rem culpa magnam magni unde ea veritatis quis quae.</div>
+    <hr>
+    <h2>box3 設定高度，內容若溢出可設定 overflow</h2>
+    <div class="box3">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quasi amet suscipit laborum adipisci
+        molestias mollitia dolorem accusantium fugit cupiditate incidunt? Fugit explicabo quidem omnis optio in pariatur
+        perspiciatis commodi impedit et cumque mollitia inventore aut quibusdam, expedita magni nihil accusantium ipsum
+        facilis veniam quas quis! Laborum provident veritatis distinctio! Vel obcaecati ut aperiam error numquam placeat
+        quos debitis, modi saepe harum eveniet. Ipsa ut soluta laboriosam unde quis debitis voluptates quae officia
+        numquam, aut quidem eos sed necessitatibus odit nobis iste natus consequatur vel fugiat mollitia enim nostrum
+        aspernatur ipsam! Officiis necessitatibus dolores veniam? Itaque delectus recusandae inventore excepturi non.
+    </div>
+    <hr>
+    <h2>box4 設定盒子的 margin、padding、border</h2>
+    <div class="box4">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Velit odit nostrum nemo, quas, deserunt
+        sunt dolores at, maiores veniam laborum doloribus voluptatem delectus perferendis eligendi eveniet modi harum
+        dolor explicabo vero aperiam neque magni. Ut quas voluptatibus cupiditate corrupti velit consequatur id veniam
+        beatae, delectus laudantium, maiores perferendis, exercitationem magnam nemo adipisci dolores dolore odit et
+        repellat. Magni facilis harum, cupiditate deleniti quisquam, placeat doloremque quod ipsam, veritatis molestiae
+        explicabo doloribus et soluta consequatur possimus voluptatibus nesciunt quos voluptas tempore dolorem? Itaque,
+        reprehenderit tempore eveniet temporibus quae commodi ut, fuga, at molestiae amet ratione? Aspernatur itaque
+        obcaecati necessitatibus mollitia libero!</div>
+    <hr>
+    <h2>box5、box6 外距會重疊，大外距會吃掉小外距</h2>
+    <div class="box5"></div>
+    <div class="box6"></div>
+    <hr>
+    <h2>計算一個盒子的寬度</h2>
+    <div class="box7">Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus, tenetur. Ea praesentium
+        provident ipsam mollitia esse, delectus corporis veniam, est laboriosam quasi ipsum commodi magni inventore
+        atque. Neque similique totam optio unde tempore quas voluptatum minus quisquam adipisci sit, iure soluta
+        temporibus rerum ipsum earum aliquid! Aperiam reiciendis perferendis, numquam aut deleniti, modi accusantium
+        libero, veritatis vitae eius adipisci ratione harum repellendus consequatur molestiae incidunt minima
+        voluptatibus id maxime beatae non aspernatur eum optio quibusdam. Ad impedit nostrum sint et necessitatibus quo
+        culpa maiores expedita libero nemo magnam provident, temporibus ex odio vero sit assumenda totam quibusdam
+        corporis! Tempore, voluptate!</div>
+    <hr>
+    <h2>Border-radius</h2>
+    <div class="box8"></div>
+    <hr>
+    <h2>畫一個圓</h2>
+    <div class="circle"></div>
+
+</body>
+
+</html>

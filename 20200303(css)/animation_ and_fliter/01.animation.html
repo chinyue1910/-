@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        
+        section {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+        
+        .box {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            /* background-color: pink; */
+            color: white;
+            text-align: center;
+            line-height: 200px;
+            position: absolute;
+            top: 40%;
+            left: 40%;
+            transform: translate(-50%, -50%);
+        }
+        /* 
+            Transiton
+            1.需要觸發條件(:hover)，兩種樣式狀態之間的漸進改變 
+            2.無法在網頁載入時自動發生，而且是一次性，必須重新在觸發一次
+
+            Animation
+            1.產生更複雜的動畫，可以設定關鍵影格(keyframes)控制動畫進度
+            2.網頁載入時自動播放，且可以重複來回播放
+        */
+        /* 步驟二，套用動畫到各種選擇器或創建一個 Animation專用的class，設定動畫各種屬性 */
+        
+        .animation {
+            /* 動畫名稱 */
+            animation-name: animation;
+            /* 持續時間 */
+            animation-duration: 5s;
+            /* 設定播放次數 預設 1 ，infinite 無限次 */
+            animation-iteration-count: infinite;
+            /* 播放速率 預設 ease、linear、ease-in、ease-out、ease-in-out */
+            animation-timing-function: ease-in-out;
+            /* 
+                播放方向
+                normal 預設
+                reverse 反向播放
+                alternate 交替播放，奇數是正向播放，偶數反向播放 0~100% => 100%~0%
+                alternate reverse 交替播放，偶數是正向播放，奇數反向播放 100%~0% => 0%~100%
+            */
+            animation-direction: alternate;
+            /* 延遲時間 ms 或 s */
+            animation-delay: 0s;
+            /* 播放後的狀態
+                forwards 保留動畫結束後的樣式，ex 顏色、位置...
+                backwards 返回動畫一開始的樣式，ex 顏色、位置...
+             */
+            animation-fill-mode: forwards;
+            /* 縮寫 */
+            animation: animation 5s infinite 0s ease normal forwards;
+        }
+        /* 建立動畫 animation */
+        /* 步驟一，必須建立一組關鍵影格(keyframes)，並設定動畫名稱(自定義 */
+        
+        @keyframes animation {
+            0% {
+                /* background: green; */
+                left: 40%;
+                top: 40%;
+                transform: rotate(0deg);
+            }
+            25% {
+                /* background: red; */
+                left: 80%;
+                top: 80%;
+                transform: rotate(360deg);
+            }
+            50% {
+                /* background: green; */
+                left: 40%;
+                top: 40%;
+                transform: rotate(720deg);
+            }
+            75% {
+                /* background: blue; */
+                left: 0%;
+                top: 0%;
+                transform: rotate(360deg);
+            }
+            100% {
+                /* background: green; */
+                left: 40%;
+                bottom: 40%;
+                transform: rotate(0deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <section>
+        <div class="box animation"><img src="../Heart_left-highlight_jon_01.svg" width="150px" height="150px" alt="">
+        </div>
+    </section>
+</body>
+
+</html>

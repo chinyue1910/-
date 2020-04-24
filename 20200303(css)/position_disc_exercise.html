@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* 全域選擇器，做reset */
+        * {
+            margin: 0;
+            padding: 0;
+            /* 清單符號清除 */
+            list-style: none;
+
+        }
+
+        .container {
+            text-align: center;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+        }
+
+        .dice {
+            width: 200px;
+            height: 200px;
+            border: 2px solid #000000;
+            border-radius: 1rem;
+            display: inline-block;
+            background-image: linear-gradient(45deg, #ccc, #fff);
+            box-shadow: 0.2rem 0.3rem 0.5rem rgba(0, 0, 0, 0.5);
+            position: relative;
+        }
+
+        .point-red {
+            width: 40px;
+            height: 40px;
+            background-color: red;
+            border-radius: 50%;
+            position: absolute;
+        }
+
+        .point-black {
+            width: 40px;
+            height: 40px;
+            background-color: black;
+            border-radius: 50%;
+            position: absolute;
+        }
+
+        .center {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .left-top {
+            left: 10%;
+            top: 10%;
+        }
+
+        .left-bottom {
+            left: 10%;
+            bottom: 10%;
+        }
+
+        .right-top {
+            top: 10%;
+            right: 10%;
+        }
+
+        .right-bottom {
+            bottom: 10%;
+            right: 10%;
+        }
+
+        .center-left {
+            top: 50%;
+            left: 10%;
+            transform: translateY(-50%);
+        }
+
+        .center-right {
+            top: 50%;
+            right: 10%;
+            transform: translateY(-50%);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="dice">
+            <div class="center point-red"></div>
+        </div>
+        <div class="dice">
+            <!-- 後面出現的標籤會蓋掉前面的區塊，z-index 越大的會蓋掉小的 -->
+            <!-- <div class="point-black" style="z-index: 1;"></div> -->
+            <div class="left-top point-black"></div>
+            <div class="right-bottom point-black"></div>
+        </div>
+        <div class="dice">
+            <div class="center point-black"></div>
+            <div class="left-top point-black"></div>
+            <div class="right-bottom point-black"></div>
+        </div>
+        <div class="dice">
+            <div class="left-top point-black"></div>
+            <div class="left-bottom point-black"></div>
+            <div class="right-top point-black"></div>
+            <div class="right-bottom point-black"></div>
+        </div>
+        <div class="dice">
+            <div class="center point-black"></div>
+            <div class="left-top point-black"></div>
+            <div class="left-bottom point-black"></div>
+            <div class="right-top point-black"></div>
+            <div class="right-bottom point-black"></div>
+        </div>
+        <div class="dice">
+            <div class="left-top point-black"></div>
+            <div class="left-bottom point-black"></div>
+            <div class="right-top point-black"></div>
+            <div class="right-bottom point-black"></div>
+            <div class="center-left point-black"></div>
+            <div class="center-right point-black"></div>
+        </div>
+    </div>
+</body>
+
+</html>

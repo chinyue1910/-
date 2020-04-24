@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        html,
+        /* body {
+            height: 100%;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        } */
+
+        .container {
+            width: 1280px;
+            margin: auto;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            /* border: 1px solid #000; */
+        }
+
+        .box {
+            background-image: linear-gradient(135deg, #fff, #eee, #ddd);
+            width: 200px;
+            height: 200px;
+            float: left;
+            margin: 5px;
+            border-radius: 10%;
+            border: 1px solid #000;
+            box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+            position: relative;
+        }
+
+        .red {
+            width: 40px;
+            height: 40px;
+            background-color: red;
+            border-radius: 50%;
+        }
+
+        .black {
+            width: 40px;
+            height: 40px;
+            background-color: black;
+            border-radius: 50%;
+        }
+
+        .center {
+            position: absolute;
+            left: 50%;
+            bottom: 50%;
+            transform: translate(-50%, 50%);
+        }
+
+        .right {
+            position: absolute;
+            top: 50%;
+            left: 75%;
+            transform: translate(-50%, -50%);
+        }
+
+        .left {
+            position: absolute;
+            top: 50%;
+            left: 25%;
+            transform: translate(-50%, -50%);
+        }
+
+        .top-left {
+            position: absolute;
+            top: 25%;
+            left: 25%;
+            transform: translate(-50%, -50%);
+        }
+
+        .top-right {
+            position: absolute;
+            top: 25%;
+            left: 75%;
+            transform: translate(-50%, -50%);
+        }
+
+        .bottom-right {
+            position: absolute;
+            top: 75%;
+            left: 75%;
+            transform: translate(-50%, -50%);
+        }
+
+        .bottom-left {
+            position: absolute;
+            top: 75%;
+            left: 25%;
+            transform: translate(-50%, -50%);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="box">
+            <div class="center red"></div>
+        </div>
+        <div class="box">
+            <div class="black top-left"></div>
+            <div class="black bottom-right"></div>
+        </div>
+        <div class="box">
+            <div class="black top-left"></div>
+            <div class="black center"></div>
+            <div class="black bottom-right"></div>
+        </div>
+        <div class="box">
+            <div class="black top-left"></div>
+            <div class="black bottom-right"></div>
+            <div class="black top-right"></div>
+            <div class="black bottom-left"></div>
+        </div>
+        <div class="box">
+            <div class="black top-left"></div>
+            <div class="black center"></div>
+            <div class="black bottom-right"></div>
+            <div class="black top-right"></div>
+            <div class="black bottom-left"></div>
+        </div>
+        <div class="box">
+            <div class="black top-left"></div>
+            <div class="black bottom-right"></div>
+            <div class="black top-right"></div>
+            <div class="black bottom-left"></div>
+            <div class="black right"></div>
+            <div class="black left"></div>
+        </div>
+    </div>
+</body>
+
+</html>

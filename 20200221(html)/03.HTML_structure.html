@@ -1,0 +1,50 @@
+<!-- !DOCTYPE 宣告html5 文件 -->
+<!DOCTYPE html>
+<html>
+
+<!-- head 紀錄的是給瀏覽器看的資訊 -->
+
+<head>
+    <!-- "/" 可加可不加，代表結束，charset 代表標籤屬性，字元編碼，UTF-8 確保個國家瀏覽該網頁內容可以正常顯示 -->
+    <meta charset="UTF-8" />
+    <!-- name 代表網頁描述內容，屬性名稱 = 屬性值 name/value 的關係，可以在CSS、Jss 看到這種關係 -->
+    <meta name="description" content="這是我的第一個網頁">
+    <title>我的第一個網頁</title>
+    <!-- link 連結到外部CSS檔案 -->
+    <link href="css/example.css">
+    <!-- link+"tab" -->
+    <link rel="stylesheet" href="">
+    <style>
+        /* 本頁使用的CSS */
+        
+        body {
+            background: rgb(204, 188, 41);
+        }
+    </style>
+</head>
+
+<!-- body 是給瀏覽者看的內容 -->
+
+<body>
+    <!-- h1是字型大小 -->
+    <h1>第一個網頁</h1>
+    <!-- p是段落，paragraph -->
+    <p>HTML是網頁最基礎的技術</p>
+    <button id="btn">顯示現在的時間</button>
+    <div id="showtime"></div>
+    <!-- 給Jss看的 -->
+    <script src="js/example.js"></script>
+    <script>
+        // script 標籤標記的是元素演員的腳本、劇本
+        // 確認元素演員先登上舞台，劇本才開始
+        // 本頁使用的 js 程式碼
+        var btn = document.getElementById('btn');
+        btn.onclick = function() {
+            setInterval(() => {
+                document.getElementById('showtime').innerText = Date();
+            }, 1000);
+        }
+    </script>
+</body>
+
+</html>
