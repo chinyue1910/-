@@ -21,6 +21,7 @@
             transition: transform 1s;
             float: left;
             margin: 15px 15px;
+            opacity: 0;
         }
 
         .front {
@@ -59,6 +60,24 @@
             margin-top: 70vh;
             margin-left: 50px;
         }
+
+        .rotate {
+            animation: rotate 5s;
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotateY(0deg);
+            }
+
+            75% {
+                transform: rotateY(0deg);
+            }
+
+            to {
+                transform: rotateY(180deg);
+            }
+        }
     </style>
 </head>
 
@@ -69,12 +88,18 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <script>
         $(function () {
+            let gamemusic = new Audio()
+            gamemusic.src = "./music/gamemusic.mp3"
             let music = new Audio()
             music.src = "./music/Malfurion.ogg"
-            const bg = new Audio()
-            bg.src = "./music/bg.ogg"
-            let score = 0
-            for (let i = 0; i < 18; i++) {
+            let yell = new Audio()
+            yell.src = "./music/歡呼聲.mp3"
+            let yellbg = new Audio()
+            yellbg.src = "./music/勝利音樂.mp3"
+            let yellbglong = new Audio()
+            yellbglong.src = "./music/勝利樂長.mp3"
+            let score = 1
+            for (let i = 0; i < 2; i++) {
                 $("#game").append(`
                 <div class="poker">
                     <div class="front"></div>
@@ -94,9 +119,27 @@
                 $(".poker").eq(target).insertAfter($(".poker").eq(i))
             }
 
+            Swal.fire({
+                confirmButtonText: "Start",
+                title: "<span style='color:white'>Are you ready</span>",
+                background: "url(./images/alertbegin.jpg) center/cover"
+            }).then((result) => {
+                if (result.value) {
+                    $(".poker").css("pointer-events", "none");
+                    gamemusic.play();
+                    $(".poker").addClass("rotate")
+                    $(".poker").fadeTo(1000, 1);
+                    setTimeout(() => {
+                        $(".poker").removeClass("rotate")
+                        $(".poker").css("pointer-events", "");
+                    }, 5000)
+                }
+            })
+
             $(".poker").on("click", function () {
+                $("#text").attr("src", `./images/class/${score}.png`).addClass("animated tada")
                 if ($(".open").length < 2 && !$(this).hasClass("open")) {
-                    $(this).addClass("open")
+                    $(this).addClass("open");
                 }
 
                 if ($(".open").length == 2) {
@@ -132,7 +175,6 @@
                                     music.play();
                                     break;
                             }
-                            bg.play();
                         }, 1000)
                         setTimeout(() => {
                             $(".open").removeClass("animated flash").fadeTo(1000, 0).addClass("ok")
@@ -143,16 +185,35 @@
                         $(".open").removeClass("open")
                         score++;
                         $(".poker").css("pointer-events", "");
-                        $("#text").attr("src", `./images/class/${score}.png`).addClass("animated tada")
                         if ($(".ok").length == $(".poker").length) {
+                            yellbglong.play()
                             setTimeout(() => {
+                                gamemusic.pause()
+                                gamemusic.currentTime = 0
+                                music.pause()
+                                yell.play()
+                                yellbg.play()
                                 Swal.fire({
-                                    icon: "success",
-                                    title: "恭喜過關，你所花費的次數",
-                                    imageUrl: `./images/class/${score}.png`,
-                                    imageHeight: 100
+                                    title: "<span style='color:white'>Congratulations，your level is</span>",
+                                    imageUrl: `./images/class/${score - 1}.png`,
+                                    imageHeight: 200,
+                                    showCancelButton: true,
+                                    cancelButtonColor: 'red',
+                                    confirmButtonText: "Again",
+                                    cancelButtonText: "Exit",
+                                    background: "url(./images/alert.jpg) center/cover",
+                                    backdrop: `
+                                        rgba(0,0,0,0.5)
+                                    `
+                                }).then((result) => {
+                                    if (result.value) {
+                                        window.location.reload("./homework.html")
+                                    }
+                                    else {
+                                        window.close()
+                                    }
                                 })
-                            })
+                            }, 6500)
                         }
                     }, 2500)
                 }
