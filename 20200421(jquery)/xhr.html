@@ -15,9 +15,11 @@
         xhr.open("get", "https://kktix.com/events.json")
         // 設定成功時執行的 function
         xhr.onload = () => {
+            // responseText 把傳回的值視為字串使用
+            // JSON.parse() 把括號內的字串轉為物件
             let json = JSON.parse(xhr.responseText);
             for (let i of json.entry) {
-                document.write(i.summary + "<br><br>")
+                document.write(`<p>${i.summary}</p>`)
             }
         }
         // 設定失敗時執行的 function
@@ -29,7 +31,7 @@
         // --------------------------------------------------------------------------
         // 建立 xhr
         let xhr2 = new XMLHttpRequest();
-        // 設定請求方式與網址
+        // 設定請求方式與網址 
         xhr2.open("post", "https://jsonplaceholder.typicode.com/posts")
         // 設定送出的資料格式為 json
         xhr2.setRequestHeader("Content-type", "application/json")
@@ -37,14 +39,14 @@
         xhr2.onload = () => {
             let json = JSON.parse(xhr2.responseText);
             for (let i in json) {
-                console.log(json[i])
+                document.write(json[i] + "<br>")
             }
         }
         // 設定失敗時執行的 function
         xhr2.onerror = () => {
             console.log(error);
         }
-        // 送出請求
+        // 送出請求，JSON.stringify 將物件轉為字串傳送
         xhr2.send(JSON.stringify({
             "title": "aaa",
             "body": "bbb",
