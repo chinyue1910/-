@@ -44,6 +44,7 @@
             /* 把背面的 div 轉到 front 後面貼齊 */
             transform: rotateY(180deg);
             backface-visibility: hidden;
+            box-sizing: border-box;
         }
 
         #game {
@@ -88,10 +89,12 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <script>
         $(function () {
+            let startmusic = new Audio()
+            startmusic.src = "./music/進場音樂.mp3"
+            startmusic.play()
             let gamemusic = new Audio()
             gamemusic.src = "./music/gamemusic.mp3"
             let music = new Audio()
-            music.src = "./music/Malfurion.ogg"
             let yell = new Audio()
             yell.src = "./music/歡呼聲.mp3"
             let yellbg = new Audio()
@@ -99,7 +102,7 @@
             let yellbglong = new Audio()
             yellbglong.src = "./music/勝利樂長.mp3"
             let score = 1
-            for (let i = 0; i < 2; i++) {
+            for (let i = 0; i < 18; i++) {
                 $("#game").append(`
                 <div class="poker">
                     <div class="front"></div>
@@ -120,12 +123,20 @@
             }
 
             Swal.fire({
+                showClass: {
+                    popup: 'animated rotateIn slower'
+                },
+                hideClass: {
+                    popup: 'animated rotateOut slow'
+                },
+                allowOutsideClick: false,
                 confirmButtonText: "Start",
                 title: "<span style='color:white'>Are you ready</span>",
                 background: "url(./images/alertbegin.jpg) center/cover"
             }).then((result) => {
                 if (result.value) {
                     $(".poker").css("pointer-events", "none");
+                    startmusic.pause()
                     gamemusic.play();
                     $(".poker").addClass("rotate")
                     $(".poker").fadeTo(1000, 1);
@@ -148,30 +159,31 @@
                         setTimeout(() => {
                             $(".open").addClass("animated flash")
                             switch ($(".open").eq(0).attr("data-poker")) {
-                                case "1": music.play();
-                                    break;
-                                case "2": music.src = "./music/Rexxar.ogg";
+                                case "1": music.src = "./music/Malfurion.mp3";
                                     music.play();
                                     break;
-                                case "3": music.src = "./music/Jaina.ogg";
+                                case "2": music.src = "./music/Rexxar.mp3";
                                     music.play();
                                     break;
-                                case "4": music.src = "./music/Uther.ogg";
+                                case "3": music.src = "./music/Jaina.mp3";
                                     music.play();
                                     break;
-                                case "5": music.src = "./music/Anduin.ogg";
+                                case "4": music.src = "./music/Uther.mp3";
                                     music.play();
                                     break;
-                                case "6": music.src = "./music/Valeera.ogg";
+                                case "5": music.src = "./music/Anduin.mp3";
                                     music.play();
                                     break;
-                                case "7": music.src = "./music/Thrall.ogg";
+                                case "6": music.src = "./music/Valeera.mp3";
                                     music.play();
                                     break;
-                                case "8": music.src = "./music/Guldan.ogg";
+                                case "7": music.src = "./music/Thrall.mp3";
                                     music.play();
                                     break;
-                                case "9": music.src = "./music/Garrosh.ogg";
+                                case "8": music.src = "./music/Guldan.mp3";
+                                    music.play();
+                                    break;
+                                case "9": music.src = "./music/Garrosh.mp3";
                                     music.play();
                                     break;
                             }
@@ -186,14 +198,15 @@
                         score++;
                         $(".poker").css("pointer-events", "");
                         if ($(".ok").length == $(".poker").length) {
+                            gamemusic.pause()
+                            gamemusic.currentTime = 0
                             yellbglong.play()
                             setTimeout(() => {
-                                gamemusic.pause()
-                                gamemusic.currentTime = 0
                                 music.pause()
                                 yell.play()
                                 yellbg.play()
                                 Swal.fire({
+                                    allowOutsideClick: false,
                                     title: "<span style='color:white'>Congratulations，your level is</span>",
                                     imageUrl: `./images/class/${score - 1}.png`,
                                     imageHeight: 200,
@@ -213,7 +226,7 @@
                                         window.close()
                                     }
                                 })
-                            }, 6500)
+                            }, 2000)
                         }
                     }, 2500)
                 }
