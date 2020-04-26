@@ -20,8 +20,8 @@
                 console.log(response.title);
             },
             // 錯誤時的 function
-            error: function () {
-                console.log("無法取得資料");
+            error: function (error) {
+                console.log(error);
             }
         })
 
