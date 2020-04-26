@@ -9,15 +9,17 @@
 
 <body>
     <script>
-        // fetch (請求網址, 設定)
-        fetch("https://kktix.com/events.json")
+        // fetch (請求網址, 設定)，預設為 get ，{method:"get"} 可加可不加
+        fetch("https://kktix.com/events.json", { method: "get" })
             // 轉換回傳資料格式
             .then(response => {
                 return response.json()
             })
             // 成功時的 function
             .then(json => {
-                console.log(json)
+                for (let i of json.entry) {
+                    document.write(`<p>${i.summary}</p>`)
+                }
             })
             // 失敗時的 function
             .catch(error => {
