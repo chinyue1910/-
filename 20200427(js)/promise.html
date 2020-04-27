@@ -9,21 +9,41 @@
 
 <body>
     <script>
-        const passed = true;
-        const WillGetMoney = new Promise((resolve, reject) => {
-            if (passed) {
-                resolve("撿到錢，超爽得")
-            }
-            else {
-                reject("媽的沒錢拿")
-            }
-        })
+        // const passed = true;
+        // const WillGetMoney = new Promise((resolve, reject) => {
+        //     if (passed) {
+        //         resolve("撿到錢，超爽得")
+        //     }
+        //     else {
+        //         reject("媽的沒錢拿")
+        //     }
+        // })
 
-        WillGetMoney.then((result) => {
-            console.log(result);
-        }).catch((error) => {
-            console.log(error);
-        })
+        // WillGetMoney.then((result) => {
+        //     console.log(result);
+        // }).catch((error) => {
+        //     console.log(error);
+        // })
+
+        // -----------------------------------------------------------------------
+
+        const WillGetMoney = (passed) => {
+            return new Promise((resolve, reject) => {
+                if (passed) {
+                    resolve("撿到錢，超爽得")
+                }
+                else {
+                    reject("媽的沒錢拿")
+                }
+            })
+        }
+
+        WillGetMoney(false)
+            .then((result) => {
+                console.log(result);
+            }).catch((error) => {
+                console.log(error);
+            })
     </script>
 </body>
 
