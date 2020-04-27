@@ -2,6 +2,10 @@
     // 以 setTimeout 模擬長時間運算
     const wait = (duration) => {
         return new Promise((resolve, reject) => {
+            if (isNaN(duration)) {
+                // 建議 reject 使用 Error，保持 catch 接到的東西一致
+                reject(new Error("不是數字"))
+            }
             setTimeout(() => {
                 resolve(`過了${duration}毫秒`)
             }, duration)
@@ -11,8 +15,15 @@
     // await 後面只能接受 Promise
     // await 只能在 async 裡面使用
     const asyncFunction = async () => {
-        const result = await wait(5000)
-        console.log(result)
+        try {
+            // Promise 的 resolve 可以直接進變數
+            const result = await wait(500)
+            alertt("錯的")
+            console.log(result)
+        } catch (error) {
+            // Promise 的 reject 要用 try catch 接
+            console.log("錯誤" + error)
+        }
     }
 
     asyncFunction()

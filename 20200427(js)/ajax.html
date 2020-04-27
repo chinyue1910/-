@@ -1,0 +1,48 @@
+<script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+    // const asyncFetch = async () => {
+    //     try {
+    //         const result = await fetch("https://kktix.com/events.json")
+    //         const json = await result.json()
+    //         console.log("sucess")
+    //         console.log(json)
+    //     } catch (error) {
+    //         console.log(error.message)
+    //     }
+    // }
+
+    // asyncFetch()
+
+    // -----------------------------------------------------------------------------------------------
+
+    // const asyncJQ = async () => {
+    //     try {
+    //         const result = await $.ajax({
+    //             url: "https://kktix.com/events.json",
+    //             method: "get",
+    //             dataType: "json"
+    //         })
+    //         console.log("sucess")
+    //         console.log(result)
+    //     } catch (error) {
+    //         console.log(error.message)
+    //     }
+    // }
+
+    // asyncJQ()
+
+    // -----------------------------------------------------------------------------------------------
+
+    const asyncAxios = async () => {
+        try {
+            const result = await axios.get("https://kktix.com/events.json")
+            console.log("sucess")
+            console.log(result)
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    asyncAxios()
+</script>

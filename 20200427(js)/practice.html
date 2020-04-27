@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <ul id="e04"></ul>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
+    <script>
+        const asyncAxios = async () => {
+            try {
+                let user = await axios.get("https://jsonplaceholder.typicode.com/users");
+                let article = await axios.get("https://jsonplaceholder.typicode.com/posts");
+                user = await user;
+                article = await article;
+                let person = "Leanne Graham"
+                for (let i of user.data) {
+                    if (i.name == person) {
+                        user = i.id
+                    }
+                }
+                for (let i of article.data) {
+                    if (i.userId == user) {
+                        $("#e04").append(`<li>${i.title}</li>`)
+                    }
+                }
+
+            } catch (error) {
+                console.log(error.message)
+            }
+        }
+
+        asyncAxios()
+    </script>
+</body>
+
+</html>
