@@ -13,7 +13,7 @@
         axios.get("https://kktix.com/events.json")
             // 成功時的 function
             .then(response => {
-                console.log(response)
+                console.log(response.data)
             })
             // 失敗時的 function
             .catch(error => {
