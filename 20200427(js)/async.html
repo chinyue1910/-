@@ -1,0 +1,19 @@
+<script>
+    // 以 setTimeout 模擬長時間運算
+    const wait = (duration) => {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                resolve()
+            }, duration)
+        })
+    }
+    // await 可以讓程式暫停，等執行完後才繼續
+    // await 後面只能接受 Promise
+    // await 只能在 async 裡面使用
+    const asyncFunction = async () => {
+        await wait(5000)
+        console.log("ok")
+    }
+
+    asyncFunction()
+</script>
