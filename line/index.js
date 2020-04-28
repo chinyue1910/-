@@ -11,6 +11,8 @@
 import linebot from 'linebot'
 // 引用 dotenv 套件
 import dotenv from 'dotenv'
+// 引用 request 套件
+import rp from 'request-promise'
 
 // 讀取 .env 檔
 dotenv.config()
@@ -24,11 +26,15 @@ const bot = linebot({
 
 // 詳細可以看 linebot npm
 // 當收到訊息時
-bot.on('message', event => {
-  if (event.message.type === 'text') {
-    event.reply(event.message.text)
-    console.log(event.message)
+bot.on('message', async (event) => {
+  let msg = ''
+  try {
+    const data = await rp({ uri: 'https://kktix.com/events.json', json: true })
+    msg = data.entry[0].title
+  } catch (error) {
+    msg = '發生錯誤'
   }
+  event.reply(msg)
 })
 
 // 在 PORT 啟動
