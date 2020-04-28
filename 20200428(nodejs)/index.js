@@ -26,3 +26,4 @@ server.listen(5678, () => {
 // npm install dotenv 讀取環境設定檔
 // npm install linebot LINE 機器人
 // package-lock.json 更詳細的套件內容，不要去動他
+// .gitignore 忽略要上傳到 git hub 的內容
