@@ -2,7 +2,7 @@
 // 方向鍵 "↑，↓" 可以重複呼叫上一次的指令
 // 更改 package.json裡面的 scripts 後，npm run start 即可執行
 
-// 從 http 套件引用變數，取名為 http
+// 從內建 http 套件引用變數，取名為 http
 // require 是 CommonJS 語法
 // const http = require("http")
 
@@ -22,3 +22,7 @@ server.listen(5678, () => {
     console.log("網頁伺服器已啟動:http://localhost:5678")
 })
 // ctrl+C 結束終端機之後再修改內容
+// npm install -g nodemon 改成存檔會後會自動重新啟動 node.js
+// npm install dotenv 讀取環境設定檔
+// npm install linebot LINE 機器人
+// package-lock.json 更詳細的套件內容，不要去動他
