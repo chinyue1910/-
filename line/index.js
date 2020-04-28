@@ -24,9 +24,18 @@ const bot = linebot({
 
 // 詳細可以看 linebot npm
 // 當收到訊息時
-bot.options('message', event => {
-  console.log(event)
+bot.on('message', event => {
+  if (event.message.type === 'text') {
+    event.reply(event.message.text)
+    console.log(event.message)
+  }
 })
 
 // 在 PORT 啟動
-bot.listen('/', process.env.PORT)
+bot.listen('/', process.env.PORT, () => [
+  console.log('機器人已啟動')
+])
+
+// ngrok authtoken 1b9P8tU0KP18opg8GJmshUNB1wt_7YcxYkpaN2tsedLp6DDe7
+// npm install request
+// npm install request-promise
