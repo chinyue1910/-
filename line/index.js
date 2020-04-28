@@ -14,3 +14,19 @@ import dotenv from 'dotenv'
 
 // 讀取 .env 檔
 dotenv.config()
+
+// 宣告機器人的資訊
+const bot = linebot({
+  channelId: process.env.CHANNEL_ID,
+  channelSecret: process.env.CHANNEL_SECRET,
+  channelAccessToken: process.env.CHANNEL_ACCESS_TOKEN
+})
+
+// 詳細可以看 linebot npm
+// 當收到訊息時
+bot.options('message', event => {
+  console.log(event)
+})
+
+// 在 PORT 啟動
+bot.listen('/', process.env.PORT)
