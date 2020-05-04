@@ -22,11 +22,14 @@ const bot = linebot({
 //     })
 //   }
 // })
+bot.on('join', (event) => {
+  linebot.push(event.source.userId, '請輸入想查詢的資訊')
+})
 
 bot.on('message', async (event) => {
   let msg = ''
   try {
-    const data = await rp({ uri: 'https://kktix.com/events.json', json: true })
+    const data = await rp({ uri: 'https://gis.taiwan.net.tw/XMLReleaseALL_public/hotel_C_f.json', json: true })
     msg = data.entry[0].title
   } catch (error) {
     msg = '發生錯誤'
