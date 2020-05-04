@@ -2,8 +2,11 @@
 import linebot from 'linebot'
 // 引用 dotenv 套件
 import dotenv from 'dotenv'
-// 引用 request 套件
-import rp from 'request-promise'
+
+import kkbox from '@kkbox/kkbox-js-sdk'
+
+const Api = kkbox.Api
+const Auth = kkbox.Auth
 
 // 讀取 env 檔
 dotenv.config()
@@ -14,6 +17,19 @@ const bot = linebot({
   channelAccessToken: process.env.CHANNEL_ACCESS_TOKEN
 })
 
+let kkboxToken = ''
+
+const getToken = async () => {
+  const auth = new Auth(process.env.KKBOX_ID, process.env.KKBOX_SECRET)
+  await auth.clientCredentialsFlow
+    .fetchAccessToken()
+    .then(response => {
+      kkboxToken = response.data.access_token
+    })
+}
+
+getToken()
+
 // // 當收到訊息時
 // bot.on('message', function (event) {
 //   if (event.message.type === 'text') {
@@ -22,15 +38,21 @@ const bot = linebot({
 //     })
 //   }
 // })
-bot.on('join', (event) => {
-  linebot.push(event.source.userId, '請輸入想查詢的資訊')
-})
 
 bot.on('message', async (event) => {
   let msg = ''
   try {
-    const data = await rp({ uri: 'https://gis.taiwan.net.tw/XMLReleaseALL_public/hotel_C_f.json', json: true })
-    msg = data.entry[0].title
+    // Create an API object with your access token
+    const api = new Api(kkboxToken)
+
+    // Fetch content with various fetchers
+    await api.searchFetcher
+      .setSearchCriteria('五月天 派對動物', 'track')
+      .fetchSearchResult()
+      .then(response => {
+        // Content from the KKBOX Open API
+        console.log(response.data)
+      })
   } catch (error) {
     msg = '發生錯誤'
   }
