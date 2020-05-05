@@ -5,6 +5,8 @@ import dotenv from 'dotenv'
 // 引用 request 套件
 import rp from 'request-promise'
 
+import cheerio from 'cheerio'
+
 // 讀取 env 檔
 dotenv.config()
 
@@ -22,20 +24,31 @@ const bot = linebot({
 //     })
 //   }
 // })
-bot.on('join', (event) => {
-  linebot.push(event.source.userId, '請輸入想查詢的資訊')
-})
 
-bot.on('message', async (event) => {
+const test = async (event) => {
   let msg = ''
   try {
-    const data = await rp({ uri: 'https://gis.taiwan.net.tw/XMLReleaseALL_public/hotel_C_f.json', json: true })
-    msg = data.entry[0].title
+    const data = await rp('https://www.ptt.cc/bbs/Beauty/index.html')
+    const $ = cheerio.load(data)
+    console.log($('.title').eq(2).find('a'))
   } catch (error) {
     msg = '發生錯誤'
   }
-  event.reply(msg)
-})
+}
+
+test()
+
+// bot.on('message', async (event) => {
+//   let msg = ''
+//   try {
+//     const data = await rp('https://www.ptt.cc/bbs/Beauty/index.html')
+//     const $ = cheerio.load(data)
+//     console.log($('.r-ent'))
+//   } catch (error) {
+//     msg = '發生錯誤'
+//   }
+//   event.reply(msg)
+// })
 
 // 在 port 啟動
 bot.listen('/', process.env.PORT, () => {
