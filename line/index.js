@@ -36,12 +36,23 @@ const opts = {
 bot.on('message', async (event) => {
   let msg = ''
   try {
-    const data = await rp({ uri: 'https://kktix.com/events.json', json: true })
-    msg = data.entry[0].title
+    await search('蔡阿嘎', opts, function (err, results) {
+      if (err) { return console.log(err) }
+      for (const i of results) {
+        console.dir(i.thumbnails.high.url)
+      }
+      msg = results[0].thumbnails
+    })
   } catch (error) {
     msg = '錯誤'
   }
-  event.reply(msg)
+  event.reply([
+    {
+      type: 'image',
+      originalContentUrl: ,
+      previewImageUrl: 'https://example.com/preview.jpg'
+    }
+  ])
 })
 
 bot.listen('/', process.env.PORT, () => {
