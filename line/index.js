@@ -12,7 +12,7 @@ const bot = linebot({
 })
 
 const opts = {
-  maxResults: 5,
+  maxResults: 1,
   key: process.env.API_KEY
 }
 
@@ -34,25 +34,16 @@ const opts = {
 // test()
 
 bot.on('message', async (event) => {
-  let msg = ''
-  try {
-    await search('蔡阿嘎', opts, function (err, results) {
-      if (err) { return console.log(err) }
-      for (const i of results) {
-        console.dir(i.thumbnails.high.url)
-      }
-      msg = results[0].thumbnails
-    })
-  } catch (error) {
-    msg = '錯誤'
-  }
-  event.reply([
-    {
-      type: 'image',
-      originalContentUrl: ,
-      previewImageUrl: 'https://example.com/preview.jpg'
-    }
-  ])
+  let msg = '123'
+  await search('蔡阿嘎', opts, function (err, results) {
+    if (err) { return console.log(err) }
+    // for (const i of results) {
+    //   console.log(i.title)
+    // }
+    msg = results[0].title
+    console.log(msg)
+    return event.reply(msg)
+  })
 })
 
 bot.listen('/', process.env.PORT, () => {
