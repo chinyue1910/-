@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CCS選擇器優先權</title>
+    <style>
+        /* 
+            CSS 選擇器權重
+            1. inline style spade: 1,0,0,0
+            2. id 選擇器 heart: 0,1,0,0
+            3. Class 選擇器、屬性選擇器、虛擬類別 diamond: 0,0,1,0
+            4. 元素(標籤)、虛擬元素 clover: 0,0,0,1
+         */
+        /* 第一組 */
+        /* 0 1 0 1 */
+        #container p {
+            color: red;
+        }
+
+        /* 0 0 1 1 */
+        .container p {
+            color: green;
+        }
+
+        /* 第二組 */
+        /* 0 1 1 1 */
+        #container2 .box p {
+            color: blue;
+        }
+
+        /* 0 1 0 1 */
+        #container2 p {
+            color: red;
+        }
+
+        /* 第三組 */
+        /* 0 0 2 2 */
+        .container3 .box h1+p {
+            color: blue;
+        }
+
+        /* 0 0 2 1 */
+        .container3 .box p {
+            color: red !important
+        }
+
+        .bg-primary {
+            background: red !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container" class="container">
+        <div class="box">
+            <h1>Lorem ipsum dolor sit amet.</h1>
+            <p style="color: blue;">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam enim itaque maiores illo sit
+                accusantium porro praesentium ex ipsum expedita! Itaque reprehenderit reiciendis neque fugit nam
+                veritatis aperiam quo ratione.
+            </p>
+        </div>
+    </div>
+    <hr>
+    <div id="container2" class="container2">
+        <div class="box">
+            <h1>Lorem ipsum dolor sit amet.</h1>
+            <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam enim itaque maiores illo sit
+                accusantium porro praesentium ex ipsum expedita! Itaque reprehenderit reiciendis neque fugit nam
+                veritatis aperiam quo ratione.
+            </p>
+        </div>
+    </div>
+    <hr>
+    <div id="container3" class="container3">
+        <div class="box">
+            <h1>Lorem ipsum dolor sit amet.</h1>
+            <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam enim itaque maiores illo sit
+                accusantium porro praesentium ex ipsum expedita! Itaque reprehenderit reiciendis neque fugit nam
+                veritatis aperiam quo ratione.
+            </p>
+        </div>
+    </div>
+</body>
+
+</html>

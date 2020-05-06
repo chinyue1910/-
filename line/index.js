@@ -12,24 +12,26 @@ const bot = linebot({
 })
 
 const opts = {
-  maxResults: 10,
+  maxResults: 5,
   key: process.env.API_KEY
 }
 
-const test = async () => {
-  let msg = ''
-  try {
-    await search('jsconf', opts, function (err, results) {
-      if (err) return console.log(err)
-      console.dir(results)
-    })
-  } catch (error) {
-    msg = '錯誤'
-  }
-  console.log(msg)
-}
+// const test = async () => {
+//   let msg = ''
+//   try {
+//     await search('蔡阿嘎', opts, function (err, results) {
+//       if (err) return console.log(err)
+//       for (let i of results) {
+//         console.dir(i.thumbnails.high.url)
+//       }
+//     })
+//   } catch (error) {
+//     msg = '錯誤'
+//   }
+//   console.log(msg)
+// }
 
-test()
+// test()
 
 bot.on('message', async (event) => {
   let msg = ''
