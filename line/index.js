@@ -1,7 +1,11 @@
+// 引用 linebot 套件
 import linebot from 'linebot'
+// 引用 dotenv 套件
 import dotenv from 'dotenv'
-import YouTube from 'youtube-node'
+// 引用 request 套件
+import rp from 'request-promise'
 
+// 讀取 env 檔
 dotenv.config()
 
 const bot = linebot({
@@ -10,38 +14,27 @@ const bot = linebot({
   channelAccessToken: process.env.CHANNEL_ACCESS_TOKEN
 })
 
-const youTube = new YouTube()
-youTube.setKey(process.env.API_KEY)
+// // 當收到訊息時
+// bot.on('message', function (event) {
+//   if (event.message.type === 'text') {
+//     event.source.profile().then(function (profile) {
+//       event.reply(profile.displayName + '你再說一次試試看')
+//     })
+//   }
+// })
 
 bot.on('message', async (event) => {
   let msg = ''
-  await youTube.search('蔡阿嘎', 2, function (error, result) {
-    if (error) {
-      console.log(error)
-    } else {
-      // console.log(JSON.stringify(result, null, 2))
-      // console.log(result.items[0].snippet.title)
-      msg = result.items[0].snippet.title
-      console.log(youTube)
-      event.reply(msg)
-    }
-  })
+  try {
+    const data = await rp({ uri: 'https://kktix.com/events.json', json: true })
+    msg = data.entry[0].title
+  } catch (error) {
+    msg = '發生錯誤'
+  }
+  event.reply(msg)
 })
 
-// const test = async () => {
-//   await youTube.search('蔡阿嘎', 2, function (error, result) {
-//     if (error) {
-//       console.log(error)
-//     } else {
-//       console.log(JSON.stringify(result, null, 2))
-//     }
-//   })
-// }
-
-// test()
-
+// 在 port 啟動
 bot.listen('/', process.env.PORT, () => {
-  console.log('已啟動')
+  console.log('機器人已啟動')
 })
-
-// https://www.npmjs.com/package/youtube-node 套件用法
