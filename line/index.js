@@ -14,25 +14,34 @@ const bot = linebot({
   channelAccessToken: process.env.CHANNEL_ACCESS_TOKEN
 })
 
-// // 當收到訊息時
-// bot.on('message', function (event) {
-//   if (event.message.type === 'text') {
-//     event.source.profile().then(function (profile) {
-//       event.reply(profile.displayName + '你再說一次試試看')
-//     })
-//   }
-// })
-
-bot.on('message', async (event) => {
-  let msg = ''
+const option = {
+  method: 'POST',
+  uri: 'https://account.kkbox.com/oauth2/token',
+  headers: {
+    'Content-Type': 'application/x-www-form-urlencoded'
+  },
+  body: {
+    grant_type: 'client_credentials',
+    client_id: process.env.KKBOX_ID,
+    client_secret: process.env.KKBOX_SECRET
+  },
+  json: true
+}
+const test = () => {
   try {
-    const data = await rp({ uri: 'https://kktix.com/events.json', json: true })
-    msg = data.entry[0].title
+    rp(option)
+      .then(response => {
+        console.log(response.data)
+      })
   } catch (error) {
-    msg = '發生錯誤'
+    console.log(error)
+    console.log('false')
   }
-  event.reply(msg)
-})
+}
+
+test()
+
+// https://www.postman.com/collections/5cd6236e9e9748fd1ed1
 
 // 在 port 啟動
 bot.listen('/', process.env.PORT, () => {
