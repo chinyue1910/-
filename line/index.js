@@ -39,6 +39,7 @@ const getToken = async () => {
   }
 }
 // 時間差問題，console.log(token) 要等一下
+
 getToken()
 
 const options = {

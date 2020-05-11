@@ -11,12 +11,29 @@
     <div id="app">
         <input type="text" v-model="newitem" @keydown.enter="add" :style="{backgroundColor:bg,color:'white'}">
         <input type="button" value="新增" @click="add">
+        <hr>
+        <h1>過濾</h1>
+        <input type="button" v-model="all" @click="showall">
+        <input type="button" v-model="com" @click="showdone">
+        <input type="button" v-model="uncom" @click="showtodo">
+        <br>
+        <h1>刪除</h1>
+        <input type="button" value="全部項目" @click="delall">
+        <input type="button" value="已完成項目" @click="deldone">
+        <input type="button" value="未完成項目" @click="deltodo">
+        <hr>
+        <h1>一次標記</h1>
+        <input type="button" value="全部標記完成" @click="mark">
+        <input type="button" value="全部標記未完成" @click="unmark">
+        <hr>
+        <h1>{{msg}}</h1>
         <ul>
-            <li v-for="(item,index) in items">
+            <li v-for="(item,index) in items" v-show="item.number === 1">
                 <input type="checkbox" :checked="item.get" @change="toggle(item)">
                 <del v-if="item.get" @dblclick="db(item)">{{item.text}}</del>
                 <span v-else @dblclick="db(item)">{{item.text}}</span>
-                <input type="text" v-model="item.text" v-if="item.show">
+                <input type="text" v-model="plus" v-if="item.show" @keydown.enter="modify(item)"
+                    @keydown.esc="esc(item)">
                 <input type="button" value="X" @click="del(index)">
             </li>
         </ul>
@@ -27,30 +44,123 @@
             el: '#app',
             name: 'app',
             data: {
+                all: "全部項目",
+                com: "已完成項目",
+                uncom: "未完成項目",
+                msg: "全部項目",
+                plus: "",
                 newitem: "",
-                items: [],
+                items: []
             },
             methods: {
                 add() {
                     if (this.newitem.length > 2) {
-                        this.items.push({ get: false, text: this.newitem, show: false })
+                        this.items.push({ get: false, text: this.newitem, show: false, number: 1 })
                         this.newitem = ""
                     }
                 },
                 toggle(item) {
                     item.get = !item.get
+                    if (this.msg == this.uncom && item.get == true) {
+                        item.number = 2
+                    }
+                    else if (this.msg == this.com && item.get == false) {
+                        item.number = 2
+                    }
                 },
                 del(index) {
                     this.items.splice(index, 1)
                 },
                 db(item) {
                     item.show = true
-                    console.log(item);
+                    this.plus = item.text
+                },
+                modify(item) {
+                    item.show = false;
+                    item.text = this.plus
+                },
+                esc(item) {
+                    item.show = false
+                },
+                showall() {
+                    for (let i of this.items) {
+                        i.number = 1
+                    }
+                    this.msg = this.all
+                },
+                showdone() {
+                    for (let i of this.items) {
+                        if (i.get === true) {
+                            i.number = 1
+                        } else {
+                            i.number = 2
+                        }
+                    }
+                    this.msg = this.com
+                },
+                showtodo() {
+                    for (let i of this.items) {
+                        if (i.get === false) {
+                            i.number = 1
+                        } else {
+                            i.number = 2
+                        }
+                    }
+                    this.msg = this.uncom
+                },
+                delall() {
+                    this.items = []
+                },
+                deldone() {
+                    this.items = this.done
+                },
+                deltodo() {
+                    this.items = this.todo
+                },
+                mark() {
+                    for (let i of this.items) {
+                        i.get = true
+                    }
+                    if (this.msg == this.uncom) {
+                        for (let i of this.items) {
+                            i.number = 2
+                        }
+                    }
+                    else {
+                        for (let i of this.items) {
+                            i.number = 1
+                        }
+                    }
+                },
+                unmark() {
+                    for (let i of this.items) {
+                        i.get = false
+                    }
+                    if (this.msg == this.com) {
+                        for (let i of this.items) {
+                            i.number = 2
+                        }
+                    }
+                    else {
+                        for (let i of this.items) {
+                            i.number = 1
+                        }
+                    }
                 }
             },
             computed: {
                 bg() {
                     return (this.newitem.length == 0) ? 'rgba(0,0,0,0.8)' : (this.newitem.length > 2) ? 'rgba(0,0,255,0.8)' : 'rgba(255,0,0,0.8)'
+                },
+                done() {
+                    return this.items.filter(done => {
+                        return done.get == false
+                    })
+                },
+                todo() {
+                    return this.items.filter(done => {
+                        return done.get == true
+                    })
                 }
             },
             watch: {
