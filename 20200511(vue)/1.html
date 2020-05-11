@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .red {
+            color: red;
+        }
+
+        .big {
+            font-size: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <p>{{msg}}</p>
+        <!-- 另一種寫法 -->
+        <p v-text="msg"></p>
+        <p v-html="msg2"></p>
+
+        <!-- 符合條件才出現在 DOM -->
+        <p v-if="number === 1">數字是 1</p>
+        <p v-else-if="number === 2">數字是 2</p>
+        <p v-else>數字是其他</p>
+
+        <!-- 符合條件才顯示，不符合是 display : none -->
+        <p v-show="number === 1">數字是 1 (v - show)</p>
+
+        <ul>
+            <li v-for="fruit in fruits">{{ fruit }}</li>
+        </ul>
+
+        <ul>
+            <li v-for="(fruit,index) in fruits">{{ index + 1 + "-" + fruit }}</li>
+        </ul>
+
+        <ul>
+            <li v-for="(web,key,index) in webs">{{ index + "." + key + "." + web }}</li>
+        </ul>
+
+        <img v-bind:src="img" width="100px">
+        <img :src="img" width="100px">
+
+        <img v-for="img in imgs" :src="img" width="100px">
+
+        <h1 :style="style">aaa</h1>
+        <!-- 也可以這樣寫 -->
+        <h1 :style="{backgroundColor: color,fontSize: '50px'}">aaa</h1>
+
+        <h1 :class="myclass">bbb</h1>
+        <h1 :class="{red : isRed, big: false}">bbb</h1>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        new Vue({
+            // 選取 id 為 map 的元件
+            el: '#app',
+            name: 'app',
+            data: {
+                msg: 'Hello Vue',
+                msg2: '<a href="https://google.com">連結</a>',
+                number: 1,
+                fruits: ['apple', 'banana', 'watermelon', 'mango', 'pitch'],
+                webs: {
+                    fb: 'facebook',
+                    yt: 'youtube'
+                },
+                img: 'https://blog.photofeeler.com/wp-content/uploads/2017/09/tinder-photo-size-tinder-picture-size-tinder-aspect-ratio-image-dimensions-crop.jpg',
+                imgs: [
+                    'https://miro.medium.com/max/720/1*XGw9zUEZGYPNmeKGmyeX1g.jpeg',
+                    'https://stickershop.line-scdn.net/stickershop/v1/product/15825/LINEStorePC/main.png',
+                    'https://stickershop.line-scdn.net/sticonshop/v1/product/5d9195cb031a670891fd84dc/iPhone/main.png'
+                ],
+                style: {
+                    backgroundColor: 'red',
+                    fontSize: '50px'
+                },
+                myclass: {
+                    // 是否要套用
+                    red: true,
+                    big: false
+                },
+                color: 'blue',
+                isRed: true
+            }
+        })
+    </script>
+</body>
+
+</html>
