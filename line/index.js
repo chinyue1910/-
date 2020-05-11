@@ -42,29 +42,28 @@ const getToken = async () => {
 
 getToken()
 
-const options = {
-  uri: 'https://api.kkbox.com/v1.1/search',
-  qs: {
-    q: '周杰倫',
-    territory: 'TW',
-    limit: '50',
-    type: 'track'
-  },
-  auth: {
-    bearer: 'Jay3jIFWf2lHzLs0iySNEg=='
-  },
-  json: true
-}
-
-const search = async () => {
+bot.on('message', async function (event) {
+  const options = {
+    uri: 'https://api.kkbox.com/v1.1/search',
+    qs: {
+      q: '周杰倫',
+      territory: 'TW',
+      limit: '5',
+      type: 'track'
+    },
+    auth: {
+      bearer: token
+    },
+    json: true
+  }
   try {
     const response = await rp(options)
-    console.log(response)
+    console.log(response.tracks.data[0].name)
+    event.reply(response.tracks.data[0].name)
   } catch (error) {
     console.log(error.message)
   }
-}
-search()
+})
 
 // https://www.postman.com/collections/5cd6236e9e9748fd1ed1
 
