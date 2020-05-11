@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <p>總共有 {{ count }} 筆資料</p>
+        <input type="text" v-model="newitem" @keydown.enter="add" :style="{border: '10px solid ' + borderColor}">
+        <input type="button" value="新增" @click="add">
+        <ul>
+            <li v-for="(item,index) in items">
+                <input type="checkbox" :checked="item.done" @change="toggle(item)">
+                <del v-if="item.done">{{ item.text }}</del>
+                <span v-else>{{ item.text }}</span>
+                <input type="button" value="x" @click="del(index)">
+            </li>
+        </ul>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            name: 'app',
+            data: {
+                newitem: "",
+                items: []
+            },
+            methods: {
+                add() {
+                    if (this.newitem.length > 2) {
+                        this.items.push({ done: false, text: this.newitem })
+                        this.newitem = ""
+                    }
+                },
+                toggle(item) {
+                    item.done = !item.done
+                    console.log(item)
+                },
+                del(index) {
+                    this.items.splice(index, 1)
+                }
+            },
+            computed: {
+                count() {
+                    return this.items.length
+                },
+                borderColor() {
+                    return (this.newitem.length > 2) ? 'green ' : 'red'
+                }
+            },
+            // 監聽 data 變動
+            watch: {
+                newitem(newValue, oldValue) {
+                    console.log("something change")
+                },
+                // 陣列只會偵測到多或是少一個東西，無法偵測到裡面的東西改變
+                items: {
+                    // 加上這個才會偵測到裡面的東西改變
+                    deep: true,
+                    handler(newValue, oldValue) {
+                        localStorage.setItem('todo', JSON.stringify(this.items))
+                    }
+                }
+            },
+            mounted() {
+                const data = localStorage.getItem('todo')
+                if (data !== null) {
+                    this.items = JSON.parse(data)
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
