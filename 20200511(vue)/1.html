@@ -54,6 +54,9 @@
 
         <h1 :class="myclass">bbb</h1>
         <h1 :class="{red : isRed, big: false}">bbb</h1>
+
+        <input type="text" v-model="text">
+        {{text}}
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script>
@@ -86,7 +89,8 @@
                     big: false
                 },
                 color: 'blue',
-                isRed: true
+                isRed: true,
+                text: ''
             }
         })
     </script>
