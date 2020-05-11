@@ -60,7 +60,12 @@
 
         <input type="button" value="按鈕" v-on:click="add">
         <!-- 簡寫 -->
-        <input type="button" value="按鈕" @click="add">
+        <input type="button" value="簡寫按鈕" @click="add">
+
+        <!-- 阻止事件發生 -->
+        <a href="https://google.com" @click.prevent="click">連結</a>
+
+        <p>我有 {{count}} 個水果</p>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script>
@@ -103,6 +108,15 @@
                         // 清除 value
                         this.text = ""
                     }
+                },
+                click(e) {
+                    alert(e.target)
+                    console.log(e)
+                }
+            },
+            computed: {
+                count() {
+                    return this.fruits.length
                 }
             }
         })
