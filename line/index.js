@@ -20,26 +20,50 @@ const option = {
   headers: {
     'Content-Type': 'application/x-www-form-urlencoded'
   },
-  body: {
+  form: {
     grant_type: 'client_credentials',
     client_id: process.env.KKBOX_ID,
     client_secret: process.env.KKBOX_SECRET
   },
   json: true
 }
-const test = () => {
+let token = ''
+
+const getToken = async () => {
   try {
-    rp(option)
-      .then(response => {
-        console.log(response.data)
-      })
+    const response = await rp(option)
+    token = response.access_token
   } catch (error) {
-    console.log(error)
+    console.log(error.message)
     console.log('false')
   }
 }
+// 時間差問題，console.log(token) 要等一下
+getToken()
 
-test()
+const options = {
+  uri: 'https://api.kkbox.com/v1.1/search',
+  qs: {
+    q: '周杰倫',
+    territory: 'TW',
+    limit: '50',
+    type: 'track'
+  },
+  auth: {
+    bearer: 'Jay3jIFWf2lHzLs0iySNEg=='
+  },
+  json: true
+}
+
+const search = async () => {
+  try {
+    const response = await rp(options)
+    console.log(response)
+  } catch (error) {
+    console.log(error.message)
+  }
+}
+search()
 
 // https://www.postman.com/collections/5cd6236e9e9748fd1ed1
 
