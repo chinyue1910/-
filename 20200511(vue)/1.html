@@ -55,8 +55,12 @@
         <h1 :class="myclass">bbb</h1>
         <h1 :class="{red : isRed, big: false}">bbb</h1>
 
-        <input type="text" v-model="text">
+        <input type="text" v-model="text" @keydown.enter="add">
         {{text}}
+
+        <input type="button" value="按鈕" v-on:click="add">
+        <!-- 簡寫 -->
+        <input type="button" value="按鈕" @click="add">
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script>
@@ -91,6 +95,15 @@
                 color: 'blue',
                 isRed: true,
                 text: ''
+            },
+            methods: {
+                add() {
+                    if (this.text.length > 0) {
+                        this.fruits.push(this.text)
+                        // 清除 value
+                        this.text = ""
+                    }
+                }
             }
         })
     </script>
