@@ -42,6 +42,8 @@ const getToken = async () => {
 
 getToken()
 
+const IDget = []
+
 bot.on('message', async function (event) {
   const optionSearch = {
     uri: 'https://api.kkbox.com/v1.1/search',
@@ -79,27 +81,30 @@ bot.on('message', async function (event) {
   try {
     const response = await rp(optionCharts)
     const aryChart = []
-    for (let i = 0; i < 10; i++) {
+    const want = [0, 1, 2, 3, 7, 8, 9, 25, 27]
+    for (const i of want) {
       aryChart.push(
         {
           thumbnailImageUrl: response.data[i].images[0].url,
           title: response.data[i].title,
           text: response.data[i].description,
-          actions: [{
-            type: 'postback',
-            label: 'Buy',
-            data: 'action=buy&itemid=111'
-          }, {
-            type: 'postback',
-            label: 'Add to cart',
-            data: 'action=add&itemid=111'
-          }, {
+          defaultAction: {
             type: 'uri',
             label: 'View detail',
+            uri: response.data[i].url
+          },
+          actions: [{
+            type: 'postback',
+            label: '查看排行歌曲',
+            data: '查看排行歌曲'
+          }, {
+            type: 'uri',
+            label: '查看官方網址',
             uri: response.data[i].url
           }]
         }
       )
+      IDget.push(response.data[i].id)
     }
     event.reply({
       type: 'template',
@@ -109,9 +114,21 @@ bot.on('message', async function (event) {
         columns: aryChart
       }
     })
-    console.log(aryChart)
   } catch (error) {
     console.log(error.message)
+  }
+})
+
+bot.on('postback', (event) => {
+  // const optionChartsTracks = {
+  //   uri: 'https://api.kkbox.com/v1.1/charts/chart_id/tracks',
+  //   qs: {
+  //     territory: 'TW',
+  //     chartId:
+  //   }
+  // }
+  if (event.postback.data === '查看排行歌曲') {
+    console.log(event)
   }
 })
 
