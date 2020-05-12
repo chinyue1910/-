@@ -26,7 +26,7 @@
         <input type="button" value="全部標記完成" @click="mark">
         <input type="button" value="全部標記未完成" @click="unmark">
         <hr>
-        <h1>{{msg}}</h1>
+        <h1>目前顯示：{{msg}}，{{length}}個</h1>
         <ul>
             <li v-for="(item,index) in items" v-show="item.number === 1">
                 <input type="checkbox" :checked="item.get" @change="toggle(item)">
@@ -34,7 +34,6 @@
                 <span v-else @dblclick="db(item)">{{item.text}}</span>
                 <input type="text" v-model="plus" v-if="item.show" @keydown.enter="modify(item)"
                     @keydown.esc="esc(item)">
-                <input type="button" value="X" @click="del(index)">
             </li>
         </ul>
     </div>
@@ -67,9 +66,6 @@
                     else if (this.msg == this.com && item.get == false) {
                         item.number = 2
                     }
-                },
-                del(index) {
-                    this.items.splice(index, 1)
                 },
                 db(item) {
                     item.show = true
@@ -161,6 +157,9 @@
                     return this.items.filter(done => {
                         return done.get == true
                     })
+                },
+                length() {
+                    return (this.msg == this.uncom) ? this.done.length : (this.msg == this.com) ? this.todo.length : this.items.length
                 }
             },
             watch: {
