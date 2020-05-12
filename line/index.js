@@ -43,7 +43,7 @@ const getToken = async () => {
 getToken()
 
 bot.on('message', async function (event) {
-  const options = {
+  const optionSearch = {
     uri: 'https://api.kkbox.com/v1.1/search',
     qs: {
       q: '周杰倫',
@@ -56,10 +56,60 @@ bot.on('message', async function (event) {
     },
     json: true
   }
+  const optionCharts = {
+    uri: 'https://api.kkbox.com/v1.1/charts',
+    qs: {
+      territory: 'TW'
+    },
+    auth: {
+      bearer: token
+    },
+    json: true
+  }
+  // 搜尋 -----------------------------------------------------------
+  // try {
+  //   const response = await rp(optionSearch)
+  //   console.log(response.tracks.data[0].name)
+  //   event.reply(response.tracks.data[0].name)
+  // } catch (error) {
+  //   console.log(error.message)
+  // }
+
+  // 排行榜 -----------------------------------------------------------
   try {
-    const response = await rp(options)
-    console.log(response.tracks.data[0].name)
-    event.reply(response.tracks.data[0].name)
+    const response = await rp(optionCharts)
+    const aryChart = []
+    for (let i = 0; i < 10; i++) {
+      aryChart.push(
+        {
+          thumbnailImageUrl: response.data[i].images[0].url,
+          title: response.data[i].title,
+          text: response.data[i].description,
+          actions: [{
+            type: 'postback',
+            label: 'Buy',
+            data: 'action=buy&itemid=111'
+          }, {
+            type: 'postback',
+            label: 'Add to cart',
+            data: 'action=add&itemid=111'
+          }, {
+            type: 'uri',
+            label: 'View detail',
+            uri: response.data[i].url
+          }]
+        }
+      )
+    }
+    event.reply({
+      type: 'template',
+      altText: 'this is a carousel template',
+      template: {
+        type: 'carousel',
+        columns: aryChart
+      }
+    })
+    console.log(aryChart)
   } catch (error) {
     console.log(error.message)
   }
