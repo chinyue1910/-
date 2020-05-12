@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <counter v-for="n in 3"></counter>
+        <!-- 傳遞名稱為 text 的文字進文件 -->
+        <proptest text="天氣不好下雨"></proptest>
+        <!-- 也可以用 v-bind 把 data 傳進文件 -->
+        <proptest :text="msg"></proptest>
+        <!-- 使用 v-for 迴圈將陣列資料帶入元件 -->
+        <post v-for="post in posts" :data="post" @good="handleGood"></post>
+
+        <comp1></comp1>
+        <comp2></comp2>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- 元件的 HTML 部分 -->
+    <script type="text/x-template" id="counter">
+        <button @click="count++">你點擊了 {{ count }} 次</button>
+    </script>
+    <script type="text/x-template" id="proptest">
+            <p>{{ text }}</p>
+    </script>
+    <script type="text/x-template" id="post">
+        <div>
+            <h1>標題: {{data.title}}</h1>
+            <h3>作者: {{data.author}}</h3>
+            <p>{{data.content}}</p>
+            <button @click="good">讚</button>
+        </div>
+    </script>
+    <script type="text/x-template" id="comp1">
+        <div>
+            <input type="text" v-model="text">
+            <button @click="sendData">傳資料</button>
+        </div>
+    </script>
+    <script type="text/x-template" id="comp2">
+        <p>{{ text }}</p>
+    </script>
+    <script>
+        const eventBus = new Vue()
+        // 註冊文件
+        Vue.component("counter", {
+            // 使用 ID 為 counter 的東西當元件的 HTML 部分
+            template: "#counter",
+            // 元件的 data 必須要寫成 function
+            data() {
+                return {
+                    count: 0
+                }
+            }
+        })
+
+        Vue.component("proptest", {
+            template: "#proptest",
+            // 外面傳進元件的資料有哪些
+            props: {
+                text: String
+            }
+        })
+
+        Vue.component("post", {
+            template: "#post",
+            props: {
+                data: Object
+            },
+            methods: {
+                good() {
+                    // 子元件觸發事件，事件名為 good，傳出作者資料
+                    this.$emit("good", this.data.author, this.data.title)
+                }
+            }
+        })
+
+        Vue.component("comp1", {
+            template: "#comp1",
+            data() {
+                return {
+                    text: ""
+                }
+            },
+            methods: {
+                sendData() {
+                    // eventBus 觸發事件
+                    eventBus.$emit('sendData', this.text)
+                    this.text = ""
+                }
+            }
+        })
+        Vue.component("comp2", {
+            template: "#comp2",
+            data() {
+                return {
+                    text: ""
+                }
+            },
+            mounted() {
+                // 監聽 eventBus 的 sendData 事件
+                eventBus.$on('sendData', (data) => {
+                    this.text = data
+                })
+            }
+        })
+
+        new Vue({
+            el: "#app",
+            name: "app",
+            data: {
+                msg: "aaaa",
+                posts: [
+                    {
+                        title: "標題一",
+                        author: "aaa",
+                        content: "fafadfdsfsdfsdgsdfg"
+                    },
+                    {
+                        title: "標題二",
+                        author: "bbb",
+                        content: "fafadfdsfsdfsdgsdfg"
+                    }
+                ]
+            },
+            methods: {
+                handleGood(author, title) {
+                    alert(`你按了 ${author} 的 ${title} 讚`)
+                }
+            }
+
+        })
+    </script>
+</body>
+
+</html>
