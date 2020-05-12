@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .del {
+            text-decoration: line-through
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <input type="text" v-model="newitem" @keydown.enter="add" :style="{border:'5px solid ' + borderColor}">
+        <input type="button" value="新增" @click="add">
+        <hr>
+        <input type="button" value="顯示全部" @click="filter = '全部'">
+        <input type="button" value="顯示已完成" @click="filter = '已完成'">
+        <input type="button" value="顯示未完成" @click="filter = '未完成'">
+        <hr>
+        <input type="button" value="刪除全部" @click="del('全部')">
+        <input type="button" value="刪除已完成" @click="del('已完成')">
+        <input type="button" value="刪除未完成" @click="del('未完成')">
+        <hr>
+        <input type="button" value="全部標記已完成" @click="mark(true)">
+        <input type="button" value="全部標記未完成" @click="mark(false)">
+        <hr>
+        顯示 {{ filter }}，共 {{filteredItems.length}} 個
+        <ul>
+            <li v-for="(item , index) in filteredItems">
+                <input type="checkbox" :checked="item.done" @change="toggle(item)">
+                <span :class="{del: item.done}" @dblclick="edit(item)">{{ item.text }}</span>
+                <input type="text" v-if="item.edit" v-model="item.model" @keydown.enter="editFinish(item)"
+                    @keydown.esc="editCancel(item)">
+                <input type="button" value="X" @click="delOne(item)">
+            </li>
+        </ul>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        new Vue({
+            el: "#app",
+            name: "app",
+            data: {
+                newitem: "",
+                items: [],
+                filter: "全部"
+            },
+            methods: {
+                add() {
+                    if (this.newitem.length >= 2) {
+                        this.items.push({ done: false, text: this.newitem, edit: false, model: this.newitem })
+                    }
+                    this.newitem = ""
+                },
+                toggle(item) {
+                    item.done = !item.done
+                },
+                delOne(item) {
+                    const index = this.items.indexOf(item)
+                    this.items.splice(index, 1)
+                },
+                edit(item) {
+                    item.edit = !item.edit
+                },
+                editFinish(item) {
+                    item.edit = false
+                    item.text = item.model
+                },
+                editCancel(item) {
+                    item.edit = false
+                    item.text = item.text
+                },
+                del(filter) {
+                    switch (filter) {
+                        case "全部":
+                            this.items = []
+                            break
+                        case "未完成":
+                            this.items = this.items.filter(item => {
+                                return item.done === true
+                            })
+                            break
+                        case "已完成":
+                            this.items = this.items.filter(item => {
+                                return item.done === false
+                            })
+                    }
+                },
+                mark(data) {
+                    for (let item of this.items) {
+                        item.done = data
+                    }
+                }
+            },
+            computed: {
+                borderColor() {
+                    return (this.newitem.length == 0) ? "black" : (this.newitem.length >= 2) ? "blue" : "red"
+                },
+                filteredItems() {
+                    switch (this.filter) {
+                        case "全部":
+                            return this.items
+                            break
+                        case "已完成":
+                            return this.items.filter(item => {
+                                return item.done == true
+                            })
+                            break
+                        case "未完成":
+                            return this.items.filter(item => {
+                                return item.done == false
+                            })
+                    }
+                }
+            }
+            ,
+            watch: {
+                items: {
+                    deep: true,
+                    // 東西改變時要執行的 function
+                    handler() {
+                        localStorage.setItem("aaa", JSON.stringify(this.items))
+                    }
+                }
+            },
+            mounted() {
+                const data = localStorage.getItem("aaa")
+                if (data !== null) {
+                    this.items = JSON.parse(data)
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
