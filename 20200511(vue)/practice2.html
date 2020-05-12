@@ -5,22 +5,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            font-family: '微軟正黑體';
+            box-sizing: border-box;
+        }
+
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
 </head>
 
 <body>
-    <div id="app">
-        <count></count>
+    <div id="app" :style="style">
+        <count :style="number"></count>
         <collection v-for="post in posts" :data="post"></collection>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script type="text/x-template" id="count">
-        <p>{{count}}</p>
+        <div>收集到讚的數量 ： {{count}}</div>
     </script>
     <script type="text/x-template" id="collection">
-        <div>
-            <img :src="data.img" width="500px">
+        <div :style="box">
+            <img :src="data.img" :style="objectfit">
             <h1>{{data.title}}</h1>
-            <button @click="toggle">{{goodone}}</button>
+            <button @click="toggle" :style="btn">{{goodone}}</button>
         </div>
     </script>
     <script>
@@ -33,12 +49,31 @@
             },
             data() {
                 return {
-                    goodone: "讚"
+                    goodone: "讚",
+                    box: {
+                        width: "300px",
+                        height: "300px",
+                        margin: "0 40px",
+                        textAlign: "center"
+                    },
+                    objectfit: {
+                        objectFit: 'cover',
+                        objectPosition: 'center',
+                        width: '100%',
+                        height: '100%'
+                    },
+                    btn: {
+                        fontSize: "2rem",
+                        borderRadius: "1rem",
+                        width: "100px",
+                        outline: "none"
+                    }
                 }
             },
             methods: {
                 toggle() {
                     this.data.good = !this.data.good
+                    console.log(this);
                     this.$emit("toggle", this.data.good)
                     if (this.data.good) {
                         this.goodone = "讚"
@@ -76,6 +111,17 @@
             el: "#app",
             name: "app",
             data: {
+                style: {
+                    display: 'flex',
+                    flexWrap: 'wrap',
+                    alignContent: "space-evenly",
+                    height: "100vh"
+                },
+                number: {
+                    width: "100vw",
+                    fontSize: "3rem",
+                    textAlign: "center"
+                },
                 posts: [
                     {
                         img: "https://cdn.pixabay.com/photo/2018/01/14/23/12/nature-3082832__340.jpg",
