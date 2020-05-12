@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <count></count>
+        <collection v-for="post in posts" :data="post"></collection>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script type="text/x-template" id="count">
+        <p>{{count}}</p>
+    </script>
+    <script type="text/x-template" id="collection">
+        <div>
+            <img :src="data.img" width="500px">
+            <h1>{{data.title}}</h1>
+            <button @click="toggle">{{goodone}}</button>
+        </div>
+    </script>
+    <script>
+        const eventBus = new Vue()
+
+        Vue.component("collection", {
+            template: "#collection",
+            props: {
+                data: Object
+            },
+            data() {
+                return {
+                    goodone: "讚"
+                }
+            },
+            methods: {
+                toggle() {
+                    this.data.good = !this.data.good
+                    this.$emit("toggle", this.data.good)
+                    if (this.data.good) {
+                        this.goodone = "讚"
+                    } else {
+                        this.goodone = "收回讚"
+                    }
+                    eventBus.$emit('toggle', this.data.good)
+                }
+            }
+        })
+
+        Vue.component("count", {
+            template: "#count",
+            props: {
+                data: String
+            },
+            data() {
+                return {
+                    count: 0
+                }
+            },
+            mounted() {
+                eventBus.$on("toggle", (data) => {
+                    if (!data) {
+                        this.count++
+                    }
+                    else {
+                        this.count--
+                    }
+                })
+            }
+        })
+
+        new Vue({
+            el: "#app",
+            name: "app",
+            data: {
+                posts: [
+                    {
+                        img: "https://cdn.pixabay.com/photo/2018/01/14/23/12/nature-3082832__340.jpg",
+                        title: "風景一",
+                        good: true
+                    },
+                    {
+                        img: "https://www.guodong.net/wp-content/uploads/2018/12/20181223_5c1f64e09b6bb-1.jpg",
+                        title: "風景二",
+                        good: true
+                    },
+                    {
+                        img: "https://c4.wallpaperflare.com/wallpaper/500/442/354/outrun-vaporwave-hd-wallpaper-thumb.jpg",
+                        title: "風景三",
+                        good: true
+                    },
+                    {
+                        img: "https://images.all-free-download.com/images/wallpapers_large/blue_wallpaper_landscape_nature_wallpaper_1007.jpg",
+                        title: "風景四",
+                        good: true
+                    },
+                    {
+                        img: "https://images.hdqwalls.com/wallpapers/small-memory-lp.jpg",
+                        title: "風景五",
+                        good: true
+                    }
+                ]
+            }
+        })
+    </script>
+</body>
+
+</html>
