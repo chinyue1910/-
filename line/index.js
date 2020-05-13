@@ -156,13 +156,13 @@ bot.on('message', async function (event) {
       })
     } else {
       // 搜尋 -----------------------------------------------------------
-      try {
-        const response = await rp(optionSearch)
-        console.log(response.tracks.data[0].name)
-        event.reply(response.tracks.data[0].name)
-      } catch (error) {
-        console.log(error.message)
-      }
+      // try {
+      //   const response = await rp(optionSearch)
+      //   console.log(response.tracks.data[0].name)
+      //   event.reply(response.tracks.data[0].name)
+      // } catch (error) {
+      //   console.log(error.message)
+      // }
       console.log('搜尋')
     }
   } catch (error) {
