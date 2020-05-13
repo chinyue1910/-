@@ -10,20 +10,19 @@
     <link rel="stylesheet" href="./css/bootstrap.css">
 
     <title>Hello, world!</title>
+    <style>
+        html,
+        body {
+            height: 100%;
+        }
+    </style>
 </head>
 
 <body>
-    <div class="container bg-primary"> 固定寬度 </div>
-    <div class="contianer-fluid bg-info">滿版</div>
-
-    <div class="container px-5 bg-primary">
+    <div class="container bg-primary">
         <div class="row">
-            <div class="col-6 bg-light">
-                One of three columns
-            </div>
-            <div class="col-6 bg-light">
-                One of three columns
-            </div>
+            <div class="col-auto bg-dark">.col-auto .mr-auto</div>
+            <div class="col-auto mx-auto bg-dark">.col-auto</div>
         </div>
     </div>
     <!-- Optional JavaScript -->
