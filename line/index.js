@@ -42,13 +42,11 @@ const getToken = async () => {
 
 getToken()
 
-const IDget = []
-
 bot.on('message', async function (event) {
   const optionSearch = {
     uri: 'https://api.kkbox.com/v1.1/search',
     qs: {
-      q: '周杰倫',
+      q: event.message.text,
       territory: 'TW',
       limit: '5',
       type: 'track'
@@ -68,20 +66,12 @@ bot.on('message', async function (event) {
     },
     json: true
   }
-  // 搜尋 -----------------------------------------------------------
-  // try {
-  //   const response = await rp(optionSearch)
-  //   console.log(response.tracks.data[0].name)
-  //   event.reply(response.tracks.data[0].name)
-  // } catch (error) {
-  //   console.log(error.message)
-  // }
-
   // 排行榜 -----------------------------------------------------------
   try {
     const response = await rp(optionCharts)
     const aryChart = []
-    const want = [0, 1, 2, 3, 7, 8, 9, 25, 27]
+    const IDget = []
+    const want = [0, 7, 8, 9, 10, 11, 12, 25, 27]
     for (const i of want) {
       aryChart.push(
         {
@@ -94,9 +84,9 @@ bot.on('message', async function (event) {
             uri: response.data[i].url
           },
           actions: [{
-            type: 'postback',
+            type: 'message',
             label: '查看排行歌曲',
-            data: '查看排行歌曲'
+            text: response.data[i].id
           }, {
             type: 'uri',
             label: '查看官方網址',
@@ -106,29 +96,77 @@ bot.on('message', async function (event) {
       )
       IDget.push(response.data[i].id)
     }
-    event.reply({
-      type: 'template',
-      altText: 'this is a carousel template',
-      template: {
-        type: 'carousel',
-        columns: aryChart
+    if (IDget.includes(event.message.text)) {
+      const optionChartsTracks = {
+        uri: 'https://api.kkbox.com/v1.1/charts/' + event.message.text,
+        qs: {
+          territory: 'TW'
+        },
+        auth: {
+          bearer: token
+        },
+        json: true
       }
-    })
+      try {
+        const rep = await rp(optionChartsTracks)
+        console.log(rep.tracks.data[0].url)
+        const trackinfo = []
+        for (let i = 0; i < 10; i++) {
+          trackinfo.push(
+            {
+              thumbnailImageUrl: rep.tracks.data[i].album.images[0].url,
+              title: rep.tracks.data[i].name,
+              text: '歌手：' + rep.tracks.data[i].album.artist.name,
+              defaultAction: {
+                type: 'uri',
+                label: 'View detail',
+                uri: rep.tracks.data[i].url
+              },
+              actions: [{
+                type: 'message',
+                label: '立即試聽',
+                text: '待更新'
+              }, {
+                type: 'uri',
+                label: '查看官方網址',
+                uri: rep.tracks.data[i].url
+              }]
+            }
+          )
+        }
+        event.reply({
+          type: 'template',
+          altText: '行動裝置才看的到',
+          template: {
+            type: 'carousel',
+            columns: trackinfo
+          }
+        })
+      } catch (error) {
+        console.log(error.msg)
+      }
+    } else if (event.message.text === 'rank') {
+      event.reply({
+        type: 'template',
+        altText: '行動裝置才看的到',
+        template: {
+          type: 'carousel',
+          columns: aryChart
+        }
+      })
+    } else {
+      // 搜尋 -----------------------------------------------------------
+      try {
+        const response = await rp(optionSearch)
+        console.log(response.tracks.data[0].name)
+        event.reply(response.tracks.data[0].name)
+      } catch (error) {
+        console.log(error.message)
+      }
+      console.log('搜尋')
+    }
   } catch (error) {
     console.log(error.message)
-  }
-})
-
-bot.on('postback', (event) => {
-  // const optionChartsTracks = {
-  //   uri: 'https://api.kkbox.com/v1.1/charts/chart_id/tracks',
-  //   qs: {
-  //     territory: 'TW',
-  //     chartId:
-  //   }
-  // }
-  if (event.postback.data === '查看排行歌曲') {
-    console.log(event)
   }
 })
 
