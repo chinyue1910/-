@@ -13,37 +13,19 @@
 </head>
 
 <body>
-    <table class="table table-responsive-xl">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr class="table-success">
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>Larry</td>
-                <td>the Bird</td>
-                <td>@twitter</td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="container bg-primary"> 固定寬度 </div>
+    <div class="contianer-fluid bg-info">滿版</div>
 
+    <div class="container px-5 bg-primary">
+        <div class="row">
+            <div class="col-6 bg-light">
+                One of three columns
+            </div>
+            <div class="col-6 bg-light">
+                One of three columns
+            </div>
+        </div>
+    </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="./js/jquery-3.5.1.min.js"></script>
