@@ -14,7 +14,7 @@ const bot = linebot({
   channelAccessToken: process.env.CHANNEL_ACCESS_TOKEN
 })
 
-const option = {
+const optionToken = {
   method: 'POST',
   uri: 'https://account.kkbox.com/oauth2/token',
   headers: {
@@ -31,7 +31,7 @@ let token = ''
 
 const getToken = async () => {
   try {
-    const response = await rp(option)
+    const response = await rp(optionToken)
     token = response.access_token
   } catch (error) {
     console.log(error.message)
@@ -43,21 +43,8 @@ const getToken = async () => {
 getToken()
 
 bot.on('message', async function (event) {
-  const optionSearch = {
-    uri: 'https://api.kkbox.com/v1.1/search',
-    qs: {
-      q: event.message.text,
-      territory: 'TW',
-      limit: '5',
-      type: 'track'
-    },
-    auth: {
-      bearer: token
-    },
-    json: true
-  }
-  const optionCharts = {
-    uri: 'https://api.kkbox.com/v1.1/charts',
+  const option = {
+    uri: 'https://api.kkbox.com/v1.1/charts/chart_id',
     qs: {
       territory: 'TW'
     },
@@ -66,107 +53,27 @@ bot.on('message', async function (event) {
     },
     json: true
   }
-  // 排行榜 -----------------------------------------------------------
-  try {
-    const response = await rp(optionCharts)
-    const aryChart = []
-    const IDget = []
-    const want = [0, 7, 8, 9, 10, 11, 12, 25, 27]
-    for (const i of want) {
-      aryChart.push(
-        {
-          thumbnailImageUrl: response.data[i].images[0].url,
-          title: response.data[i].title,
-          text: response.data[i].description,
-          defaultAction: {
-            type: 'uri',
-            label: 'View detail',
-            uri: response.data[i].url
-          },
-          actions: [{
-            type: 'message',
-            label: '查看排行歌曲',
-            text: response.data[i].id
-          }, {
-            type: 'uri',
-            label: '查看官方網址',
-            uri: response.data[i].url
-          }]
-        }
-      )
-      IDget.push(response.data[i].id)
+  class Leaderboard {
+    constructor(id) {
+      this.id = id
     }
-    if (IDget.includes(event.message.text)) {
-      const optionChartsTracks = {
-        uri: 'https://api.kkbox.com/v1.1/charts/' + event.message.text,
-        qs: {
-          territory: 'TW'
-        },
-        auth: {
-          bearer: token
-        },
-        json: true
-      }
+
+    async info() {
       try {
-        const rep = await rp(optionChartsTracks)
-        console.log(rep.tracks.data[0].url)
-        const trackinfo = []
-        for (let i = 0; i < 10; i++) {
-          trackinfo.push(
-            {
-              thumbnailImageUrl: rep.tracks.data[i].album.images[0].url,
-              title: rep.tracks.data[i].name,
-              text: '歌手：' + rep.tracks.data[i].album.artist.name,
-              defaultAction: {
-                type: 'uri',
-                label: 'View detail',
-                uri: rep.tracks.data[i].url
-              },
-              actions: [{
-                type: 'message',
-                label: '立即試聽',
-                text: '待更新'
-              }, {
-                type: 'uri',
-                label: '查看官方網址',
-                uri: rep.tracks.data[i].url
-              }]
-            }
-          )
-        }
-        event.reply({
-          type: 'template',
-          altText: '行動裝置才看的到',
-          template: {
-            type: 'carousel',
-            columns: trackinfo
-          }
-        })
+        option.uri = 'https://api.kkbox.com/v1.1/charts/' + this.id
+        const response = await rp(option)
+        console.log(response)
       } catch (error) {
         console.log(error.msg)
       }
-    } else if (event.message.text === 'rank') {
-      event.reply({
-        type: 'template',
-        altText: '行動裝置才看的到',
-        template: {
-          type: 'carousel',
-          columns: aryChart
-        }
-      })
-    } else {
-      // 搜尋 -----------------------------------------------------------
-      // try {
-      //   const response = await rp(optionSearch)
-      //   console.log(response.tracks.data[0].name)
-      //   event.reply(response.tracks.data[0].name)
-      // } catch (error) {
-      //   console.log(error.message)
-      // }
-      console.log('搜尋')
     }
-  } catch (error) {
-    console.log(error.message)
+  }
+  // -------------------------------------------------------------------------------------------
+  switch (event.message.text) {
+    case '!綜合':
+      const live = new Leaderboard('LZPhK2EyYzN15dU-PT')
+      live.info()
+      break
   }
 })
 
