@@ -10,12 +10,30 @@
     <link rel="stylesheet" href="./css/bootstrap.css">
 
     <title>Hello, world!</title>
+    <style>
+        html,
+        body {
+            height: 100%;
+        }
+
+        .container {
+            height: 80%;
+        }
+
+        .box {
+            width: 100px;
+            height: 100px;
+        }
+    </style>
 </head>
 
-<body>
-    <!-- https://developers.google.com/youtube/iframe_api_reference 串接 youtube API -->
-    <div class="embed-responsive embed-responsive-16by9">
-        <div id="player"></div>
+<body class="d-flex justify-content-center align-items-center">
+    <div class="container bg-dark text-white">
+        <div class="d-flex h-100 justify-content-around align-items-center">
+            <div class="box bg-danger d-flex justify-content-center align-items-center">1</div>
+            <div class="box bg-success">2</div>
+            <div class="box bg-primary">3</div>
+        </div>
     </div>
 
     <!-- Optional JavaScript -->
@@ -23,23 +41,6 @@
     <script src="./js/jquery-3.5.1.min.js"></script>
     <script src="./js/popper.min.js"></script>
     <script src="./js/bootstrap.min.js"></script>
-    <script src="http://www.youtube.com./iframe_api"></script>
-    <script>
-        var player;
-        function onYouTubeIframeAPIReady() {
-            player = new YT.Player('player', {
-                height: '390',
-                width: '640',
-                videoId: 'TgOu00Mf3kI',
-                events: {
-                    onReady: onPlayerReady
-                }
-            });
-        }
-        function onPlayerReady(e) {
-            e.target.mute().playVideo();
-        }
-    </script>
 </body>
 
 </html>
