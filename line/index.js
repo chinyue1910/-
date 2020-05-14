@@ -43,36 +43,142 @@ const getToken = async () => {
 getToken()
 
 bot.on('message', async function (event) {
-  const option = {
-    uri: 'https://api.kkbox.com/v1.1/charts/chart_id',
-    qs: {
-      territory: 'TW'
-    },
-    auth: {
-      bearer: token
-    },
-    json: true
-  }
-  class Leaderboard {
+  // 歌曲物件導向--------------------------------------------------------------------------------------
+  class LeaderboardTrack {
     constructor(id) {
       this.id = id
+      this.ary = []
+      this.option = {
+        uri: 'https://api.kkbox.com/v1.1/charts/chart_id/tracks',
+        qs: {
+          territory: 'TW',
+          limit: 10
+        },
+        auth: {
+          bearer: token
+        },
+        json: true
+      }
     }
 
     async info() {
       try {
-        option.uri = 'https://api.kkbox.com/v1.1/charts/' + this.id
-        const response = await rp(option)
-        console.log(response)
+        this.option.uri = 'https://api.kkbox.com/v1.1/charts/' + this.id + '/tracks'
+        const response = await rp(this.option)
+        for (const i of response.data) {
+          this.ary.push(
+            {
+              thumbnailImageUrl: i.album.images[0].url,
+              title: i.name,
+              text: i.album.artist.name,
+              actions: [{
+                type: 'postback',
+                label: '立即試聽',
+                data: 'action=add&itemid=111'
+              }, {
+                type: 'uri',
+                label: '看看歌詞',
+                uri: i.url
+              }]
+            }
+          )
+        }
+        event.reply({
+          type: 'template',
+          altText: 'this is a carousel template',
+          template: {
+            type: 'carousel',
+            columns: this.ary
+          }
+        })
       } catch (error) {
-        console.log(error.msg)
+        console.log(error)
       }
     }
   }
+  // 排行榜物件導向--------------------------------------------------------------------------------------
+  class Leaderboard {
+    constructor(id) {
+      this.id = id
+      this.ary = []
+      this.option = {
+        uri: 'https://api.kkbox.com/v1.1/charts/chart_id/tracks',
+        qs: {
+          territory: 'TW',
+          limit: 10
+        },
+        auth: {
+          bearer: token
+        },
+        json: true
+      }
+    }
+
+    async info() {
+      try {
+        this.option.uri = 'https://api.kkbox.com/v1.1/charts/' + this.id + '/tracks'
+        const response = await rp(this.option)
+        for (const i of response.data) {
+          this.ary.push(
+            {
+              thumbnailImageUrl: i.album.images[0].url,
+              title: i.name,
+              text: i.album.artist.name,
+              actions: [{
+                type: 'postback',
+                label: '立即試聽',
+                data: 'action=add&itemid=111'
+              }, {
+                type: 'uri',
+                label: '看看歌詞',
+                uri: i.url
+              }]
+            }
+          )
+        }
+        event.reply({
+          type: 'template',
+          altText: 'this is a carousel template',
+          template: {
+            type: 'carousel',
+            columns: this.ary
+          }
+        })
+      } catch (error) {
+        console.log(error)
+      }
+    }
+  }
+
   // -------------------------------------------------------------------------------------------
   switch (event.message.text) {
     case '!綜合':
-      const live = new Leaderboard('LZPhK2EyYzN15dU-PT')
-      live.info()
+      const l1 = new LeaderboardTrack('LZPhK2EyYzN15dU-PT')
+      l1.info()
+      break
+    case '!華語':
+      const l2 = new LeaderboardTrack('Ct1lsavgcKhiQMGmkH')
+      l2.info()
+      break
+    case '!西洋':
+      const l3 = new LeaderboardTrack('4poDBNQIFJSONTfzD_')
+      l3.info()
+      break
+    case '!韓語':
+      const l4 = new LeaderboardTrack('9XrDk_NiUFThN_-nfZ')
+      l4.info()
+      break
+    case '!日語':
+      const l5 = new LeaderboardTrack('D_KBTe8Cdcm7XVoK84')
+      l5.info()
+      break
+    case '!台語':
+      const l6 = new LeaderboardTrack('1aT2xlLH21QAedmxlz')
+      l6.info()
+      break
+    case '!粵語':
+      const l7 = new LeaderboardTrack('Ksduyo5whgbL4dXdlQ')
+      l7.info()
       break
   }
 })
