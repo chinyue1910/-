@@ -83,102 +83,76 @@ bot.on('message', async function (event) {
             }
           )
         }
-        event.reply({
-          type: 'template',
-          altText: 'this is a carousel template',
-          template: {
-            type: 'carousel',
-            columns: this.ary
-          }
-        })
       } catch (error) {
         console.log(error)
       }
-    }
-  }
-  // 排行榜物件導向--------------------------------------------------------------------------------------
-  class Leaderboard {
-    constructor(id) {
-      this.id = id
-      this.ary = []
-      this.option = {
-        uri: 'https://api.kkbox.com/v1.1/charts/chart_id/tracks',
-        qs: {
-          territory: 'TW',
-          limit: 10
-        },
-        auth: {
-          bearer: token
-        },
-        json: true
-      }
-    }
-
-    async info() {
-      try {
-        this.option.uri = 'https://api.kkbox.com/v1.1/charts/' + this.id + '/tracks'
-        const response = await rp(this.option)
-        for (const i of response.data) {
-          this.ary.push(
-            {
-              thumbnailImageUrl: i.album.images[0].url,
-              title: i.name,
-              text: i.album.artist.name,
-              actions: [{
-                type: 'postback',
-                label: '立即試聽',
-                data: 'action=add&itemid=111'
-              }, {
-                type: 'uri',
-                label: '看看歌詞',
-                uri: i.url
-              }]
-            }
-          )
+      event.reply({
+        type: 'template',
+        altText: 'this is a carousel template',
+        template: {
+          type: 'carousel',
+          columns: this.ary
         }
-        event.reply({
-          type: 'template',
-          altText: 'this is a carousel template',
-          template: {
-            type: 'carousel',
-            columns: this.ary
-          }
-        })
-      } catch (error) {
-        console.log(error)
-      }
+      })
     }
   }
-
   // -------------------------------------------------------------------------------------------
   switch (event.message.text) {
-    case '!綜合':
+    case '!綜合新歌':
       const l1 = new LeaderboardTrack('LZPhK2EyYzN15dU-PT')
       l1.info()
       break
-    case '!華語':
+    case '!華語單曲':
       const l2 = new LeaderboardTrack('Ct1lsavgcKhiQMGmkH')
       l2.info()
       break
-    case '!西洋':
+    case '!西洋單曲':
       const l3 = new LeaderboardTrack('4poDBNQIFJSONTfzD_')
       l3.info()
       break
-    case '!韓語':
+    case '!韓語單曲':
       const l4 = new LeaderboardTrack('9XrDk_NiUFThN_-nfZ')
       l4.info()
       break
-    case '!日語':
+    case '!日語單曲':
       const l5 = new LeaderboardTrack('D_KBTe8Cdcm7XVoK84')
       l5.info()
       break
-    case '!台語':
+    case '!台語單曲':
       const l6 = new LeaderboardTrack('1aT2xlLH21QAedmxlz')
       l6.info()
       break
-    case '!粵語':
+    case '!粵語單曲':
       const l7 = new LeaderboardTrack('Ksduyo5whgbL4dXdlQ')
       l7.info()
+      break
+    case '!華語新歌':
+      const l8 = new LeaderboardTrack('KkMIkv62_0Gg3yQn6-')
+      l8.info()
+      break
+    case '!西洋新歌':
+      const l9 = new LeaderboardTrack('Ctf6UavgcKhiSF3K10')
+      l9.info()
+      break
+    case '!韓語新歌':
+      const l10 = new LeaderboardTrack('4lTLWA4shw1HtRTnC2')
+      l10.info()
+      break
+    case '!日語新歌':
+      const l11 = new LeaderboardTrack('_ZZn3GuvztVJxP1W-m')
+      l11.info()
+      break
+    case '!台語新歌':
+      const l12 = new LeaderboardTrack('8oEmWG0PWzFpVzLmr6')
+      l12.info()
+      break
+    case '!粵語新歌':
+      const l13 = new LeaderboardTrack('WsCJuxOyp1sPmvPBsd')
+      l13.info()
+      break
+    case '!電子單曲':
+      const l14 = new LeaderboardTrack('Ksf4Go5whgbL6C5dY2')
+      l14.info()
       break
   }
 })
