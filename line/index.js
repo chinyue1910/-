@@ -207,10 +207,6 @@ bot.on('message', async function (event) {
   } else {
     const seartrack = new Search()
     seartrack.information()
-      .then(console.log(seartrack))
-      .catch((error) => {
-        console.log(error)
-      })
   }
 })
 
