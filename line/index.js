@@ -5,6 +5,8 @@ import dotenv from 'dotenv'
 // 引用 request 套件
 import rp from 'request-promise'
 
+import search from 'youtube-search'
+
 // 讀取 env 檔
 dotenv.config()
 
@@ -41,6 +43,11 @@ const getToken = async () => {
 // 時間差問題，console.log(token) 要等一下
 
 getToken()
+
+var opts = {
+  maxResults: 1,
+  key: 'AIzaSyDJzdhPGE9f1LDb0BcjR82ahfscoVeyC0c'
+}
 
 bot.on('message', async function (event) {
   // -------------------------------------------------------------------------------------------
@@ -152,7 +159,9 @@ bot.on('message', async function (event) {
     const top = new Leaderboard()
     top.info()
   } else if (event.message.text === 'aaa') {
-    console.log('你好')
+    const you = await search('蔡阿嘎', opts)
+    console.log(you.results[0].thumbnails.default.url)
+    event.reply(you.results[0].link)
   } else {
     const seartrack = new Search()
     seartrack.information()

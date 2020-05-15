@@ -18,7 +18,8 @@
     "eslint": "^7.0.0",
     "linebot": "^1.5.3",
     "request": "^2.88.2",
-    "request-promise": "^4.2.5"
+    "request-promise": "^4.2.5",
+    "youtube-search": "^1.1.4"
   },
   "devDependencies": {
     "eslint-config-standard": "^14.1.1",
