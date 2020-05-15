@@ -96,6 +96,57 @@ bot.on('message', async function (event) {
     }
   }
   // -------------------------------------------------------------------------------------------
+  class Leaderboard {
+    constructor() {
+      this.ary = []
+      this.want = [0, 1, 2, 3, 4, 5, 6, 25, 26]
+      this.option = {
+        uri: 'https://api.kkbox.com/v1.1/charts',
+        qs: {
+          territory: 'TW'
+        },
+        auth: {
+          bearer: token
+        },
+        json: true
+      }
+    }
+
+    async info() {
+      try {
+        const response = await rp(this.option)
+        for (const i of this.want) {
+          this.ary.push(
+            {
+              thumbnailImageUrl: response.data[i].images[0].url,
+              title: response.data[i].name,
+              text: response.data[i].description,
+              actions: [{
+                type: 'postback',
+                label: '立即試聽',
+                data: 'action=add&itemid=111'
+              }, {
+                type: 'uri',
+                label: '看看榜單',
+                uri: response.data[i].url
+              }]
+            }
+          )
+        }
+      } catch (error) {
+        console.log(error)
+      }
+      event.reply({
+        type: 'template',
+        altText: 'this is a carousel template',
+        template: {
+          type: 'carousel',
+          columns: this.ary
+        }
+      })
+    }
+  }
+  // -------------------------------------------------------------------------------------------
   class Search {
     constructor() {
       this.ary = []
@@ -204,6 +255,9 @@ bot.on('message', async function (event) {
         l13.info()
         break
     }
+  } else if (event.message.text === 'rank') {
+    const top = new Leaderboard()
+    top.info()
   } else {
     const seartrack = new Search()
     seartrack.information()
