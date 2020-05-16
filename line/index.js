@@ -63,8 +63,7 @@ const opts = {
 
 bot.on('follow', function (event) {
   event.reply(
-    { type: 'text', text: '請輸入 rank 來查看榜單' }
-    , { type: 'text', text: '或是直接輸入歌曲名稱' }
+    { type: 'text', text: '請輸入 rank 來查看榜單，或是直接輸入歌曲名稱' }
   )
 })
 
