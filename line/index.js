@@ -4,8 +4,10 @@ import linebot from 'linebot'
 import dotenv from 'dotenv'
 // 引用 request 套件
 import rp from 'request-promise'
-
+// 引用 youtube 搜尋套件
 import search from 'youtube-search'
+// 引用 schedule 套件
+import schedule from 'node-schedule'
 
 // 讀取 env 檔
 dotenv.config()
@@ -40,14 +42,31 @@ const getToken = async () => {
     console.log('false')
   }
 }
+getToken()
 // 時間差問題，console.log(token) 要等一下
 
-getToken()
+// 每天凌晨執行獲取 KKBOX 的 access token
+schedule.scheduleJob('* * 0 * * *', async () => {
+  try {
+    const response = await rp(optionToken)
+    token = response.access_token
+  } catch (error) {
+    console.log(error.message)
+    console.log('false')
+  }
+})
 
-var opts = {
+const opts = {
   maxResults: 1,
-  key: 'AIzaSyDJzdhPGE9f1LDb0BcjR82ahfscoVeyC0c'
+  key: process.env.API_Key
 }
+
+bot.on('follow', function (event) {
+  event.reply(
+    { type: 'text', text: '請輸入 rank 來查看榜單' }
+    , { type: 'text', text: '或是直接輸入歌曲名稱' }
+  )
+})
 
 bot.on('message', async function (event) {
   // -------------------------------------------------------------------------------------------
@@ -124,15 +143,16 @@ bot.on('message', async function (event) {
       try {
         const response = await rp(this.option)
         for (const i of response.tracks.data) {
+          const youtube = search(i.name + i.album.artist.name, opts)
           this.ary.push(
             {
               thumbnailImageUrl: i.album.images[0].url,
               title: i.name,
               text: i.album.artist.name,
               actions: [{
-                type: 'postback',
+                type: 'uri',
                 label: '立即試聽',
-                data: 'action=add&itemid=111'
+                uri: (await youtube).results[0].link
               }, {
                 type: 'uri',
                 label: '看看歌詞',
@@ -158,10 +178,6 @@ bot.on('message', async function (event) {
   if (event.message.text === 'rank') {
     const top = new Leaderboard()
     top.info()
-  } else if (event.message.text === 'aaa') {
-    const you = await search('蔡阿嘎', opts)
-    console.log(you.results[0].thumbnails.default.url)
-    event.reply(you.results[0].link)
   } else {
     const seartrack = new Search()
     seartrack.information()
@@ -191,15 +207,16 @@ bot.on('postback', (event) => {
         this.option.uri = 'https://api.kkbox.com/v1.1/charts/' + this.id + '/tracks'
         const response = await rp(this.option)
         for (const i of response.data) {
+          const youtube = search(i.name + i.album.artist.name, opts)
           this.ary.push(
             {
               thumbnailImageUrl: i.album.images[0].url,
               title: i.name,
               text: i.album.artist.name,
               actions: [{
-                type: 'postback',
+                type: 'uri',
                 label: '立即試聽',
-                data: 'action=add&itemid=111'
+                uri: (await youtube).results[0].link
               }, {
                 type: 'uri',
                 label: '看看歌詞',
@@ -221,8 +238,8 @@ bot.on('postback', (event) => {
       })
     }
   }
-  const bbb = new LeaderboardTrack(event.postback.data)
-  bbb.info()
+  const getTracks = new LeaderboardTrack(event.postback.data)
+  getTracks.info()
 })
 
 // https://www.postman.com/collections/5cd6236e9e9748fd1ed1
