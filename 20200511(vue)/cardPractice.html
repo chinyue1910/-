@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <h1>背景</h1>
+        <h3>總共 {{goods}} 個讚</h3>
+        <card v-for="card in cards" :data="card" @good="handleGood">
+            <card>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script type="text/x-template" id="card">
+        <div class="card">
+            <img :src="data.img">
+            <h1>{{data.title}}</h1>
+            <!-- 可放三元判斷式 -->
+            <button @click="toggleGood">{{good ? '收回讚' : '讚'}}</button>
+        </div>
+    </script>
+    <script>
+        Vue.component('card', {
+            template: '#card',
+            data() {
+                return {
+                    good: false
+                }
+            },
+            props: {
+                data: Object
+            },
+            methods: {
+                toggleGood() {
+                    this.good = !this.good
+                    this.$emit('good', this.good)
+                }
+            }
+        })
+        new Vue({
+            el: "#app",
+            data: {
+                goods: 0,
+                cards: [
+                    {
+                        img: "https://cdn.pixabay.com/photo/2018/01/14/23/12/nature-3082832__340.jpg",
+                        title: "風景一",
+                    },
+                    {
+                        img: "https://www.guodong.net/wp-content/uploads/2018/12/20181223_5c1f64e09b6bb-1.jpg",
+                        title: "風景二",
+                    },
+                    {
+                        img: "https://c4.wallpaperflare.com/wallpaper/500/442/354/outrun-vaporwave-hd-wallpaper-thumb.jpg",
+                        title: "風景三",
+                    },
+                    {
+                        img: "https://images.all-free-download.com/images/wallpapers_large/blue_wallpaper_landscape_nature_wallpaper_1007.jpg",
+                        title: "風景四",
+                    },
+                    {
+                        img: "https://images.hdqwalls.com/wallpapers/small-memory-lp.jpg",
+                        title: "風景五",
+                    }
+                ]
+            },
+            methods: {
+                handleGood(good) {
+                    if (good) this.goods++
+                    else this.goods--
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
