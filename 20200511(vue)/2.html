@@ -14,7 +14,7 @@
         <input type="button" value="新增" @click="add">
         <ul>
             <li v-for="(item,index) in items">
-                <input type="checkbox" :checked="item.done" @change="toggle(item)">
+                <input type="checkbox" :checked="item.done" @click="toggle(item)">
                 <del v-if="item.done">{{ item.text }}</del>
                 <span v-else>{{ item.text }}</span>
                 <input type="button" value="x" @click="del(index)">
