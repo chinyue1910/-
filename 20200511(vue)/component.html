@@ -61,8 +61,9 @@
 
         Vue.component("proptest", {
             template: "#proptest",
-            // 外面傳進元件的資料有哪些
+            // 父元件傳給子元件
             props: {
+                // 傳入 text="天氣不好下雨"
                 text: String
             }
         })
@@ -114,7 +115,7 @@
             el: "#app",
             name: "app",
             data: {
-                msg: "aaaa",
+                msg: ":text='msg'",
                 posts: [
                     {
                         title: "標題一",
