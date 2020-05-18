@@ -75,8 +75,9 @@
             },
             methods: {
                 good() {
-                    // 子元件觸發事件，事件名為 good，傳出作者資料
+                    // 子元件觸發事件，事件名為 good，傳出作者資料給父層
                     this.$emit("good", this.data.author, this.data.title)
+                    console.log(this);
                 }
             }
         })
