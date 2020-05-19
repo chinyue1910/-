@@ -61,8 +61,9 @@
 
         Vue.component("proptest", {
             template: "#proptest",
-            // 外面傳進元件的資料有哪些
+            // 父元件傳給子元件
             props: {
+                // 傳入 text="天氣不好下雨"
                 text: String
             }
         })
@@ -74,8 +75,9 @@
             },
             methods: {
                 good() {
-                    // 子元件觸發事件，事件名為 good，傳出作者資料
+                    // 子元件觸發事件，事件名為 good，傳出作者資料給父層
                     this.$emit("good", this.data.author, this.data.title)
+                    console.log(this);
                 }
             }
         })
@@ -114,7 +116,7 @@
             el: "#app",
             name: "app",
             data: {
-                msg: "aaaa",
+                msg: ":text='msg'",
                 posts: [
                     {
                         title: "標題一",
