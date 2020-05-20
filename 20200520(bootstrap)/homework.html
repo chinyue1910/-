@@ -19,41 +19,54 @@
       box-sizing: border-box;
       transition: 0.5s
     }
+
+    html,
+    body {
+      height: 100%;
+    }
+
+    body {
+      background: linear-gradient(black, #333, black);
+    }
   </style>
 </head>
 
-<body class="d-flex text-white bg-dark flex-wrap align-content-between">
-  <div class="container col-12 ">
-    <div class="row">
-      <div class="col-12 text-center">
-        <h1>LOGO</h1>
+<body class="d-flex text-white flex-column justify-content-between">
+  <div class="container">
+    <div class="row justify-content-between">
+      <div class="col-12 col-md-1 mr-auto p-md-0  text-center">
+        <h3>LOGO</h3>
       </div>
-      <div class="col-12 d-flex justify-content-around">
-        <div>Home</div>
-        <div>Features</div>
-        <div>Works</div>
-        <div>Contact</div>
+      <div class="col-12 col-md-3 d-flex justify-content-around">
+        <div class="p-md-2">Home</div>
+        <div class="p-md-2">Features</div>
+        <div class="p-md-2">Works</div>
+        <div class="p-md-2">Contact</div>
       </div>
     </div>
   </div>
-  <div class="container col-12">
-    <div class="row flex-column align-items-center">
-      <img class="img-fluid rounded-circle w-50 mx-auto d-block" src="https://picsum.photos/800/800/?random=1">
-      <div class="text-center">
+  <div class="container">
+    <div class="row flex-wrap justify-content-center">
+      <img class="col-6 col-sm-5 col-md-4 col-lg-3 col-xl-2 img-fluid rounded-circle mx-auto d-block"
+        src="https://picsum.photos/800/800/?random=1">
+      <div class="col-12"></div>
+      <div class="col-12 col-sm-8 text-center">
         <h1>Bootstrap Layout</h1>
       </div>
-      <div class="text-center">
+      <div class="col-12"></div>
+      <div class="col-12 col-sm-8 text-center">
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus laudantium odit eaque eius culpa, aliquam quia
           nam quod debitis fugit ad quisquam nostrum minima accusantium doloremque unde commodi exercitationem tempore!
         </p>
       </div>
-      <div class="btn btn-light">
-        Learn More
+      <div class="col-12"></div>
+      <div class="btn btn-light ">
+        <b>Learn More</b>
       </div>
     </div>
-    
+
   </div>
-  <div class="container col-12 ">123</div>
+  <div class="container text-center">Design By ChinYue</div>
 
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
