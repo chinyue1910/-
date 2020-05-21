@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="./css/bootstrap.css">
+
+    <title>Hello, world!</title>
+    <style>
+      h4{
+        margin: 1rem 0;
+      }
+      body{
+        background: #eee;
+      }
+      .container{
+        margin-bottom: 2rem;
+      }
+
+      #checkbox input{
+        display: none;
+      }
+
+      #checkbox input+label ::before{
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        width: 2.5rem;
+        height: 1.2rem;
+        background-color: blue;
+        border-radius: 0.5rem;
+      }
+
+      #checkbox input + label::after{
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        width: 1.2rem;
+        height: 1.2rem;
+        background-color: red;
+        border-radius: 50%;
+        transition: 0.5s;
+      }
+
+      #checkbox input:checked + label::after{
+        left: 1.3rem;
+      }
+
+      #checkbox input+label >span{
+        margin-left: 3rem;
+      }
+
+    </style>
+</head>
+
+<body>
+    <div id="checkbox">
+      <input type="checkbox" id="check1">
+      <label for="check1"><span>check me</span></label>
+    </div>
+
+    <div class="custom-file">
+      <input type="file" class="custom-file-input" id="customFile">
+      <label class="custom-file-label" for="customFile" data-browse="上傳">請選擇檔案...</label>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="./js/jquery-3.5.1.min.js"></script>
+    <script src="./js/popper.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+</body>
+
+</html>
