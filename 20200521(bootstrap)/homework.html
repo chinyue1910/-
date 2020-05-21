@@ -30,8 +30,17 @@
       background-repeat: no-repeat;
       background-size: cover;
     }
+    .col-7{
+      background-color: rgba(255,255,255,0.3)
+    }
 
-    .col-7 div:first-of-type{
+    .col-7 .bg-primary{
+      position: absolute;
+      left: 50%;
+      top: -5%;
+      transform: translate(-50%,-50%);
+      width: 150px;
+      height: 150px;
     }
   </style>
 </head>
@@ -39,18 +48,18 @@
 <body class="d-flex justify-content-center align-items-center bg-dark">
   <div class="container h-100">
     <div class="row justify-content-center align-items-center h-100">
-      <div class="col-7 h-50 d-flex flex-column justify-content-around text-center rounded-lg pt-5 p-5"
-        style="background-color: rgba(255,255,255,0.3);">
-        <div class="bg-primary rounded-circle p-5 px-5 position-absolute">
-          <h1 class="far fa-user text-white display-1"></h1>
+      <div class="col-7 h-50 d-flex flex-column justify-content-between text-center rounded-lg p-5">
+        <div class="bg-primary rounded-circle d-flex justify-content-center align-items-center">
+          <h1 class="far fa-user text-white display-2"></h1>
         </div>
-        <h1>Sign In</h1>
+        <h1 class="pt-3">Sign In</h1>
         <div class="form-group">
           <div class="input-group">
             <div class="input-group-prepend">
               <div class="input-group-text bg-white border-white"><i class="fas fa-user"></i></div>
             </div>
-            <input type="text" class="form-control form-control-lg border-white" id="inlineFormInputGroup" placeholder="Username">
+            <input type="text" class="form-control form-control-lg border-white" id="inlineFormInputGroup"
+              placeholder="Username">
           </div>
         </div>
         <div class="form-group">
@@ -58,7 +67,8 @@
             <div class="input-group-prepend">
               <div class="input-group-text bg-white border-white"><i class="fas fa-lock"></i></div>
             </div>
-            <input type="text" class="form-control form-control-lg border-white" id="inlineFormInputGroup" placeholder="Password">
+            <input type="text" class="form-control form-control-lg border-white" id="inlineFormInputGroup"
+              placeholder="Password">
           </div>
         </div>
         <button type="submit" class="btn btn-primary btn-lg">Login</button>
