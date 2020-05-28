@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="./css/bootstrap.css">
+
+  <title>Hello, world!</title>
+</head>
+
+<body>
+  <div class="container">
+    <h4>彈出提示框 (Popovers)</h4>
+    <ol>
+      <li>需要 jquery 觸發</li>
+      <li>data-placement 改顯示方向</li>
+      <li>data-trigger 改觸發方式</li>
+    </ol>
+    <div class="row">
+      <div class="col">
+        <button 
+          type="button" 
+          class="btn btn-lg btn-danger" 
+          data-toggle="popover" 
+          data-placement="bottom"
+          data-trigger="hover"
+          title="Popover title" 
+          data-content="And here's some amazing content. It's very engaging. Right?">
+          Click to toggle popover
+      </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="./js/jquery-3.5.1.min.js"></script>
+  <script src="./js/popper.min.js"></script>
+  <script src="./js/bootstrap.min.js"></script>
+  <script>
+    $(function () {
+      $('[data-toggle="popover"]').popover()
+    })
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="./css/bootstrap.css">
+
+  <title>Hello, world!</title>
+  <style>
+    .progress {
+      margin: 1rem 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h4>進度條 (Progress)</h4>
+    <ul>
+      <li>使用 .progress 作為包裝器來指示進度條的最大值。</li>
+      <li>內部的 .progress-bar 來表示到目前為止的進度。</li>
+      <li>.progress-bar 需要行內樣式，通用類別的 Class 或自訂 CSS 來設置它們的寬度。</li>
+      <li>.progress-bar 還需要一些 role 和 aria 屬性來使其具親和性。</li>
+    </ul>
+    <div class="row">
+      <div class="col">
+        <div class="progress">
+          <div class="progress-bar" role="progressbar"></div>
+        </div>
+        <div class="progress">
+          <div class="progress-bar bg-warning progress-bar-animated progress-bar-striped" role="progressbar" style="width: 25%"></div>
+        </div>
+        <div class="progress">
+          <div class="progress-bar bg-danger progress-bar-animated progress-bar-striped" role="progressbar" style="width: 50%"></div>
+        </div>
+        <div class="progress">
+          <div class="progress-bar bg-primary progress-bar-animated progress-bar-striped" role="progressbar" style="width: 75%"></div>
+        </div>
+        <div class="progress">
+          <div class="progress-bar bg-info progress-bar-animated progress-bar-striped" role="progressbar" style="width: 100%"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="./js/jquery-3.5.1.min.js"></script>
+  <script src="./js/popper.min.js"></script>
+  <script src="./js/bootstrap.min.js"></script>
+  <script>
+    const progressBar = document.getElementsByClassName("progress-bar")
+    console.log(progressBar)
+    for (let i of progressBar) { i.innerText = i.style.width }
+
+  </script>
+</body>
+
+</html>
