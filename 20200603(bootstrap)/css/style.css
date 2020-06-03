@@ -1,0 +1,200 @@
+/* --------------------原生-------------------- */
+/* CSS 原生變數 */
+:root {
+  /* 主題色 */
+  --coffee1: #000000 !important;
+  --coffee2: #3a3a3a !important;
+  --coffee3: #6c6c6c !important;
+  --coffee4: #c7c7c7 !important;
+  --coffee5: #eeeeee !important;
+
+  /* 黑色透明 */
+  --black25: rgba(0, 0, 0, 0.25) !important;
+  --black50: rgba(0, 0, 0, 0.5) !important;
+  --black75: rgba(0, 0, 0, 0.75) !important;
+
+  /* 白色透明 */
+  --white25: rgba(255, 255, 255, 0.25) !important;
+  --white50: rgba(255, 255, 255, 0.5) !important;
+  --white75: rgba(255, 255, 255, 0.75) !important;
+
+  /* 陰影 */
+  --shadow1: 0 0 5px var(--black25) !important;
+  --shadow2: 0 0 10px var(--black50) !important;
+  --shadow3: 0 0 15px var(--black75) !important;
+
+  /* 內距、外距 */
+  --s0: 0 !important;
+  --s1: 0.25rem !important;
+  --s2: 0.5rem !important;
+  --s3: 1rem !important;
+  --s4: 1.5rem !important;
+  --s5: 3rem !important;
+}
+
+.btn-coffee {
+  color: var(--coffee5);
+  background-color: var(--coffee3);
+}
+
+.btn-coffee:hover {
+  color: var(--coffee5);
+  background-color: var(--coffee2);
+}
+
+.btn-coffee:focus,
+.btn-coffee.focus {
+  box-shadow: var(--shadow1);
+}
+
+.btn-coffee.disabled,
+.btn-coffee:disabled {
+  color: var(--coffee5);
+  background-color: var(--coffee3);
+}
+
+.btn-coffee:not(:disabled):not(.disabled):active,
+.btn-coffee:not(:disabled):not(.disabled).active,
+.show > .btn-coffee.dropdown-toggle {
+  color: var(--coffee5);
+  background-color: var(--coffee3);
+}
+
+.btn-coffee:not(:disabled):not(.disabled):active:focus,
+.btn-coffee:not(:disabled):not(.disabled).active:focus,
+.show > .btn-coffee.dropdown-toggle:focus {
+  box-shadow: var(--shadow1);
+}
+
+/* --------------------body-------------------- */
+body {
+  font-family: "微軟正黑體", "Microsoft JhengHei", Arial, Helvetica, sans-serif;
+  background-color: var(--coffee1);
+}
+
+/* --------------------Navbar-------------------- */
+
+#navbar {
+  background: var(--coffee1);
+  padding: var(--s1) 0;
+  transition: 0.5s;
+}
+
+#coffee-navbar .nav-link span {
+  margin-right: var(--s1);
+}
+
+#login_menu {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+/* section01 輪播圖 */
+.carousel-control-prev,
+.carousel-control-next{
+  transition: 0.5s;
+}
+
+.carousel-control-prev:hover{
+  background: linear-gradient(90deg,rgba(0,0,0,0.8),transparent);
+  opacity: 1;
+}
+
+.carousel-control-next:hover{
+  background: linear-gradient(270deg,rgba(0,0,0,0.8),transparent);
+  opacity: 1;
+}
+
+.img-scale{
+  animation: img-scale 20s 1s 1 ease forwards;
+}
+
+@keyframes img-scale{
+  from{
+    transform: scale(1);
+  }
+  to{
+    transform: scale(1.2);
+  }
+}
+
+#section01,
+#section02,
+#section03,
+#section04,
+#section05,
+#section06{
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+#section02{
+  background-color: var(--coffee4);
+}
+
+#section02 .container h1{
+  text-align: center;
+  padding-top: var(--s4);
+  color: var(--coffee1);
+}
+
+#section02 .container .row{
+  padding: var(--s2);
+}
+
+#section02 .list-group{
+  font-size: 1rem;
+  margin: 1rem 0;
+}
+
+#section02 .list-group .nav-link{
+  color: var(--coffee2);
+  padding: 0.5rem;
+}
+
+#section02 .card{
+  border: 5px double var(--coffee5) !important;
+  transition: 0.3s;
+  margin-bottom: 2rem;
+  height: 40vh;
+}
+
+#section02 .card:hover{
+  transform: translateY(-1rem);
+}
+
+/* --------------------裝置斷點控制區-------------------- */
+
+@media (max-width: 575px) {
+}
+
+@media (min-width: 992px) {
+  #section01,
+  #section02,
+  #section03,
+  #section04,
+  #section05,
+  #section06{
+    height: 100vh;
+  }
+}
+
+section:nth-child(odd){
+  background: var(--coffee3);
+}
+
+/* --------------------modal-------------------- */
+
+#login .modal-content,
+#register .modal-content {
+  box-shadow: var(--shadow3);
+}
+
+#login input.form-control:focus,
+#register input.form-control:focus{
+  border: var(--coffee3);
+  box-shadow: var(--shadow2);
+}
