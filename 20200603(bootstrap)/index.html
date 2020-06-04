@@ -15,6 +15,14 @@
   <!-- fontawesome -->
   <link rel="stylesheet" href="./css/fontawesome.css">
 
+  <!-- Magnific Popup core CSS file -->
+  <link rel="stylesheet" href="./css/magnific-popup.css">
+  <link rel="stylesheet" href="./css/magnific-popup-single.css">
+
+  <!-- animate.css -->
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.0/animate.min.css'/>
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css'/>
+
   <link rel="stylesheet" href="./css/style.css">
   <style>
 
@@ -22,7 +30,7 @@
   <title>泰山咖啡莊園 - Coding 的好地方</title>
 </head>
 
-<body>
+<body data-spy="scroll" data-target="#coffee-navbar">
   <nav id="navbar" class="navbar navbar-expand-lg navbar-dark fixed-top">
     <a class="navbar-brand" href="#section01">
       <img src="./images/logo.png" alt="泰山咖啡莊園" width="40">
@@ -33,8 +41,8 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div id="coffee-navbar" class="collapse navbar-collapse justify-content-lg-end">
-      <ul class="navbar-nav">
-        <li class="nav-item active">
+      <ul id="main_menu" class="navbar-nav">
+        <li class="nav-item">
           <a class="nav-link" href="#section02"><span class="fas fa-hamburger"></span>菜單餐點</a>
         </li>
         <li class="nav-item">
@@ -183,12 +191,13 @@
       <h1>菜單餐點</h1>
       <div class="row">
         <div class="col-12 col-lg-2 mt-3">
-          <ul class="list-group flex-row flex-lg-column justify-content-center">
-            <li class="list-group-item"><a class="nav-item active" data-toggle="pill" href="#eat-01">咖啡飲品</a></li>
-            <li class="list-group-item"><a class="nav-item" data-toggle="pill" href="#eat-02">特調飲品</a></li>
-            <li class="list-group-item"><a class="nav-item" data-toggle="pill" href="#eat-03">手做蛋糕</a></li>
-            <li class="list-group-item"><a class="nav-item" data-toggle="pill" href="#eat-04">輕食料理</a></li>
-            <li class="list-group-item"><a class="nav-item" data-toggle="pill" href="#eat-05">義式風味</a></li>
+          <ul class="list-group flex-row flex-lg-column justify-content-center list-group-flush">
+            <li class="list-group-item p-0"><a class="nav-item nav-link active" data-toggle="pill"
+                href="#eat-01">咖啡飲品</a></li>
+            <li class="list-group-item p-0"><a class="nav-item nav-link" data-toggle="pill" href="#eat-02">特調飲品</a></li>
+            <li class="list-group-item p-0"><a class="nav-item nav-link" data-toggle="pill" href="#eat-03">手做蛋糕</a></li>
+            <li class="list-group-item p-0"><a class="nav-item nav-link" data-toggle="pill" href="#eat-04">輕食料理</a></li>
+            <li class="list-group-item p-0"><a class="nav-item nav-link" data-toggle="pill" href="#eat-05">義式風味</a></li>
           </ul>
         </div>
         <div class="col-12 col-lg-10">
@@ -235,8 +244,6 @@
                     </div>
                   </div>
                 </div>
-              </div>
-              <div class="row">
                 <div class="col-6 col-lg-3">
                   <div class="card">
                     <img class="card-img-top" src="https://picsum.photos/300/200/?random=">
@@ -301,8 +308,6 @@
                     </div>
                   </div>
                 </div>
-              </div>
-              <div class="row">
                 <div class="col-6 col-lg-3">
                   <div class="card">
                     <img class="card-img-top" src="https://picsum.photos/300/200/?random=13">
@@ -377,8 +382,6 @@
                     </div>
                   </div>
                 </div>
-              </div>
-              <div class="row">
                 <div class="col-6 col-lg-3">
                   <div class="card">
                     <img class="card-img-top" src="https://picsum.photos/300/200/?random=20">
@@ -463,8 +466,6 @@
                     </div>
                   </div>
                 </div>
-              </div>
-              <div class="row">
                 <div class="col-6 col-lg-3">
                   <div class="card">
                     <img class="card-img-top" src="https://picsum.photos/300/200/?random=28">
@@ -549,8 +550,6 @@
                     </div>
                   </div>
                 </div>
-              </div>
-              <div class="row">
                 <div class="col-6 col-lg-3">
                   <div class="card">
                     <img class="card-img-top" src="https://picsum.photos/300/200/?random=36">
@@ -590,17 +589,407 @@
   </section>
 
   <!-- section03 周邊景點 -->
-  <section id="section03"></section>
+  <section id="section03">
+    <div class="container">
+      <h1>周邊景點</h1>
+      <div class="row">
+        <div class="col-6 col-lg-3">
+          <a href="https://picsum.photos/1920/1080/?random=1" class="image-popup-no-margins">
+            <div class="view">
+              <img src="https://picsum.photos/1920/1080/?random=1" class="img-fluid">
+              <div class="text">
+                <h4 class="text-center">101大樓</h4>
+                <p>發生浪漫，因此絶不回頭，以下有點，犯罪。</p>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="col-6 col-lg-3">
+          <a href="https://picsum.photos/1920/1080/?random=2" class="image-popup-no-margins">
+            <div class="view">
+              <img src="https://picsum.photos/1920/1080/?random=2" class="img-fluid">
+              <div class="text">
+                <h4 class="text-center">國父紀念館</h4>
+                <p>發生浪漫，因此絶不回頭，以下有點，犯罪。</p>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="col-6 col-lg-3">
+          <a href="https://picsum.photos/1920/1080/?random=3" class="image-popup-no-margins">
+            <div class="view">
+              <img src="https://picsum.photos/1920/1080/?random=3" class="img-fluid">
+              <div class="text">
+                <h4 class="text-center">中正紀念堂</h4>
+                <p>發生浪漫，因此絶不回頭，以下有點，犯罪。</p>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="col-6 col-lg-3">
+          <a href="https://picsum.photos/1920/1080/?random=4" class="image-popup-no-margins">
+            <div class="view">
+              <img src="https://picsum.photos/1920/1080/?random=4" class="img-fluid">
+              <div class="text">
+                <h4 class="text-center">西門町</h4>
+                <p>發生浪漫，因此絶不回頭，以下有點，犯罪。</p>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="col-6 col-lg-3">
+          <a href="https://picsum.photos/1920/1080/?random=5" class="image-popup-no-margins">
+            <div class="view">
+              <img src="https://picsum.photos/1920/1080/?random=5" class="img-fluid">
+              <div class="text">
+                <h4 class="text-center">台北東區</h4>
+                <p>發生浪漫，因此絶不回頭，以下有點，犯罪。</p>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="col-6 col-lg-3">
+          <a href="https://picsum.photos/1920/1080/?random=6" class="image-popup-no-margins">
+            <div class="view">
+              <img src="https://picsum.photos/1920/1080/?random=6" class="img-fluid">
+              <div class="text">
+                <h4 class="text-center">士林夜市</h4>
+                <p>發生浪漫，因此絶不回頭，以下有點，犯罪。</p>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="col-6 col-lg-3">
+          <a href="https://picsum.photos/1920/1080/?random=7" class="image-popup-no-margins">
+            <div class="view">
+              <img src="https://picsum.photos/1920/1080/?random=7" class="img-fluid">
+              <div class="text">
+                <h4 class="text-center">陽明山國家公園</h4>
+                <p>發生浪漫，因此絶不回頭，以下有點，犯罪。</p>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="col-6 col-lg-3">
+          <a href="https://picsum.photos/1920/1080/?random=8" class="image-popup-no-margins">
+            <div class="view">
+              <img src="https://picsum.photos/1920/1080/?random=8" class="img-fluid">
+              <div class="text">
+                <h4 class="text-center">台北市立動物園</h4>
+                <p>發生浪漫，因此絶不回頭，以下有點，犯罪。</p>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="col-6 col-lg-3">
+          <a href="https://picsum.photos/1920/1080/?random=9" class="image-popup-no-margins">
+            <div class="view">
+              <img src="https://picsum.photos/1920/1080/?random=9" class="img-fluid">
+              <div class="text">
+                <h4 class="text-center">淡水老街</h4>
+                <p>發生浪漫，因此絶不回頭，以下有點，犯罪。</p>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="col-6 col-lg-3">
+          <a href="https://picsum.photos/1920/1080/?random=10" class="image-popup-no-margins">
+            <div class="view">
+              <img src="https://picsum.photos/1920/1080/?random=10" class="img-fluid">
+              <div class="text">
+                <h4 class="text-center">萬華龍山寺</h4>
+                <p>發生浪漫，因此絶不回頭，以下有點，犯罪。</p>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- section04 莊園位置 -->
-  <section id="section04"></section>
+  <section id="section04">
+    <div class="embed-responsive embed-responsive-21by9 h-100">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3614.7080213475365!2d121.41715431500656!3d25.043980983967728!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3442a7bec9ad74b1%3A0xa639904a89f26435!2z5Yue5YuV6YOo5Yue5YuV5Yqb55m85bGV572y5YyX5Z-65a6c6Iqx6YeR6aas5YiG572y5rOw5bGx6IG35qWt6KiT57e05aC0!5e0!3m2!1szh-TW!2stw!4v1591237557196!5m2!1szh-TW!2stw"
+        width="600" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false"
+        tabindex="0"></iframe>
+    </div>
+    <div class="information">
+      <input type="checkbox" id="accordion">
+      <div class="accordion" id="chinyue_accordion">
+        <div class="information_switch">
+          <label for="accordion">
+            <span class="close fas fa-angle-double-right"></span>
+            <span class="close fas fa-angle-double-left"></span>
+          </label>
+        </div>
+        <h3>交通資訊</h3>
+        <div class="card">
+          <div class="card-header" id="heading1">
+            <h2 class="mb-0">
+              <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse1">
+                搭捷運
+              </button>
+            </h2>
+          </div>
+          <div id="collapse1" class="collapse" data-parent="#chinyue_accordion">
+            <div class="card-body">
+              <ul>
+                <li> 臺北捷運中和新蘆線至丹鳳站 1 號出口或桃園捷運機場線至泰山貴和站（明志科大）1 號出口，再轉乘公車或騎乘 YouBike 微笑單車（約 10~15 分鐘）至明志科技大學。</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header" id="heading2">
+            <h2 class="mb-0">
+              <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse2">
+                搭公車
+              </button>
+            </h2>
+          </div>
+          <div id="collapse2" class="collapse" data-parent="#chinyue_accordion">
+            <div class="card-body">
+              <ul>
+                <li>三重客運(637、638)、指南客運(797、798、801、858、880、883、1501、1503)，至明志科技大學站下車。</li>
+                <li>新北市泰山區免費公車(泰山區 F216 明志國小-台北車站(北三門搭車))：至貴子路下車後，步行至貴子路口左轉明志路 3 段，明志路直行約 100 公尺至工專路右轉，再直行即可至明志科技大學。
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header" id="heading3">
+            <h2 class="mb-0">
+              <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse3">
+                騎乘 YouBike 公共自行車
+              </button>
+            </h2>
+          </div>
+          <div id="collapse3" class="collapse" data-parent="#chinyue_accordion">
+            <div class="card-body">
+              <ul>
+                <li>可停放於明志科技大學校門口公車站旁的租賃區。</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header" id="heading4">
+            <h2 class="mb-0">
+              <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse4">
+                自行開車
+              </button>
+            </h2>
+          </div>
+          <div id="collapse4" class="collapse" data-parent="#chinyue_accordion">
+            <div class="card-body">
+              <ul>
+                <li>高速公路五股交流道下(往新莊、泰山)，經新五路至新北大道右轉，直行至貴子路口右轉，貴子路直行至明志路左轉。於明志路繼續前行約 100 公尺右轉工專路，即可抵達明科技大學。</li>
+                <li>由台北車站走忠孝橋，直行高架道路，下到平面道路之後直行至貴子路口右轉，貴子路直行至明志路左轉，於明志路繼續前行約 100 公尺右轉工專路，即可抵達明科技大學。</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header" id="heading5">
+            <h2 class="mb-0">
+              <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse5">
+                停車資訊
+              </button>
+            </h2>
+          </div>
+          <div id="collapse5" class="collapse" data-parent="#chinyue_accordion">
+            <div class="card-body">
+              <ul>
+                <li>明志科大「汽車」停車費 30 元/小時，請儘量搭乘大眾交通工具或機車（免停車費）。</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- section05 聯絡我們 -->
-  <section id="section05"></section>
+  <section id="section05">
+    <div class="container">
+      <h1>聯絡我們</h1>
+      <form>
+        <div class="row">
+          <div class="col-12">
+            <h5>泰山咖啡莊園，傳承熱情 coding 精神</h5>
+            <small>任何服務問題或建議，歡迎您透過客服表單告知我們，謝謝！</small>
+          </div>
+          <!-- 性別 -->
+          <div class="col-lg-6">
+            <label for="q_name">
+              <h6 class="m-0">姓名</h6>
+            </label>
+            <div class="input-group mb-3">
+              <input id="q_name" type="text" class="form-control">
+              <div class="input-group-append">
+                <span class="input-group-text">
+                  <label for="q_male" class="m-0 mr-1">先生</label>
+                  <input id="q_male" type="radio" name="gender" required>
+                  <label for="q_female" class="m-0 mr-1">女士</label>
+                  <input id="q_female" type="radio" name="gender" required>
+                </span>
+              </div>
+            </div>
+          </div>
+          <!-- 電話 -->
+          <div class="col-lg-6">
+            <label for="q_tel">
+              <h6 class="m-0">電話</h6>
+            </label>
+            <div class="input-group mb-3">
+              <input id="q-tel" type="tel" class="form-control" required>
+            </div>
+          </div>
+          <!-- 信箱 -->
+          <div class="col-lg-6">
+            <label for="q_email">
+              <h6 class="m-0">電子信箱</h6>
+            </label>
+            <div class="input-group mb-3">
+              <input id="q-email" type="email" class="form-control" required>
+            </div>
+          </div>
+          <!-- 類型 -->
+          <div class="col-lg-6">
+            <label for="q_type">
+              <h6 class="m-0">問題類型</h6>
+            </label>
+            <div class="input-group mb-3">
+              <select id="q-type" class="custom-select" required>
+                <option value="餐飲建議" selected>餐飲建議</option>
+                <option value="服務品質">服務品質</option>
+                <option value="其他">其他</option>
+              </select>
+            </div>
+          </div>
+          <!-- 意見 -->
+          <div class="col-lg-12">
+            <label for="q_comment">
+              <h6 class="m-0">意見需求</h6>
+            </label>
+            <div class="input-group mb-3">
+              <textarea id="q_comment" class="form-control" rows="5" name="q_comment" required></textarea>
+            </div>
+          </div>
+          <!-- 訂閱 -->
+          <div class="col-lg-12">
+            <div class="input-group mb-3">
+              <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="q_order">
+                <label class="custom-control-label" for="q_order">訂閱泰山最新資訊</label>
+              </div>
+            </div>
+          </div>
+          <!-- 送出 -->
+          <div class="col-12">
+            <div class="input-group justify-content-center">
+              <button class="btn btn-coffee">送出</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </section>
 
   <!-- section06 咖啡故事 -->
-  <section id="section06"></section>
+  <section id="section06">
+    <div class="container">
+      <h1>咖啡故事</h1>
+      <div class="row">
+        <div class="col-lg-6">
+          <img id="nav-img" class="h-100 w-100" style="object-fit: cover; border: 6px solid #fff;"
+            src="./images/section02_01.jpg">
+        </div>
+        <div class="col-lg-6">
+          <div class="nav nav-tabs" id="myTab" role="tablist">
+            <a class="nav-link active" id="coffee1" data-toggle="tab" href="#coffee-01">咖啡起源</a>
+            <a class="nav-link" id="coffee2" data-toggle="tab" href="#coffee-02">咖啡好處</a>
+            <a class="nav-link" id="coffee3" data-toggle="tab" href="#coffee-03">咖啡壞處</a>
+          </div>
+          <div class="tab-content bg-white overflow-auto" id="myTabContent" data-spy="scroll" data-target="#nav-tab"
+            style="height: 500px;">
+            <div class="tab-pane fade show active" id="coffee-01">
+              <p>
+                咖啡的來源已無從稽考，有諸多傳說。相傳，今天的奧羅莫人的祖先被認為是首個認識到咖啡樹令人振奮的效果，雖然沒有直接的證據指出非洲咖啡的增長或是本地人會用它作為興奮劑，甚至早於 17
+                世紀已經知道；另一傳說，據說是一千多年以前，在 9 世紀的衣索比亞西南部的高原地區，一位牧羊人發現他的羊吃了一種植物的種子(咖啡豆)後，變得非常興奮活潑，繼而發現咖啡，但此事截至 1671
+                年並沒有得到記載，有可能是杜撰的；也有說法是當地發生過一場野火，燒焦了一片咖啡林，經過燒烤咖啡的香味引起周圍居民注意，人們最初咀嚼這種植物果實來提神，後來烘烤磨碎摻入麵粉做成麵包，作為勇士的食物，提高作戰的勇氣。不過這些傳說故事都缺乏歷史文件佐證，只出現於後世的旅遊傳記中。據說，最初經栽培的咖啡是源自衣索比亞的哈勒爾。
+              </p>
+              <p>
+                直到 11 世紀左右，人們才開始用水煮咖啡做為飲料。13
+                世紀時，衣索比亞軍隊入侵葉門，將咖啡帶到了阿拉伯世界。因為伊斯蘭教的清規禁止教徒飲酒，有的宗教界人士認為這種飲料刺激神經，違反教義，曾一度禁止並關閉咖啡店，但埃及蘇丹認為咖啡不違反教義，因而解禁，咖啡飲料迅速在阿拉伯地區流行開來。咖啡
+                Coffee 這個詞，就是來源於阿拉伯語 Qahwa，意思是「植物飲料」，後來傳到土耳其，成為歐洲語言中這個詞的來源。咖啡種植，製作的方法也被阿拉伯人不斷地改進而逐漸完善。
+              </p>
+              <p></p>
+              但在西元 15 世紀以前，咖啡長期被阿拉伯世界所壟斷，僅在回教國家間流傳；當時主要被使用在醫學和宗教上，回教醫生和僧侶們承認咖啡具有提神、醒腦、健胃、強身、止血等功效；15
+              世紀初開始有文獻記載咖啡的使用方式，並且在此時期融入宗教儀式中，同時也出現在民間做為日常飲品。因回教世界嚴禁飲酒，因此咖啡成為當時很重要的社交飲品。直到 16、17
+              世紀，透過威尼斯商人和海上霸權荷蘭人的買賣輾轉將咖啡傳入歐洲，很快地，這種充滿東方神秘色彩、口感馥郁香氣迷魅的黑色飲料受到貴族仕紳階級的爭相競逐，咖啡的身價也跟著水漲船高，甚至產生了「黑色金子」的稱號，當時的貴族流行在特殊日子互送咖啡豆以示盡情狂歡，或是給久未謀面的親友，有財入袋、祝賀順遂之意，同時也是身分地位象徵。而「黑色金子」在接下來風起雲湧的大航海時代，藉由海運的傳播，全世界都被納入了咖啡的生產和消費版圖中。
+              </p>
+            </div>
+            <div class="tab-pane fade" id="coffee-02">
+              <p>
+                根據美國俄亥俄州立大學 1994
+                年的研究，咖啡因的確能提高清醒度，能提高細胞內環磷腺?的含量，小劑量能興奮大腦皮層，振奮精神，改善思維，消除疲勞，加快反應，提昇工作效率。大劑量則可興奮延腦呼吸中樞和血管運動中樞，
+                增加呼吸頻率，造成過度刺激， 產生焦慮、興奮、頭痛、失眠、心神不寧。
+              </p>
+              <p>
+                一般而言，每天喝 100-300 毫克的咖啡因，就足以提神，且對身體無害。又根據[美國國家糖尿病消化性腎臟研究院 ]的研究指出，咖啡因與降低罹患肝臟疾病的風險有相關，也就是說一天喝 1~2
+                杯，肝臟保護功效。咖啡因能促進胃酸的分泌，增進食欲，加速食物的消化和吸收。咖啡還刺激排便的作用。咖啡因的刺激會促進肌肉活動力，但是刺激過多會導致抽筋、肌肉顫抖等。咖啡因還可以抑制哮喘,有支氣管藥物的功效，常喝咖啡者較少氣喘。咖啡含有與紅茶相似的氧化物
+                chlorogenic acid（綠原酸）能很容易地被人體吸收，具有保護腸道及預防直腸癌的作用。
+              </p>
+            </div>
+            <div class="tab-pane fade" id="coffee-03">
+              成長中的青少年 對咖啡因的興奮作用較敏感， 比較會有心悸..影響睡眠的情形。 咖啡因對有高血壓及心血管疾病的人有強心作用， 但同時也會使心跳加快，血壓增高， 亦容易引起心肌缺氧，對病情的控制不利。
+              懷孕的婦女過量的咖啡 會增加流產 及 胎兒發育遲緩的機會。 停經後的 婦女與老年人 過多的咖啡因會導致 鈣質的流失..骨質疏鬆症的機會。
+              </p>
+              <p>
+                咖啡因會刺激胃酸的分泌，胃潰瘍的患者可能惡化消化性潰瘍的病程。空腹時不要喝咖啡，以免胃酸過多。喝咖啡確實可能增加膽固醇，對心臟血管疾病的人非常不利。咖啡中含有松烯（terpene
+                芳香性碳水化合物）這種油性的物質，對於心血管的影響因人而異，但是通常它會造成血膽固醇上昇，不可不察。這種物質的多寡與煮咖啡的方式有關：如果是以高壓蒸氣或懸滴式咖啡機來煮時，因為熱水與咖啡豆接觸的時間短，所以
+                terpene 被萃取出來的量少。如果是以浸泡為主的煮法（如日本的塞風式咖啡機），熱水咖啡豆接觸時間長，則容易萃取出大量的
+                terpene。因此，對於高膽固醇的人而言，建議少喝咖啡。如要喝要慎選煮法，並加上濾紙來過濾，對於心血管比較健康。
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
+  <footer id="footer">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-auto d-flex align-items-center"><i class="mr-2 fas fa-map-marker-alt"></i><span>新北市泰山區貴子里致遠新村 55
+            之 1 號</span></div>
+        <div class="col-auto  d-flex align-items-center"><i class="mr-2 fas fa-clock"></i><span>營業時間：週一至週五
+            08:10~16:35，六、日 08:10~16:35</span></div>
+        <div class="col-auto d-flex align-items-center"><i
+            class="mr-2 fas fa-phone-alt"></i><span>電話：（02）2901-8274</span></div>
+        <div class="col-auto">
+          <ul class="mr-1 d-flex list-unstyled flex-lg-row">
+            <li class="mr-3">
+              <a href="https://www.facebook.com/tsvts/" data-toggle="tooltip" data-placement="top" data-container="#footer" data-offset="0.10" title="泰山職訓局"><i class="fab fa-facebook"
+                  style="font-size: 30px;color: white;"></i></a>
+            </li>
+            <li class="mr-3">
+              <a href="https://wdaweb.github.io/" data-toggle="tooltip" data-placement="top" data-container="#footer" data-offset="0.10" title="網頁設計課程介紹"><img src="./images/wda.png" width="30"></a>
+            </li>
+            <li>
+              <a href="https://www.taiwanjobs.gov.tw/home/new_index.aspx" data-toggle="tooltip" data-placement="top" data-container="#footer" data-offset="0.10" title="台灣就業通"><img src="./images/twjb.png" width="30"></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+  </footer>
+<!-- 回到頂端 -->
+<div id="go_top_page">
+  <a href="#section01"><i class="fas fa-chevron-up"></i></a>
+</div>
 
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -610,12 +999,28 @@
   <!-- scrollpage -->
   <script src="./js/jquery.easing.1.3.js"></script>
   <script src="./js/scrollpage.js"></script>
+  <!-- Magnific Popup core JS file -->
+  <script src="./js/jquery.magnific-popup.min.js"></script>
+  <script src="./js/magnific-popup-single.js"></script>
 
   <script>
-    $('.carousel-control-prev,.carousel-control-next,#btn-login,#btn-register,[data-toggle="pill"]').on("click", function (event) {
+    // 設定不要有行為的
+    $('.carousel-control-prev,.carousel-control-next,#btn-login,#btn-register,[data-toggle="pill"],[data-toggle="tab"]').on("click", function (event) {
       event.preventDefault();
       $('html,body').stop()
     })
+
+    $("#coffee1").on("click",function(){
+      $("#nav-img").attr("src","./images/section02_01.jpg")
+    })
+    $("#coffee2").on("click",function(){
+      $("#nav-img").attr("src","./images/section02_02.jpg")
+    })
+    $("#coffee3").on("click",function(){
+      $("#nav-img").attr("src","./images/section02_03.jpg")
+    })
+
+    $('[data-toggle="tooltip"]').tooltip()
   </script>
 </body>
 

@@ -92,29 +92,29 @@ body {
 
 /* section01 輪播圖 */
 .carousel-control-prev,
-.carousel-control-next{
+.carousel-control-next {
   transition: 0.5s;
 }
 
-.carousel-control-prev:hover{
-  background: linear-gradient(90deg,rgba(0,0,0,0.8),transparent);
+.carousel-control-prev:hover {
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.8), transparent);
   opacity: 1;
 }
 
-.carousel-control-next:hover{
-  background: linear-gradient(270deg,rgba(0,0,0,0.8),transparent);
+.carousel-control-next:hover {
+  background: linear-gradient(270deg, rgba(0, 0, 0, 0.8), transparent);
   opacity: 1;
 }
 
-.img-scale{
+.img-scale {
   animation: img-scale 20s 1s 1 ease forwards;
 }
 
-@keyframes img-scale{
-  from{
+@keyframes img-scale {
+  from {
     transform: scale(1);
   }
-  to{
+  to {
     transform: scale(1.2);
   }
 }
@@ -124,51 +124,343 @@ body {
 #section03,
 #section04,
 #section05,
-#section06{
+#section06 {
   position: relative;
   display: flex;
   justify-content: center;
   align-content: center;
 }
 
-#section02{
+/* --------------------section02-------------------- */
+
+#section02 {
   background-color: var(--coffee4);
 }
 
-#section02 .container h1{
+#section02 .container h1 {
   text-align: center;
-  padding-top: var(--s4);
+  padding-top: 4rem;
+  margin-bottom: var(--s0);
   color: var(--coffee1);
 }
 
-#section02 .container .row{
+#section02 .container .row {
   padding: var(--s2);
 }
 
-#section02 .list-group{
-  font-size: 1rem;
-  margin: 1rem 0;
+#section02 .col-lg-3 {
+  padding-left: var(--s2);
+  padding-right: var(--s2);
+  margin-bottom: var(--s3);
 }
 
-#section02 .list-group .nav-link{
+#section02 .list-group {
+  font-size: var(--s3) 0;
+  margin-bottom: var(--s4);
+}
+
+#section02 .list-group-flush .list-group-item:last-child {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+#section02 .list-group .nav-link {
   color: var(--coffee2);
-  padding: 0.5rem;
-}
-
-#section02 .card{
-  border: 5px double var(--coffee5) !important;
+  padding: var(--s2);
   transition: 0.3s;
-  margin-bottom: 2rem;
-  height: 40vh;
 }
 
-#section02 .card:hover{
+#section02 .nav-item.active {
+  color: var(--coffee2);
+  background: var(--coffee4);
+  border: var(--s1) inset var(--coffee5);
+}
+
+#section02 .card {
+  border: 5px solid var(--coffee5) !important;
+  transition: 0.3s;
+  box-shadow: 0 0 0 1px var(--coffee4);
+  height: 100%;
+}
+
+#section02 .card:hover {
   transform: translateY(-1rem);
+}
+
+#section02 .card .card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* --------------------section03-------------------- */
+
+#section03 {
+  padding-bottom: var(--s4);
+}
+
+#section03 h1 {
+  text-align: center;
+  padding-top: var(--s5);
+  margin: var(--s3) 0;
+  color: var(--coffee5);
+}
+
+#section03 .container .row {
+  background: var(--black50);
+  padding: var(--s2);
+  padding-top: var(--s4);
+}
+
+#section03 .col-lg-3 {
+  padding-left: var(--s2);
+  padding-right: var(--s2);
+  margin-bottom: var(--s3);
+}
+
+#section03 .view {
+  position: relative;
+  overflow: hidden;
+}
+
+#section03 .view .text {
+  position: absolute;
+  color: white;
+  background-color: var(--black50);
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 var(--s3);
+}
+
+#section03 .view .text p {
+  text-align: justify;
+  display: none;
+  animation: color 3s infinite;
+}
+
+#section03 .view img {
+  transition: 1s;
+}
+
+#section03 .view:hover img {
+  transform: scale(1.2);
+}
+#section03 .view:hover .text {
+  background-color: var(--black75);
+}
+
+@keyframes color {
+  from {
+    color: orange;
+  }
+  25% {
+    color: aquamarine;
+    font-size: 1.3rem;
+  }
+  50% {
+    color: gold;
+  }
+  75% {
+    color: pink;
+    font-size: 1.3rem;
+  }
+  to {
+    color: orange;
+  }
+}
+
+/* --------------------section04-------------------- */
+
+#section04 .embed-responsive {
+  position: absolute;
+  filter: brightness(50%);
+  transition: 1s;
+}
+
+#section04 .embed-responsive:hover {
+  filter: brightness(80%);
+}
+
+#section04 .information {
+  width: 100%;
+  height: 100%;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+}
+
+#section04 .information .accordion {
+  position: relative;
+  box-shadow: var(--shadow1);
+}
+
+#section04 .information h3 {
+  color: var(--primary);
+  position: relative;
+  text-align: center;
+  background: var(--coffee5);
+  border-radius: 0.25rem;
+  box-shadow: var(--shadow1);
+}
+
+#section04 .information_switch {
+  position: absolute;
+  top: 5px;
+  left: 10px;
+  z-index: 1;
+}
+
+#section04 .information_switch .close {
+  font-size: 1.5rem;
+  color: var(--primary);
+  padding: 0.3rem 0.2rem 0.2rem;
+  /* 上式同於 padding: 0.3rem 0.2rem 0.2rem 0.2rem; */
+  cursor: pointer;
+}
+
+#chinyue_accordion {
+  transition: 1s;
+}
+
+#accordion:checked + #chinyue_accordion {
+  transform: translateX(99%);
+}
+
+.information_switch label .fa-angle-double-left {
+  display: none;
+}
+
+#accordion:checked
+  + #chinyue_accordion
+  .information_switch
+  label
+  .fa-angle-double-right {
+  display: none;
+}
+#accordion:checked
+  + #chinyue_accordion
+  .information_switch
+  label
+  .fa-angle-double-left {
+  display: block;
+}
+
+/* --------------------section05-------------------- */
+
+#section05 {
+  color: var(--coffee2);
+  background: var(--coffee4);
+  padding: 2rem 0;
+}
+
+#section05 .container {
+  width: 95%;
+}
+
+#section05 h1 {
+  text-align: center;
+  padding-top: 2.5rem;
+  padding-bottom: 0.5rem;
+}
+
+#section05 h5 {
+  font-size: 1.5rem;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+#section05 small {
+  display: block;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+#section05 .row .col-12:first-child {
+  padding-bottom: 0.2rem;
+  margin-bottom: 1.5rem !important;
+  border-bottom: 1px solid var(--coffee3);
+}
+
+#section05 .row .col-12:last-child {
+  padding-top: 1.5rem;
+  margin-top: 1.5rem !important;
+  border-top: 1px solid var(--coffee3);
+}
+
+#section05 input,
+#section05 textarea,
+#section05 select {
+  border: 1px solid var(--coffee3) !important;
+}
+
+#section05 input:focus,
+#section05 textarea:focus,
+#section05 select:focus {
+  box-shadow: var(--shadow2);
+  border: 1px solid var(--coffee3) !important;
+}
+
+/* --------------------section06-------------------- */
+
+#section06{
+  padding: 2rem 0;
+  background-color: var(--coffee4);
+}
+
+#section06 h1{
+  text-align: center;
+  padding-top: var(--s5);
+  padding-bottom: var(--s2);
+  color: var(--coffee5);
+}
+
+#section06 a{
+  color: var(--coffee5);
+}
+
+#section06 a:hover{
+  color: var(--coffee1);
+  background-color: var(--coffee5);
+}
+
+#section06 a:active{
+  color: var(--coffee1);
+}
+
+#section06 #nav-img{
+  box-shadow: var(--shadow3);
+}
+
+/* --------------------footer-------------------- */
+
+#footer{
+  color: var(--coffee5);
+  padding: 1rem 0;
+  background: var(--coffee1);
+  box-shadow: 0 -10px 10px var(--black50);
 }
 
 /* --------------------裝置斷點控制區-------------------- */
 
 @media (max-width: 575px) {
+  #main_menu.navbar-nav {
+    padding-left: var(--s3);
+  }
+
+  #login_menu.navbar-nav {
+    padding-left: var(--s3);
+    padding-bottom: var(--s2);
+  }
+
+  #section01 {
+    height: 330px;
+  }
 }
 
 @media (min-width: 992px) {
@@ -177,12 +469,29 @@ body {
   #section03,
   #section04,
   #section05,
-  #section06{
+  #section06 {
     height: 100vh;
+  }
+
+  #section03 .text p {
+    display: block !important;
+  }
+
+  #section04 .information .accordion {
+    width: 40%;
+    align-self: flex-end;
+  }
+
+  #section05 h5 {
+    text-align: left;
+  }
+
+  #section05 small {
+    text-align: left;
   }
 }
 
-section:nth-child(odd){
+section:nth-child(odd) {
   background: var(--coffee3);
 }
 
@@ -194,7 +503,31 @@ section:nth-child(odd){
 }
 
 #login input.form-control:focus,
-#register input.form-control:focus{
+#register input.form-control:focus {
   border: var(--coffee3);
   box-shadow: var(--shadow2);
+}
+
+
+/* 回到頂端 */
+
+#go_top_page{
+  width: 50px;
+  height: 50px;
+  background-color: var(--coffee3);
+  border-radius: 50%;
+  position: fixed;
+  bottom: 0;
+  right: 20px;
+  z-index: 9999999999999;
+  box-shadow: inset 0 0 0 2px var(--coffee3),inset 0 0 0 4px var(--coffee5);
+}
+
+#go_top_page a{
+  display: block;
+  font-size: 1.5rem;
+  text-align: center;
+  line-height: 50px;
+  color: var(--coffee5);
+  text-decoration: none;
 }
