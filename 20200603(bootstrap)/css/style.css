@@ -67,6 +67,15 @@
 }
 
 /* --------------------body-------------------- */
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-family: "微軟正黑體";
+  box-sizing: border-box;
+  transition: 0.5s;
+}
+
 body {
   font-family: "微軟正黑體", "Microsoft JhengHei", Arial, Helvetica, sans-serif;
   background-color: var(--coffee1);
@@ -129,6 +138,8 @@ body {
   display: flex;
   justify-content: center;
   align-content: center;
+  align-items: center;
+  overflow: hidden;
 }
 
 /* --------------------section02-------------------- */
@@ -239,7 +250,6 @@ body {
 #section03 .view .text p {
   text-align: justify;
   display: none;
-  animation: color 3s infinite;
 }
 
 #section03 .view img {
@@ -251,26 +261,6 @@ body {
 }
 #section03 .view:hover .text {
   background-color: var(--black75);
-}
-
-@keyframes color {
-  from {
-    color: orange;
-  }
-  25% {
-    color: aquamarine;
-    font-size: 1.3rem;
-  }
-  50% {
-    color: gold;
-  }
-  75% {
-    color: pink;
-    font-size: 1.3rem;
-  }
-  to {
-    color: orange;
-  }
 }
 
 /* --------------------section04-------------------- */
@@ -408,38 +398,41 @@ body {
 
 /* --------------------section06-------------------- */
 
-#section06{
+#section06 {
   padding: 2rem 0;
-  background-color: var(--coffee4);
 }
 
-#section06 h1{
+#section06 h1 {
   text-align: center;
   padding-top: var(--s5);
   padding-bottom: var(--s2);
   color: var(--coffee5);
 }
 
-#section06 a{
+#section06 #myTab {
+  border: 0;
+}
+
+#section06 a {
   color: var(--coffee5);
 }
 
-#section06 a:hover{
-  color: var(--coffee1);
-  background-color: var(--coffee5);
+#section06 a:hover {
+  color: var(--coffee5);
+  background-color: var(--coffee1);
 }
 
-#section06 a:active{
+#section06 .nav-tabs .active {
   color: var(--coffee1);
 }
 
-#section06 #nav-img{
+#section06 #nav-img {
   box-shadow: var(--shadow3);
 }
 
 /* --------------------footer-------------------- */
 
-#footer{
+#footer {
   color: var(--coffee5);
   padding: 1rem 0;
   background: var(--coffee1);
@@ -491,10 +484,6 @@ body {
   }
 }
 
-section:nth-child(odd) {
-  background: var(--coffee3);
-}
-
 /* --------------------modal-------------------- */
 
 #login .modal-content,
@@ -508,10 +497,37 @@ section:nth-child(odd) {
   box-shadow: var(--shadow2);
 }
 
+/* tooltip */
+/* 彈出訊息背景框顏色 */
+
+.bs-tooltip-top .arrow::before,
+.bs-tooltip-auto[x-placement^="top"] .arrow::before {
+  border-top-color: #fff;
+}
+
+.bs-tooltip-right .arrow::before,
+.bs-tooltip-auto[x-placement^="right"] .arrow::before {
+  border-right-color: #fff;
+}
+
+.bs-tooltip-bottom .arrow::before,
+.bs-tooltip-auto[x-placement^="bottom"] .arrow::before {
+  border-bottom-color: #fff;
+}
+
+.bs-tooltip-left .arrow::before,
+.bs-tooltip-auto[x-placement^="left"] .arrow::before {
+  border-left-color: #fff;
+}
+
+.tooltip-inner {
+  color: black;
+  background-color: #fff;
+}
 
 /* 回到頂端 */
 
-#go_top_page{
+#go_top_page {
   width: 50px;
   height: 50px;
   background-color: var(--coffee3);
@@ -520,14 +536,100 @@ section:nth-child(odd) {
   bottom: 0;
   right: 20px;
   z-index: 9999999999999;
-  box-shadow: inset 0 0 0 2px var(--coffee3),inset 0 0 0 4px var(--coffee5);
+  box-shadow: inset 0 0 0 2px var(--coffee3), inset 0 0 0 4px var(--coffee5);
+  /* display: none; */
 }
 
-#go_top_page a{
+#go_top_page a {
   display: block;
   font-size: 1.5rem;
   text-align: center;
   line-height: 50px;
   color: var(--coffee5);
   text-decoration: none;
+}
+
+/* 視差 */
+#scene1,
+#scene2 {
+  width: 100%;
+  height: 100%;
+}
+
+.layer {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.bg1 {
+  background: url(../images/parallax_01.jpg) no-repeat center/cover;
+}
+
+.bg2 {
+  background: url(../images/parallax_02.jpg) no-repeat center/cover;
+}
+
+.bleed {
+  position: absolute;
+  top: -5%;
+  left: -5%;
+  bottom: -5%;
+  right: -5%;
+  width: 120%;
+  height: 120%;
+}
+
+.toggle_black {
+  background-color: var(--coffee1) !important;
+}
+
+/* 連結小動畫 */
+.menu-left a {
+  display: inline-block;
+  position: relative;
+  padding-bottom: 0.5rem;
+  transition: color 0.35s ease;
+  z-index: 1;
+}
+
+.menu-left a::before {
+  content: "";
+  width: 0;
+  height: 1px;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  transition: width 0.35s ease;
+}
+
+.menu-left a:hover::before {
+  width: 100%;
+  background-color: white;
+}
+
+.menu-left a::after {
+  content: "";
+  width: 0;
+  height: 1px;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  background-color: white;
+  transition: width 0.35s ease;
+}
+
+.menu-left a:hover::after {
+  width: 100%;
+  background-color: transparent;
+}
+
+/* textillate */
+#textillate {
+  position: absolute;
+  color: white;
+  font-size: 2rem;
+  width: 50%;
+  text-align: center;
+  z-index: 999;
+  background: linear-gradient(270deg,transparent,rgba(0,0,0,0.3),transparent) !important;
 }

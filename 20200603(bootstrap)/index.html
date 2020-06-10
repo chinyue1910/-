@@ -20,8 +20,9 @@
   <link rel="stylesheet" href="./css/magnific-popup-single.css">
 
   <!-- animate.css -->
-  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.0/animate.min.css'/>
-  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css'/>
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.0/animate.min.css' />
+  <!-- wow.js 需使用舊版 animate.css -->
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css' />
 
   <link rel="stylesheet" href="./css/style.css">
   <style>
@@ -32,16 +33,18 @@
 
 <body data-spy="scroll" data-target="#coffee-navbar">
   <nav id="navbar" class="navbar navbar-expand-lg navbar-dark fixed-top">
-    <a class="navbar-brand" href="#section01">
-      <img src="./images/logo.png" alt="泰山咖啡莊園" width="40">
-      <!-- vertical-align : middle 只能用在 inline or inline-block or table-cell 格式 -->
-      <span class="ml-2 align-middle">泰山咖啡莊園</span>
-    </a>
+    <div class="menu-left">
+      <a class="navbar-brand" href="#section01">
+        <img src="./images/logo.png" alt="泰山咖啡莊園" width="40">
+        <!-- vertical-align : middle 只能用在 inline or inline-block or table-cell 格式 -->
+        <span class="ml-2 align-middle">泰山咖啡莊園</span>
+      </a>
+    </div>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#coffee-navbar">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div id="coffee-navbar" class="collapse navbar-collapse justify-content-lg-end">
-      <ul id="main_menu" class="navbar-nav">
+      <ul id="main_menu" class="navbar-nav menu-left">
         <li class="nav-item">
           <a class="nav-link" href="#section02"><span class="fas fa-hamburger"></span>菜單餐點</a>
         </li>
@@ -59,7 +62,7 @@
         </li>
       </ul>
 
-      <ul id="login_menu" class="navbar-nav">
+      <ul id="login_menu" class="navbar-nav menu-left">
         <li class="nav-item">
           <a id="btn-login" class="nav-link" href="#login" data-toggle="modal" data-target=""><span
               class="fas fa-user"></span>登入</a>
@@ -183,12 +186,22 @@
         <span class="sr-only">Next</span>
       </a>
     </div>
+    <div id="textillate">
+      <ul class="textillate_texts">
+        <li>香濃原味，伴您悠閒享生活</li>
+        <li>輕鬆愉悅，重溫浪漫時光</li>
+        <li>與您相約，戀上幸福好味道</li>
+        <li>用對待人生的態度，對待一杯咖啡</li>
+        <li>簡單即是美，一杯一世界</li>
+      </ul>
+    </div>
   </section>
 
   <!-- section02 菜單餐點 -->
   <section id="section02">
     <div class="container">
-      <h1>菜單餐點</h1>
+      <h1 class="wow fadeInLeft" data-wow-duration="2s" data-wow-delay="1s" data-wow-iteration="1s" data-wow-offset="0">
+        菜單餐點</h1>
       <div class="row">
         <div class="col-12 col-lg-2 mt-3">
           <ul class="list-group flex-row flex-lg-column justify-content-center list-group-flush">
@@ -590,8 +603,15 @@
 
   <!-- section03 周邊景點 -->
   <section id="section03">
+    <div id="scene1" class="position-absolute" style="z-index: -1;">
+      <div class="layer" data-depth="0.5">
+        <div class="bleed bg1"></div>
+      </div>
+    </div>
+    <div id="particles-js" class="position-absolute h-100 w-100" style="z-index: -1;"> </div>
     <div class="container">
-      <h1>周邊景點</h1>
+      <h1 class="wow fadeInLeft" data-wow-duration="2s" data-wow-delay="1s" data-wow-iteration="1s" data-wow-offset="0">
+        周邊景點</h1>
       <div class="row">
         <div class="col-6 col-lg-3">
           <a href="https://picsum.photos/1920/1080/?random=1" class="image-popup-no-margins">
@@ -815,7 +835,8 @@
   <!-- section05 聯絡我們 -->
   <section id="section05">
     <div class="container">
-      <h1>聯絡我們</h1>
+      <h1 class="wow fadeInLeft" data-wow-duration="2s" data-wow-delay="1s" data-wow-iteration="1s" data-wow-offset="0">
+        聯絡我們</h1>
       <form>
         <div class="row">
           <div class="col-12">
@@ -901,8 +922,14 @@
 
   <!-- section06 咖啡故事 -->
   <section id="section06">
+    <div id="scene2" class="position-absolute" style="z-index: -1;">
+      <div class="layer" data-depth="0.5">
+        <div class="bleed bg2"></div>
+      </div>
+    </div>
     <div class="container">
-      <h1>咖啡故事</h1>
+      <h1 class="wow fadeInLeft" data-wow-duration="2s" data-wow-delay="1s" data-wow-iteration="1s" data-wow-offset="0">
+        咖啡故事</h1>
       <div class="row">
         <div class="col-lg-6">
           <img id="nav-img" class="h-100 w-100" style="object-fit: cover; border: 6px solid #fff;"
@@ -914,7 +941,7 @@
             <a class="nav-link" id="coffee2" data-toggle="tab" href="#coffee-02">咖啡好處</a>
             <a class="nav-link" id="coffee3" data-toggle="tab" href="#coffee-03">咖啡壞處</a>
           </div>
-          <div class="tab-content bg-white overflow-auto" id="myTabContent" data-spy="scroll" data-target="#nav-tab"
+          <div class="tab-content bg-white overflow-auto" id="myTabContent" data-target="#nav-tab"
             style="height: 500px;">
             <div class="tab-pane fade show active" id="coffee-01">
               <p>
@@ -973,23 +1000,26 @@
         <div class="col-auto">
           <ul class="mr-1 d-flex list-unstyled flex-lg-row">
             <li class="mr-3">
-              <a href="https://www.facebook.com/tsvts/" data-toggle="tooltip" data-placement="top" data-container="#footer" data-offset="0.10" title="泰山職訓局"><i class="fab fa-facebook"
+              <a href="https://www.facebook.com/tsvts/" data-toggle="tooltip" data-placement="top"
+                data-container="#footer" data-offset="0.10" title="泰山職訓局"><i class="fab fa-facebook"
                   style="font-size: 30px;color: white;"></i></a>
             </li>
             <li class="mr-3">
-              <a href="https://wdaweb.github.io/" data-toggle="tooltip" data-placement="top" data-container="#footer" data-offset="0.10" title="網頁設計課程介紹"><img src="./images/wda.png" width="30"></a>
+              <a href="https://wdaweb.github.io/" data-toggle="tooltip" data-placement="top" data-container="#footer"
+                data-offset="0.10" title="網頁設計課程介紹"><img src="./images/wda.png" width="30"></a>
             </li>
             <li>
-              <a href="https://www.taiwanjobs.gov.tw/home/new_index.aspx" data-toggle="tooltip" data-placement="top" data-container="#footer" data-offset="0.10" title="台灣就業通"><img src="./images/twjb.png" width="30"></a>
+              <a href="https://www.taiwanjobs.gov.tw/home/new_index.aspx" data-toggle="tooltip" data-placement="top"
+                data-container="#footer" data-offset="0.10" title="台灣就業通"><img src="./images/twjb.png" width="30"></a>
             </li>
           </ul>
         </div>
       </div>
   </footer>
-<!-- 回到頂端 -->
-<div id="go_top_page">
-  <a href="#section01"><i class="fas fa-chevron-up"></i></a>
-</div>
+  <!-- 回到頂端 -->
+  <div id="go_top_page" class="animated bounce" style="animation-duration: 3s;">
+    <a href="#section01"><i class="fas fa-chevron-up"></i></a>
+  </div>
 
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -1002,25 +1032,93 @@
   <!-- Magnific Popup core JS file -->
   <script src="./js/jquery.magnific-popup.min.js"></script>
   <script src="./js/magnific-popup-single.js"></script>
-
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/parallax/3.1.0/parallax.min.js"></script>
+  <!-- particle 粒子 -->
+  <script src="./js/particles.min.js"></script>
+  <script src="./js/particle_app.js"></script>
+  <!-- wow js -->
+  <script src="./js/wow.min.js"></script>
+  <!-- textillate js -->
+  <script src="./js/jquery.textillate.js"></script>
+  <script src="./js/jquery.fittext.js"></script>
+  <script src="./js/jquery.lettering.js"></script>
   <script>
+    var scene1 = document.getElementById('scene1');
+    var parallaxInstance1 = new Parallax(scene1);
+
+    var scene2 = document.getElementById('scene2');
+    var parallaxInstance2 = new Parallax(scene2);
+
+    new WOW().init();
+
     // 設定不要有行為的
     $('.carousel-control-prev,.carousel-control-next,#btn-login,#btn-register,[data-toggle="pill"],[data-toggle="tab"]').on("click", function (event) {
       event.preventDefault();
       $('html,body').stop()
     })
 
-    $("#coffee1").on("click",function(){
-      $("#nav-img").attr("src","./images/section02_01.jpg")
+    $("#coffee1").on("click", function () {
+      $("#nav-img").attr("src", "./images/section02_01.jpg")
     })
-    $("#coffee2").on("click",function(){
-      $("#nav-img").attr("src","./images/section02_02.jpg")
+    $("#coffee2").on("click", function () {
+      $("#nav-img").attr("src", "./images/section02_02.jpg")
     })
-    $("#coffee3").on("click",function(){
-      $("#nav-img").attr("src","./images/section02_03.jpg")
+    $("#coffee3").on("click", function () {
+      $("#nav-img").attr("src", "./images/section02_03.jpg")
+    })
+
+    $('#go_top_page').css("display", "none")
+
+    $(window).on('scroll', function () {
+      nowloc = $(window).scrollTop()
+      if (nowloc > 500) {
+        $('#go_top_page').fadeIn(1000)
+        $('#go_top_page').css('animation-iteration-count', 3)
+      } else {
+        $('#go_top_page').fadeOut(1000)
+        $('#go_top_page').css('animation-iteration-count', 0)
+      }
+
+      if (nowloc <= 300) {
+        $('#navbar').css('background', "transparent")
+      } else {
+        $('#navbar').css('background', "var(--coffee1)")
+      }
+    })
+
+    $(".navbar-toggler").on("click", function () {
+      $('#navbar').toggleClass("toggle_black")
     })
 
     $('[data-toggle="tooltip"]').tooltip()
+
+    $("#textillate").textillate({
+      selector: '.textillate_texts',
+      loop: true,
+      minDisplayTime: 8000,
+      initialDelay: 500,
+      autoStart: true,
+      in: {
+        effect: 'zoomIn',
+        delayScale: 2,
+        delay: 150,
+        sync: false,
+        shuffle: true,
+        reverse: false,
+        callback: function () { }
+      },
+      out: {
+        effect: 'zoomOut',
+        delayScale: 1.5,
+        delay: 50,
+        sync: false,
+        shuffle: false,
+        reverse: false,
+        callback: function () { }
+      },
+      callback: function () { },
+      type: 'char'
+    });
   </script>
 </body>
 
