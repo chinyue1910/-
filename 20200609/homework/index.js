@@ -41,11 +41,19 @@ app.post('/new', async (req, res) => {
 })
 
 app.patch('/update/:type', async (req, res) => {
+  console.log(req.params)
   if (req.headers['content-type'] !== 'application/json') {
     res.status(400).send({ sucess: false, message: '請回傳 json 格式' })
     return
   }
-  if()
+  if (
+    req.params.type !== 'name' &&
+    req.params.type !== 'price' &&
+    req.params.type !== 'description' &&
+    req.params.type !== 'count'
+  ) {
+    res.status(400).send({ sucess: false, message: '更新欄位不符' })
+  }
 })
 
 app.listen(port, () => {
