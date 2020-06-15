@@ -6,6 +6,7 @@ const Schema = mongoose.Schema
 mongoose.set('useCreateIndex', true)
 mongoose.set('useFindAndModify', false)
 
+// market 最外層
 mongoose.connect('mongodb://127.0.0.1:27017/market', {
   useNewUrlParser: true,
   useUnifiedTopology: true
@@ -13,7 +14,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/market', {
 
 mongoose.plugin(beautifyUnique)
 
-const userScheme = new Schema({
+const productScheme = new Schema({
   name: {
     type: String,
     required: [true, '商品名稱必填'],
@@ -23,6 +24,7 @@ const userScheme = new Schema({
   },
   price: {
     type: Number,
+    min: [0, '商品價格最少 0 元'],
     required: [true, '商品價格必填']
   },
   description: {
@@ -31,9 +33,32 @@ const userScheme = new Schema({
   },
   count: {
     type: Number,
+    min: [0, '商品庫存最少 0 個'],
     required: [true, '商品數量必填']
+  },
+  image: {
+    type: String,
+    required: [true, '商品圖片必填']
+  }
+},
+{ versionKey: false }
+)
+
+const userScheme = new Schema({
+  account: {
+    type: String
+  },
+  password: {
+    type: String
   }
 })
 
-const market = mongoose.model('market', userScheme)
-export default market
+// product : market 子層
+const market = mongoose.model('product', productScheme)
+const user = mongoose.model('detail', userScheme)
+const connection = mongoose.connection
+export default {
+  market,
+  user,
+  connection
+}
