@@ -53,9 +53,10 @@ const userScheme = new Schema({
   }
 })
 
-// product : market 子層
-const market = mongoose.model('product', productScheme)
-const user = mongoose.model('detail', userScheme)
+// products : market 子層
+const market = mongoose.model('products', productScheme)
+const user = mongoose.model('users', userScheme)
+// 使用 mongoose.connection 獲取默認的 Connection 對象。一旦連接，在 Connection 實例上，將觸發打開事件。
 const connection = mongoose.connection
 export default {
   market,

@@ -21,6 +21,7 @@ export default {
           if (result.data.success) {
             alert('登入成功')
             this.$store.commit('login', result.data.account)
+            // 想要導航到不同的URL，則使用router.push方法
             this.$router.push('/about')
           } else {
             alert(result.data.message)

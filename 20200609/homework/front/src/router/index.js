@@ -37,7 +37,7 @@ const router = new VueRouter({
 // next 採取的導向動作
 router.beforeEach((to, from, next) => {
   // 如果要去的頁面需要登入 ，而且 Vuex 有使用者資料
-  if (to.meta.needLogin && store.state.user === 0) {
+  if (to.meta.needLogin && store.state.user.length === 0) {
     // 跳出訊息
     // 導向首頁
     alert('need login')

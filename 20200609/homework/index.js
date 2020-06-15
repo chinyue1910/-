@@ -12,12 +12,13 @@ import cors from 'cors'
 import session from 'express-session'
 // 將登入狀態存入資料庫
 import connectMongo from 'connect-mongo'
-
 const MongoStore = connectMongo(session)
 
 const app = express()
 const port = 8888
 
+// session data 並不會儲存在 cookie 裡，cookie 存的是 sessionID
+// session data 儲存在 server端
 app.use(session({
   // 密鑰，加密認證資料用
   secret: 'chinyue',
@@ -61,26 +62,27 @@ const upload = multer({
       const now = Date.now()
       // 副檔名
       // 使用 path 套件取得上傳檔案原始檔名的副檔名
+      // https://nodejs.org/api/path.html#path_path_extname_path
       const ext = path.extname(file.originalname)
-      // cb(錯誤訊息，沒有就是 null, 目前的時間)
+      // cb(錯誤訊息，沒有就是 null, 目前的時間+副檔名)
       cb(null, now + ext)
-    },
-    limits: {
-      // 限制大小不超過 1 MB
-      fileSize: 1024 * 1024
-    },
-    fileFilter (req, file, cb) {
-      if (file.mimetype.includes('image')) {
-        // 沒有錯誤，接受檔案
-        cb(null, true)
-      } else {
-        // 觸發 multer 錯誤，不接受檔案
-        // LIMIT_FORMAT 是自訂的錯誤 CODE，跟內建的錯誤 CODE 格式統一
-        cb(new multer.MulterError('LIMIT_FORMAT'), false)
-      }
     }
-  })
-})
+  }),
+  limits: {
+    // 限制大小不超過 1 MB
+    fileSize: 1024 * 1024
+  },
+  fileFilter (req, file, cb) {
+    if (file.mimetype.includes('image')) {
+      // 沒有錯誤，接受檔案
+      cb(null, true)
+    } else {
+      // 觸發 multer 錯誤，不接受檔案
+      // LIMIT_FORMAT 是自訂的錯誤 CODE，跟內建的錯誤 CODE 格式統一
+      cb(new multer.MulterError('LIMIT_FORMAT'), false)
+    }
+  }
+}).single('image')
 
 app.use(bodyParser.json({ type: 'application/json' }))
 
@@ -95,7 +97,7 @@ app.post('/image', async (req, res) => {
   // res 要出去的東西
   // err 檔案上傳的錯誤
   // upload.single(欄位)(req, res, 上傳完畢的 function)
-  upload.single('image')(req, res, async err => {
+  upload(req, res, async err => {
     if (err instanceof multer.MulterError) {
       const msg = (err.code === 'LIMIT_FILE_SIZE') ? '檔案太大' : '格式不符'
       res.status(400).send({ success: false, message: msg })
@@ -115,7 +117,6 @@ app.post('/image', async (req, res) => {
       } catch (error) {
         const message = error.errors[Object.keys(error.errors)[0]].message
         res.status(400).send({ success: false, message: message })
-        console.log(error)
       }
     }
   })
@@ -149,7 +150,7 @@ app.post('/new', async (req, res) => {
   } catch (error) {
     const message = error.errors[Object.keys(error.errors)[0]].message
     res.status(400).send({ success: false, message: message })
-    console.log(error)
+    // console.log(error)
   }
 })
 // 修改
@@ -175,7 +176,7 @@ app.patch('/update/:type', async (req, res) => {
     }, { new: true })
     res.send({ success: true, message: '' })
   } catch (error) {
-    console.log(error.msg)
+    // console.log(error.msg)
     res.status(500).send({ success: false, message: '發生錯誤' })
   }
 })
@@ -220,17 +221,19 @@ app.get('/product', async (req, res) => {
 })
 // 查詢所有商品
 app.get('/all', async (req, res) => {
+  // console.log(req.session)
   if (req.session.user) {
     try {
       let result = await db.market.find().select({ _id: 0, __v: 0 })
+      console.log(result)
       result = result.map(product => {
         product.image = 'http://localhost:8888/images/' + product.image
         return product
       })
-      console.log(result)
+      // console.log(result)
       res.send({ sucess: true, message: '', products: result })
     } catch (error) {
-      console.log(error)
+      // console.log(error)
       res.status(404).send({ success: false, message: '目前無任何資料' })
     }
   } else {
@@ -246,14 +249,14 @@ app.get('/instock', async (req, res) => {
     res.status(404).send({ success: false, message: '目前無任何資料' })
   }
 })
-
+// 查詢圖片
 app.get('/findimage/:file', async (req, res) => {
-  // fs.existsSync() 可以檢查檔案在不在，只能用絕對路徑
-  // process.cwd() 可以知道目前運作的 js 檔在哪裡
+  // fs.existsSync() 可以檢查檔案在不在，只能用絕對路徑 https://nodejs.org/api/fs.html#fs_fs_existssync_path
+  // process.cwd() 可以知道目前運作的 js 檔在哪裡 https://nodejs.org/api/process.html#process_process_cwd
   const path = process.cwd() + '/images/' + req.params.file
   const exists = fs.existsSync(path)
   if (exists) {
-    // res.sendFile(路徑)
+    // res.sendFile(路徑) http://expressjs.com/en/5x/api.html#res.send
     // 路徑只能放絕對路徑，不然就是要設定 root 為 process.cwd()
     // res.sendFile(路徑, {root: process.cwd()})
     // 預設是從根目錄找檔案，所以要設定根目錄為目前的資料夾
@@ -275,7 +278,6 @@ app.post('/login', async (req, res) => {
         password: req.body.password
       }
     )
-    console.log(result)
     if (result.length > 0) {
       const account = result[0].account
       req.session.user = account
@@ -301,6 +303,7 @@ app.get('/logout', async (req, res) => {
 
 app.get('/checksession', async (req, res) => {
   res.send({ success: true, message: '', user: req.session.user })
+  console.log(req.session)
 })
 
 app.listen(port, () => {
