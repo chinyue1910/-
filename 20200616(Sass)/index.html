@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <section>
+    <div class="container">
+      <h1 style="text-align: center;">Sass</h1>
+      <p style="margin-bottom: 1rem;">
+        Sass 是 CSS 的預處理器(preprocessor)，目的在撰寫 css 時減少反覆重工的動作以及更有效率的樣式結構維護，Sass 必須經過編譯 (compiler) 或原生的 CSS 才能使用，也就是說瀏覽器不懂
+        Sass，需經過編譯才能進行閱讀。
+      </p>
+      <p>
+        CSS 不是程式語言，沒有流程控制、函式這些功能，Sass 除了可以使用嵌套規則 (nested rules)、繼承 (extends)、混合 (mixins) 這些功能，還可以使用變數 (variables)、函式
+        (Function)、流程控制 (Flow Control) 等等，所以也可以稱為 CSS 的程式語言。
+      </p>
+      <h3 style="margin: 1rem 0 0;">Sass 與 CSS</h3>
+      <p style="margin-bottom: 1rem;">Sass 分為兩種 Sass 與 Scss，都稱為 Sass。不同點如下：</p>
+      <table border="1">
+        <tr>
+          <th width="5%">副檔名</th>
+          <th width="15%">年份</th>
+          <th width="20%">語法</th>
+          <th width="55%">說明</th>
+        </tr>
+        <tr>
+          <td align="center">.sass</td>
+          <td align="center">2007 年，最早的預處理器</td>
+          <td align="center">縮排語法 <br> 沒有 css 大括號，結尾分號</td>
+          <td align="center">語法不能被大眾接受，無法兼容 css</td>
+        </tr> align="center"
+        <tr> align="center"
+          <td align="center">.scss</td>
+          <td align="center">推除時期 less 之後</td>
+          <td align="center">塊語法 <br> 寫法與 css 一致，兼容 css</td>
+          <td align="center">受到 less 影響，scss 可以相容 css，撰寫起來親合彈性，成為普及受歡迎的預處理器。</td>
+        </tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- 1. 變數 (Variables) -->
+
+  <section id="section01">
+    <div class="container">
+      <h1>1. 變數 (Variables)</h1>
+      <p>變數使用時機，當一個值被重複使用兩次以上時，就可考慮使用</p>
+      <p>變數可以統一定義網站規範，只須修該變數值，不需在 CSS 原生檔一一修改數值</p>
+      <P>底線 "_" 和連接線 "-" 的使用可以互換。定義變數名稱是 $bg_black，但可以透過 $bg-black 提取</P>
+    </div>
+  </section>
+
+  <!-- 2. 嵌套 (Nested) -->
+
+  <section id="section02">
+    <div class="container">
+      <h1>2. 嵌套 (Nested)</h1>
+      <p>。嵌套雖然很好使用，不表示所有層級都該寫入嵌套裡面，可考慮使用最少的選擇器選擇到位置</p>
+      <p>。過度嵌套編譯後選擇器過長，會影響到效能的執行，也會造成 CSS 檔案容量過大</p>
+      <p>。以區塊嵌套有個優點，partial 的概念讓結構區塊模組化，專案維護時只需針對錯誤找到模組位置修改</p>
+      <ul class="menu">
+        <li><a href="#">LINK</a></li>
+        <li><a href="#">LINK</a></li>
+        <li><a href="#">LINK</a></li>
+        <li><a href="#">LINK</a></li>
+        <li><a href="#">LINK</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <div id="exercise">
+    <div class="container">
+      <h2>練習：使用嵌套建立三欄結構</h2>
+      <div class="row">
+        <div class="col">
+          <img src="https://picsum.photos/400/300/?random=1">
+          <h2><a href="#">Title Link</a></h2>
+          <p>
+            概念原因現象，一面我又我是讓她吸引也許提供見到，參與領先確認頻道都能，原料時間太麻里加快歐美監控老婆，大家論壇面對技能尷尬天堂就是哪個使得翻譯，主演動力你有鏡頭第一提升業績有個一部分真是近期機票，變化一台客戶不斷說話拍攝前來工藝智慧已被跟着，妹妹提示訊息。
+          </p>
+        </div>
+        <div class="col">
+          <img src="https://picsum.photos/400/300/?random=2">
+          <h2><a href="#">Title Link</a></h2>
+          <p>
+            概念原因現象，一面我又我是讓她吸引也許提供見到，參與領先確認頻道都能，原料時間太麻里加快歐美監控老婆，大家論壇面對技能尷尬天堂就是哪個使得翻譯，主演動力你有鏡頭第一提升業績有個一部分真是近期機票，變化一台客戶不斷說話拍攝前來工藝智慧已被跟着，妹妹提示訊息。
+          </p>
+        </div>
+        <div class="col">
+          <img src="https://picsum.photos/400/300/?random=3">
+          <h2><a href="#">Title Link</a></h2>
+          <p>
+            概念原因現象，一面我又我是讓她吸引也許提供見到，參與領先確認頻道都能，原料時間太麻里加快歐美監控老婆，大家論壇面對技能尷尬天堂就是哪個使得翻譯，主演動力你有鏡頭第一提升業績有個一部分真是近期機票，變化一台客戶不斷說話拍攝前來工藝智慧已被跟着，妹妹提示訊息。
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. 繼承 (Extend) -->
+  <div id="section03">
+    <div class="container">
+      <h1>3. 繼承 (Extend)</h1>
+      <p>。繼承可以使用 css 選擇器或 % 開始命名</p>
+      <p>。使用 css 選擇器，會被編譯到 css，而 % 佔位符不會被編譯到 css</p>
+      <p>。使用 @extend 可以養成習慣，統一將其放在樣式的最前面</p>
+      <p>。相同的繼承樣式在編譯後會被使用群組選擇器合併再一起</p>
+      <div id="extend">
+        <div class="box1"></div>
+        <div class="box2"></div>
+        <div class="box3"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. Sass 的數學計算 -->
+  <div id="section04">
+    <div class="container">
+      <h1>4. 計算</h1>
+      <p>可以做加、減、乘、除、取餘數的計算</p>
+      <p>。除法比較特別，遇到除法計算，養成用括號的習慣</p>
+      <p>。Sass 的計算與 Calc() 不同點在於預處理前已經計算好結果，不會造成瀏覽器的負擔，Calc() 是在文件正被瀏覽器解讀時進行，會消耗瀏覽器資源</p>
+      <div class="box4"></div>
+    </div>
+  </div>
+
+  <!-- 5. 函式 (function) -->
+  <div id="section05">
+    <div class="container">
+      <h1>5. 函式 (function)</h1>
+      <p style="margin-bottom: 1rem;">
+        @funtion 與 @mixin 有點像，都是在做運算處理，兩個差異在於 @function 必須使用 @return 來返回結果，而且輸出的是一個值，並非是一段 css 樣式，@mixin 則可以使用 @include
+        產生一段樣式
+      </p>
+      <h2>使用函式計算字體大小與行高</h2>
+      <p>
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Provident esse, sunt dolores dolor veniam suscipit
+        doloribus molestiae autem eum, atque quas ipsum ab mollitia in eos ad minima aliquid aspernatur expedita
+        repellat aliquam? Dolorum delectus natus similique corporis nam a dignissimos tempore, commodi officiis sit
+        exercitationem, saepe unde sunt aliquid omnis, dolor excepturi perspiciatis. Culpa vel temporibus quaerat sed
+        accusantium nesciunt, deserunt minima, magni alias adipisci natus consectetur, a perferendis aut numquam commodi
+        dolores sit nobis debitis architecto dolor inventore? Numquam libero adipisci reprehenderit aliquam repellendus
+        magni sequi ad, vero delectus, dolor assumenda necessitatibus fugiat esse harum nulla incidunt omnis.
+      </p>
+    </div>
+
+    <div class="container">
+      <h2>使用函式計算欄位寬度</h2>
+      <div class="row">
+        <div class="col">
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa quia numquam officiis sint cumque
+            praesentium molestias placeat magni iure tempore? Id expedita odio facilis accusantium quidem eveniet illum
+            porro nostrum odit tempore ipsam, possimus vitae animi, itaque quis a facere? Dignissimos, consectetur.
+            Tempore sequi libero, saepe quia fugiat dolores inventore deleniti non a! Consectetur, modi totam sit
+            pariatur eius sapiente, ad nihil exercitationem corporis veritatis beatae eveniet delectus, nostrum
+            laudantium fugiat ratione aperiam voluptatibus temporibus. Inventore nostrum possimus, cum corrupti
+            quibusdam autem, a in pariatur aut, porro quisquam optio tenetur debitis quae voluptate? Ab incidunt, vero
+            quasi consectetur maxime rerum?</p>
+        </div>
+        <div class="col">
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa quia numquam officiis sint cumque
+            praesentium molestias placeat magni iure tempore? Id expedita odio facilis accusantium quidem eveniet illum
+            porro nostrum odit tempore ipsam, possimus vitae animi, itaque quis a facere? Dignissimos, consectetur.
+            Tempore sequi libero, saepe quia fugiat dolores inventore deleniti non a! Consectetur, modi totam sit
+            pariatur eius sapiente, ad nihil exercitationem corporis veritatis beatae eveniet delectus, nostrum
+            laudantium fugiat ratione aperiam voluptatibus temporibus. Inventore nostrum possimus, cum corrupti
+            quibusdam autem, a in pariatur aut, porro quisquam optio tenetur debitis quae voluptate? Ab incidunt, vero
+            quasi consectetur maxime rerum?</p>
+        </div>
+        <div class="col">
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa quia numquam officiis sint cumque
+            praesentium molestias placeat magni iure tempore? Id expedita odio facilis accusantium quidem eveniet illum
+            porro nostrum odit tempore ipsam, possimus vitae animi, itaque quis a facere? Dignissimos, consectetur.
+            Tempore sequi libero, saepe quia fugiat dolores inventore deleniti non a! Consectetur, modi totam sit
+            pariatur eius sapiente, ad nihil exercitationem corporis veritatis beatae eveniet delectus, nostrum
+            laudantium fugiat ratione aperiam voluptatibus temporibus. Inventore nostrum possimus, cum corrupti
+            quibusdam autem, a in pariatur aut, porro quisquam optio tenetur debitis quae voluptate? Ab incidunt, vero
+            quasi consectetur maxime rerum?</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. 混和 (Mixins) -->
+  <div id="section06">
+    <div class="container">
+      <h1>6. 混合 (Mixins)</h1>
+      <p style="margin-bottom: 1rem;">
+        @mixin 就像 @function 可下參數，大括號裡面可以存放變數、自訂樣式、函式，是一種重複使用的樣式加工概念，產生一組可重複使用的樣式，並使用 @include 放置在選擇器內容中</p>
+      <h2>使用 mixin 建立按鈕</h2>
+      <button class="btn btn-primary">primary</button>
+      <button class="btn btn-success">success</button>
+      <button class="btn btn-danger">danger</button>
+      <button class="btn btn-black">black</button>
+      <h2 style="margin-top: 30px;">mixins 多參數 + for：建立多個不同顏色的盒子</h2>
+      <p>1. 多參數會以 list 型態帶入</p>
+      <p>2. @for 有兩種:</p>
+      <p>@for $i from (start number) through (end number){...} 會包括 end number</p>
+      <p>@for $i from (start number) to (end number){...} 會排除 end number</p>
+      <div class="b1"></div>
+      <div class="b2"></div>
+      <div class="b3"></div>
+      <div class="b4"></div>
+      <div class="b5"></div>
+    </div>
+  </div>
+
+  <!-- 7. RWD -->
+  <div id="section07">
+    <div class="container">
+      <h1>7. 使用 @mixin + @content 來設計 RWD</h1>
+      <div class="row">
+        <div class="col">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo eum saepe maxime possimus rem exercitationem
+          facilis, quibusdam numquam! Est quaerat obcaecati iusto sint similique perspiciatis sapiente tempore assumenda
+          explicabo! Commodi voluptates ut sapiente eaque cupiditate illum mollitia consequatur natus quia harum,
+          provident atque? Nostrum, autem tenetur. Commodi, facere atque ad vel necessitatibus eveniet laudantium
+          architecto vitae dolor. Iste facilis consectetur placeat eligendi expedita a unde libero? Natus sunt ullam
+          velit saepe, dignissimos voluptate, consequatur, molestiae dicta alias soluta necessitatibus asperiores optio
+          rerum blanditiis? Dolorum accusamus sapiente fugit, suscipit nulla dolore soluta, voluptate et similique
+          assumenda accusantium earum fuga animi alias?
+        </div>
+        <div class="col">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo eum saepe maxime possimus rem exercitationem
+          facilis, quibusdam numquam! Est quaerat obcaecati iusto sint similique perspiciatis sapiente tempore assumenda
+          explicabo! Commodi voluptates ut sapiente eaque cupiditate illum mollitia consequatur natus quia harum,
+          provident atque? Nostrum, autem tenetur. Commodi, facere atque ad vel necessitatibus eveniet laudantium
+          architecto vitae dolor. Iste facilis consectetur placeat eligendi expedita a unde libero? Natus sunt ullam
+          velit saepe, dignissimos voluptate, consequatur, molestiae dicta alias soluta necessitatibus asperiores optio
+          rerum blanditiis? Dolorum accusamus sapiente fugit, suscipit nulla dolore soluta, voluptate et similique
+          assumenda accusantium earum fuga animi alias?
+        </div>
+        <div class="col">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo eum saepe maxime possimus rem exercitationem
+          facilis, quibusdam numquam! Est quaerat obcaecati iusto sint similique perspiciatis sapiente tempore assumenda
+          explicabo! Commodi voluptates ut sapiente eaque cupiditate illum mollitia consequatur natus quia harum,
+          provident atque? Nostrum, autem tenetur. Commodi, facere atque ad vel necessitatibus eveniet laudantium
+          architecto vitae dolor. Iste facilis consectetur placeat eligendi expedita a unde libero? Natus sunt ullam
+          velit saepe, dignissimos voluptate, consequatur, molestiae dicta alias soluta necessitatibus asperiores optio
+          rerum blanditiis? Dolorum accusamus sapiente fugit, suscipit nulla dolore soluta, voluptate et similique
+          assumenda accusantium earum fuga animi alias?
+        </div>
+        <div class="col">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo eum saepe maxime possimus rem exercitationem
+          facilis, quibusdam numquam! Est quaerat obcaecati iusto sint similique perspiciatis sapiente tempore assumenda
+          explicabo! Commodi voluptates ut sapiente eaque cupiditate illum mollitia consequatur natus quia harum,
+          provident atque? Nostrum, autem tenetur. Commodi, facere atque ad vel necessitatibus eveniet laudantium
+          architecto vitae dolor. Iste facilis consectetur placeat eligendi expedita a unde libero? Natus sunt ullam
+          velit saepe, dignissimos voluptate, consequatur, molestiae dicta alias soluta necessitatibus asperiores optio
+          rerum blanditiis? Dolorum accusamus sapiente fugit, suscipit nulla dolore soluta, voluptate et similique
+          assumenda accusantium earum fuga animi alias?
+        </div>
+        <div class="col">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo eum saepe maxime possimus rem exercitationem
+          facilis, quibusdam numquam! Est quaerat obcaecati iusto sint similique perspiciatis sapiente tempore assumenda
+          explicabo! Commodi voluptates ut sapiente eaque cupiditate illum mollitia consequatur natus quia harum,
+          provident atque? Nostrum, autem tenetur. Commodi, facere atque ad vel necessitatibus eveniet laudantium
+          architecto vitae dolor. Iste facilis consectetur placeat eligendi expedita a unde libero? Natus sunt ullam
+          velit saepe, dignissimos voluptate, consequatur, molestiae dicta alias soluta necessitatibus asperiores optio
+          rerum blanditiis? Dolorum accusamus sapiente fugit, suscipit nulla dolore soluta, voluptate et similique
+          assumenda accusantium earum fuga animi alias?
+        </div>
+        <div class="col">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo eum saepe maxime possimus rem exercitationem
+          facilis, quibusdam numquam! Est quaerat obcaecati iusto sint similique perspiciatis sapiente tempore assumenda
+          explicabo! Commodi voluptates ut sapiente eaque cupiditate illum mollitia consequatur natus quia harum,
+          provident atque? Nostrum, autem tenetur. Commodi, facere atque ad vel necessitatibus eveniet laudantium
+          architecto vitae dolor. Iste facilis consectetur placeat eligendi expedita a unde libero? Natus sunt ullam
+          velit saepe, dignissimos voluptate, consequatur, molestiae dicta alias soluta necessitatibus asperiores optio
+          rerum blanditiis? Dolorum accusamus sapiente fugit, suscipit nulla dolore soluta, voluptate et similique
+          assumenda accusantium earum fuga animi alias?
+        </div>
+        <div class="col">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo eum saepe maxime possimus rem exercitationem
+          facilis, quibusdam numquam! Est quaerat obcaecati iusto sint similique perspiciatis sapiente tempore assumenda
+          explicabo! Commodi voluptates ut sapiente eaque cupiditate illum mollitia consequatur natus quia harum,
+          provident atque? Nostrum, autem tenetur. Commodi, facere atque ad vel necessitatibus eveniet laudantium
+          architecto vitae dolor. Iste facilis consectetur placeat eligendi expedita a unde libero? Natus sunt ullam
+          velit saepe, dignissimos voluptate, consequatur, molestiae dicta alias soluta necessitatibus asperiores optio
+          rerum blanditiis? Dolorum accusamus sapiente fugit, suscipit nulla dolore soluta, voluptate et similique
+          assumenda accusantium earum fuga animi alias?
+        </div>
+        <div class="col">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo eum saepe maxime possimus rem exercitationem
+          facilis, quibusdam numquam! Est quaerat obcaecati iusto sint similique perspiciatis sapiente tempore assumenda
+          explicabo! Commodi voluptates ut sapiente eaque cupiditate illum mollitia consequatur natus quia harum,
+          provident atque? Nostrum, autem tenetur. Commodi, facere atque ad vel necessitatibus eveniet laudantium
+          architecto vitae dolor. Iste facilis consectetur placeat eligendi expedita a unde libero? Natus sunt ullam
+          velit saepe, dignissimos voluptate, consequatur, molestiae dicta alias soluta necessitatibus asperiores optio
+          rerum blanditiis? Dolorum accusamus sapiente fugit, suscipit nulla dolore soluta, voluptate et similique
+          assumenda accusantium earum fuga animi alias?
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section id="section08">
+    <div class="container">
+      <h1>8. 資料型態</h1>
+      <ul>
+        <li>1. number(數字)：數字有分有單位或無單位，1,2,13,10px </li>
+        <li>2. string(字串)：有引號字串，"foo"、"bar"、無引號字串 baz</li>
+        <li>3. color(顏色)：blue,#000000,rgba(0,0,0,0.5)</li>
+        <li>4. boolean(布林值)：true false</li>
+        <li>5. null(空值):null</li>
+        <li>6. list(像陣列)：用空格或是逗號作為分隔，1.5rem 1rem 0 2rem 或 "Helvetica,Arial,sans-serif</li>
+        <li>7. map(物件)：類似 js 的物件</li>
+      </ul>
+    </div>
+  </section>
+</body>
+
+</html>

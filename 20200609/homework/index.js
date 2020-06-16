@@ -278,6 +278,7 @@ app.post('/login', async (req, res) => {
         password: req.body.password
       }
     )
+    console.log(result)
     if (result.length > 0) {
       const account = result[0].account
       req.session.user = account
