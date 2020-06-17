@@ -259,23 +259,23 @@ nav {
 }
 
 .b1 {
-  background: #a38fa6;
+  background: #d9e440;
 }
 
 .b2 {
-  background: #f932f9;
+  background: #715f6b;
 }
 
 .b3 {
-  background: #76f17e;
+  background: #5104d2;
 }
 
 .b4 {
-  background: #c18b26;
+  background: #b2dba8;
 }
 
 .b5 {
-  background: #fae140;
+  background: #52d007;
 }
 
 /* 7. 使用 @mixin + @content 來設計 RWD */
