@@ -1,0 +1,19 @@
+@import "./layout/footer";
+@import "./layout/navbar";
+@import "./layout/section01";
+@import "./layout/section02";
+@import "./layout/section03";
+@import "./layout/section04";
+@import "./layout/section05";
+@import "./layout/section06";
+
+.container {
+  width: 75%;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin: auto;
+}
+
+section {
+  margin-bottom: 2rem !important;
+}
