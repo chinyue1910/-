@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS-doodle Sakura</title>
+</head>
+<style>
+  body{
+    background: url(images/bg.jpg) center/cover;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+  }
+</style>
+<body>
+  <css-doodle>
+    :doodle{
+      @grid:20 / 100vmax;
+    }
+    @size:@rand(8,20)px;
+    background:url(images/@pick(1,2,3).png);
+    background-size:cover;
+    background-repeat:no-repeat;
+    transform:rotate(@rand(0,360)deg);
+    position:absolute;
+    left:@rand(1,100)%;
+    top:-10%;
+    animation:sakura 20s infinite @rand(0,50)s;
+
+    @keyframes sakura {
+      0%{
+        top:-5%;
+        left:@rand(-20,120)%;
+        transform:rotate(@rand(1080,1800)deg);
+      }
+      100%{
+        top:100%;
+        left:@rand(0,110)%;
+        transform:rotate(@rand(3600,7200)deg);
+      }
+    }
+  </css-doodle>
+  <script src="https://unpkg.com/css-doodle@0.8.5/css-doodle.min.js"></script>
+</body>
+</html>

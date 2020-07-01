@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <h1>CSS-Doodle</h1>
+  <p>CSS-Doodle 使用 CSS grid 的特性，可以在一個畫布上，為每個單元格設計出隨機且複雜的數學運算是背景或動畫</p>
+  <h2>選擇器</h2>
+  <h3>:doodle(容器)</h3>
+  <ol>
+    <li>:doodle{} 內，為容器的布局樣式</li>
+    <li>:doodle{} 外，為每個單元格的樣式</li>
+    <li>以下為繪製 5 x 5 / 500px 的 grid，gap 為格子間的距離</li>
+  </ol>
+  <css-doodle>
+    :doodle{
+    @grid:5x5/500px;
+    gap:10px
+
+    }
+    background:#FFA
+  </css-doodle>
+  <hr>
+  <h3>:container</h3>
+  <css-doodle>
+    :doodle{
+
+    }
+    :container{
+
+    @grid:5x5/500px;
+    gap:10px
+    }
+    background:#777;
+    border:3px solid #000;
+    transform:rotate(@rand(360deg));
+  </css-doodle>
+  <hr>
+  <h3>@nth(n, ...)</h3>
+  <p>像 :nth-child(n) 選擇第 n 個單元格</p>
+  <css-doodle>
+    :doodle{
+    @grid:5x5/500px;
+    gap:10px
+    }
+    background:#FFA;
+    @nth(odd){
+    background:green
+    }
+  </css-doodle>
+  <hr>
+  <h3>@even 與 @odd</h3>
+  <css-doodle>
+    :doodle{
+    @grid:5x5/500px;
+    gap:10px
+    }
+    background:#FFA;
+    @odd{
+    background:green
+    }
+  </css-doodle>
+  <hr>
+  <h3>@at(row, col)</h3>
+  <p>指定第幾列 / 第幾欄的單元格</p>
+  <css-doodle>
+    :doodle{
+    @grid:5x5/500px;
+    gap:10px
+    }
+    background:#FFA;
+    @at(4,3){
+    background:green
+    }
+  </css-doodle>
+  <hr>
+  <h3>@random([ ratio ])</h3>
+  <p>隨機選擇單元格，@random 沒有比率時可以省略括號</p>
+  <p>使用比率，ratio 比率介於 0 ~ 1 之間，預設值為 0.5。</p>
+  <css-doodle>
+    :doodle{
+    @grid:20x20/500px;
+    }
+    @random { border-top: 1px solid #60569e; }
+    @random { border-left: 1px solid #60569e; }
+    @random(.2) {
+    :after {
+    content: '';
+    background: hsl(@rand(360), 60%, 70%);
+    @size: @rand(3px);
+    }
+    }
+  </css-doodle>
+  <hr>
+  <h3>@row(n, ...)</h3>
+  <p>璇則往格中的第 n 列</p>
+  <p>可使用 odd 與 even 選擇 </p>
+  <css-doodle>
+    :doodle{
+    @grid:5x5/500px;
+    gap:10px
+    }
+    background:#FFA;
+    @row(3){
+    background:green
+    }
+  </css-doodle>
+  <hr>
+  <h3>@col(n, ...)</h3>
+  <p>璇則往格中的第 n 欄</p>
+  <p>可使用 odd 與 even 選擇 </p>
+  <css-doodle>
+    :doodle{
+    @grid:5x5/500px;
+    gap:10px
+    }
+    background:#FFA;
+    @col(odd){
+    background:green
+    }
+  </css-doodle>
+  <hr>
+  <h2>屬性</h2>
+  <h3>@place-cell</h3>
+  <p>相當於 :doodle 容易來定位單元格。第一個數值為水平，第二個數值為垂直，可以使用 left、 right、 center、 top、 bottom 或是絕對數值 px ...等等，就像使用了 position:absolute 去調整位置</p>
+  <css-doodle>
+    :doodle{
+      @grid:5x5/500px;
+      gap:10px;
+      background:#eee;
+      margin:auto;
+    }
+    background:#ffa;
+    @size:3rem;
+    @nth(1){
+      @place-cell:0 top;
+      background:red;
+      z-index:1;
+    }
+    @nth(2){
+      @place-cell:right 25%;
+      background:green;
+    }
+  </css-doodle>
+  <hr>
+  <h3>@shape</h3>
+  <css-doodle>
+    :doodle{
+      @grid:5x5/500px;
+      gap:10px;
+      background:#eee;
+      margin:auto;
+      @shape:heart;
+    }
+    background:#FFA;
+    @shape:hypocycloid, 5
+  </css-doodle>
+  <hr>
+  <h3>try</h3>
+
+    <css-doodle>
+      :doodle{
+        @grid: 5x1 / 500px;
+        margin:auto
+      }
+      @place-cell: center;
+      @size: calc(100% / 5 * @index);
+      background:black;
+      opacity: calc(1.1 - 1 / 5 * @index);
+    </css-doodle>
+
+
+  <script src="https://unpkg.com/css-doodle@0.8.5/css-doodle.min.js"></script>
+</body>
+
+</html>
